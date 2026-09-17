@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>PowerLedger — klikbaar prototype</title>
+<link rel="stylesheet" href="styles.css">
+<script src="thema.js" defer></script>
+<style>
+  .start{max-width:920px;margin:0 auto;padding:var(--s6) var(--marge-bureau) var(--s7)}
+  .kop{border-bottom:1px solid var(--lijn);padding-bottom:var(--s5);margin-bottom:var(--s6)}
+  .kop h1{font-size:1.6rem;font-weight:650;letter-spacing:-.02em;margin:0 0 var(--s2)}
+  .kop p{margin:0;color:var(--inkt-2);max-width:60ch}
+  .paden{display:grid;grid-template-columns:1fr 1fr;gap:var(--s6);margin-bottom:var(--s7)}
+  @media (max-width:760px){.paden{grid-template-columns:1fr}}
+  .pad{background:var(--paneel);border:1px solid var(--lijn);border-radius:var(--r-lg);
+       padding:var(--s5);display:flex;flex-direction:column}
+  .pad h2{font-size:1.1rem;font-weight:600;letter-spacing:-.015em;margin:0 0 var(--s1)}
+  .pad .wie{font-family:var(--mono);font-size:.8125rem;color:var(--inkt-3);
+            letter-spacing:.04em;text-transform:uppercase;margin-bottom:var(--s4)}
+  .pad p{margin:0 0 var(--s4);color:var(--inkt-2);font-size:.9375rem;line-height:1.5}
+  .pad ol{margin:0 0 var(--s5);padding-left:1.15rem;color:var(--inkt-2);font-size:.875rem;line-height:1.6}
+  .pad ol b{color:var(--inkt);font-weight:600}
+  .pad .knop{margin-top:auto}
+  .let{background:var(--paneel);border:1px solid var(--lijn);border-radius:var(--r-lg);
+       padding:var(--s5);margin-bottom:var(--s6)}
+  .let h2{font-size:1rem;font-weight:600;margin:0 0 var(--s4)}
+  .let dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:var(--s3) var(--s5);
+          font-size:.9375rem;align-items:baseline}
+  @media (max-width:600px){.let dl{grid-template-columns:1fr;gap:var(--s1) 0}
+                           .let dd{margin:0 0 var(--s4)}}
+  .let dt{font-weight:600;white-space:nowrap}
+  .let dd{margin:0;color:var(--inkt-2);line-height:1.5}
+  .voet{border-top:1px solid var(--lijn);padding-top:var(--s5);color:var(--inkt-3);
+        font-size:.875rem;line-height:1.6}
+  .voet code{font-family:var(--mono);font-size:.8125rem}
+  .voet a{color:var(--accent);text-decoration:underline;text-underline-offset:2px}
+</style>
+</head>
+<body>
+
+<div class="demo-balk">
+  <span>PowerLedger · klikbaar prototype</span>
+  <span class="rechts">
+    <span>Verzonnen data · geen echte installatie</span>
+    <button data-thema-knop onclick="wisselThema()">Donker</button>
+  </span>
+</div>
+
+<div class="start">
+
+  <div class="kop">
+    <h1>PowerLedger — klikbaar prototype</h1>
+    <p>Twee klikpaden door hetzelfde product. Alles wat je ziet is verzonnen data over een
+       bestaande situatie: stelplaats Mechelen, bord SVB-B, kring 14. Bedoeld om te toetsen of
+       dit klopt met hoe het werk echt gaat — niet om mooi te zijn.</p>
+  </div>
+
+  <div class="paden">
+
+    <div class="pad">
+      <h2>Aan de kast</h2>
+      <div class="wie">Jan · elektricien · telefoon</div>
+      <p>Je bent gebeld voor een storing op stelplaats Mechelen. Je opent de kast en scant de
+         QR aan de binnenkant van de deur.</p>
+      <ol>
+        <li>Scan de QR en lees <b>waarom er twee dingen uit staan</b> — en wie erop zit.</li>
+        <li>Scrol door de tijdlijn tot je <b>de kabelherstelling van 4 maart</b> tegenkomt.</li>
+        <li>Log een toestand: kring 14 blijft uit. <b>Tel de taps.</b></li>
+        <li>Kijk of de bordfoto je in de weg zit of niet.</li>
+      </ol>
+      <a class="knop" href="veld/scan.html">Start bij de kast</a>
+    </div>
+
+    <div class="pad">
+      <h2>Achter het bureau</h2>
+      <div class="wie">Geert · beheerder · desktop</div>
+      <p>Maandagochtend. Elf stelplaatsen, en elektriciteit is één van de vele dingen waarvoor
+         je verantwoordelijk bent.</p>
+      <ol>
+        <li>Open het overzicht en kijk of je <b>binnen vier minuten</b> weet dat je niets mist.</li>
+        <li>Wijs de eerste regel toe aan iemand, met een termijn.</li>
+        <li>Kijk of elke regel <b>zichzelf beantwoordt</b> — of je moet doorklikken om te weten
+            of iets jou aangaat.</li>
+        <li>Bekijk wat de keurder zou krijgen.</li>
+      </ol>
+      <a class="knop" href="bureau/overzicht.html">Start bij het bureau</a>
+    </div>
+
+  </div>
+
+  <div class="let">
+    <h2>Waar je op mag letten — en waar we het over willen hebben</h2>
+    <dl>
+      <dt>Kleur plus woord</dt>
+      <dd>Naast elke gekleurde stip staat altijd een woord. Bewust: in fel zonlicht en bij
+          kleurenblindheid is kleur alleen onbruikbaar. Werkt dat, of leest het dubbel?</dd>
+
+      <dt>Grijs betekent iets</dt>
+      <dd><code>Nog niet bevestigd</code> is geen leeg vakje maar een uitspraak. Een bord met
+          documenten maar zonder bevestiging is grijs, niet groen.</dd>
+
+      <dt>Geen oordeel</dt>
+      <dd>Nergens staat <i>veilig</i>, <i>conform</i> of <i>in orde</i>. Het product toont wie,
+          wat, wanneer en waarom — jij trekt de conclusie. Mist dat iets?</dd>
+
+      <dt>Twee verplichte velden</dt>
+      <dd>Alleen bij <i>toestand</i>: reden en eigenaar. Dat is het tapekruis dat vandaag een uur
+          rondbellen kost. Te zwaar, of precies goed?</dd>
+
+      <dt>Kringnummers</dt>
+      <dd>De nummering heeft gaten — <code>C16</code>, <code>31.4</code>. Intypen werkt altijd,
+          ook als de foto niet meer klopt. Is dat de juiste terugval?</dd>
+
+      <dt>Donker en licht</dt>
+      <dd>Rechtsboven staat een omschakelaar. Een kelder om elf uur 's ochtends is donker,
+          terwijl je telefoon denkt dat het dag is.</dd>
+    </dl>
+  </div>
+
+  <div class="voet">
+    <p><b>Wat dit prototype niet is.</b> Er zit geen database achter, niets wordt opgeslagen, en
+       de knoppen doen alleen wat nodig is om het klikpad te laten werken. Alle namen, datums en
+       nummers zijn verzonnen. De foto's zijn echt en komen uit het veld.</p>
+    <p>De grijze balk bovenaan elk scherm is demo-chroom en hoort niet bij het product.</p>
+    <p>Gebouwd op <code>DESIGN.md</code> en <code>EXPERIENCE.md</code> in
+       <code>docs/planning-artifacts/ux-designs/ux-PowerLedger-2026-08-22/</code>. Wijkt het
+       prototype af van die twee documenten, dan hebben de documenten gelijk.</p>
+  </div>
+
+</div>
+</body>
+</html>

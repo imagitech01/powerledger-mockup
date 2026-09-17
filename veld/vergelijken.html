@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bordfoto's vergelijken — PowerLedger</title>
+<link rel="stylesheet" href="../styles.css">
+<script src="../thema.js" defer></script>
+<style>
+  [hidden]{display:none !important}
+  .demo-balk{flex-wrap:wrap;row-gap:var(--s2)}
+  .vgl{max-width:900px;margin:0 auto;padding:var(--marge-veld) var(--marge-veld) var(--s7)}
+  .terug a{display:inline-flex;align-items:center;min-height:var(--raakvlak)}
+  .kop{margin:0 0 var(--s5)}
+  .paar{display:grid;grid-template-columns:1fr;gap:var(--s5)}
+  @media (min-width:640px){.paar{grid-template-columns:1fr 1fr}}
+  .paar figure{margin:0}
+  .paar img{display:block;width:100%;height:auto;max-height:56vh;object-fit:contain;
+    border:1px solid var(--lijn-hard);border-radius:var(--r-md);background:var(--paneel)}
+  .leegkader{display:flex;align-items:center;justify-content:center;min-height:240px;padding:var(--s5);
+    border:1px solid var(--lijn-hard);border-radius:var(--r-md);background:var(--paneel);text-align:center}
+  .paar figcaption{margin-top:var(--s2);font-size:.875rem;color:var(--inkt-2)}
+  .sectie{margin-top:var(--s6)}
+  .tekstueel li{font-size:.9375rem;line-height:1.45;margin-bottom:var(--s3)}
+  .tekstueel ul{margin:0;padding-left:var(--s5)}
+</style>
+</head>
+<body>
+
+<div class="demo-balk">
+  <a href="../index.html">&larr; Start</a>
+  <span>Bordfoto&rsquo;s vergelijken</span>
+  <span class="rechts">
+    <span>demo-chroom, geen productonderdeel</span>
+    <button type="button" data-thema-knop onclick="wisselThema()" aria-label="Wissel tussen licht en donker thema">Donker</button>
+  </span>
+</div>
+
+<main class="vgl">
+  <p class="terug"><a class="link" id="terug" href="bord-svb-b.html">&larr; SVB-B</a></p>
+
+  <div class="kop">
+    <h1 class="schermtitel">Bordfoto&rsquo;s vergelijken</h1>
+    <p class="toelichting">SVB-B &middot; Stelplaats Mechelen &rsaquo; Werkplaats</p>
+  </div>
+
+  <div class="paar">
+    <figure>
+      <img src="../media/bordfront-svb-b.png" alt="Bordfront SVB-B, gemaakt door Peeters op 12 maart.">
+      <figcaption>Bordfoto <span class="mono">12-03</span> &middot; Peeters</figcaption>
+    </figure>
+
+    <figure id="rechts-leeg">
+      <div class="leegkader"><span class="body-tekst">Nog geen bordfoto van vandaag.</span></div>
+      <figcaption>Vandaag <span class="mono">21-08</span></figcaption>
+    </figure>
+
+    <figure id="rechts-foto" hidden>
+      <img src="../media/bordfront-svb-b.png" alt="Bordfront SVB-B, gemaakt door Jan Verhoeven op 21 augustus.">
+      <figcaption>Bordfoto <span class="mono">21-08</span> &middot; Jan Verhoeven</figcaption>
+    </figure>
+  </div>
+
+  <section class="sectie tekstueel">
+    <h2 class="kap">tekstueel equivalent</h2>
+    <ul>
+      <li>Vorige bordfoto: 12 maart, door Peeters.</li>
+      <li id="tekst-rechts">Nog geen bordfoto van vandaag, 21 augustus.</li>
+      <li id="tekst-tussen">Sinds 12 maart gelogd op dit bord: <span class="mono">20-08</span> Kring 26 bevestigd &mdash; Jan Verhoeven.</li>
+    </ul>
+    <p class="toelichting">De foto is een ijkpunt: hij toont het bordfront zoals het er bij dat bezoek uitzag. Er wordt niets uit de foto afgeleid.</p>
+  </section>
+
+  <p class="demo-hint">De demoset bevat één bordfront-bestand. Beide kanten tonen daarom hetzelfde beeld; in het product zijn het twee foto&rsquo;s van twee bezoeken.</p>
+</main>
+
+<script>
+(function(){
+  var nieuw = /(?:\?|&)nieuw=1(?:&|$)/.test(location.search);
+  if(!nieuw) return;
+  document.getElementById('rechts-leeg').hidden = true;
+  document.getElementById('rechts-foto').hidden = false;
+  document.getElementById('tekst-rechts').textContent = 'Huidige bordfoto: 21 augustus, door Jan Verhoeven.';
+  document.getElementById('tekst-tussen').innerHTML =
+    'Tussen beide foto’s gelogd: <span class="mono">20-08</span> Kring 26 bevestigd — Jan Verhoeven. ' +
+    '<span class="mono">21-08</span> Kring 31.4 uitgezet — Jan Verhoeven.';
+  document.getElementById('terug').setAttribute('href','bord-svb-b-gelogd.html?bf=1');
+})();
+</script>
+
+</body>
+</html>

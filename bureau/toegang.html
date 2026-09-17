@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PowerLedger — Toegang</title>
+<link rel="stylesheet" href="../styles.css">
+<script src="../thema.js" defer></script>
+<style>
+/* Bureaumodus. Uitsluitend tokens uit styles.css, nooit een letterlijke kleurwaarde.
+   Schaalfactor 0,875 (DESIGN.md § Layout & Spacing) op dichtheid en raakvlak.
+   De typografische ladder blijft ongeschaald: de ondergrens van 13 px
+   uit DESIGN.md § Typography gaat voor op de schaalfactor. */
+.bureau{--schaal:.875;--raakvlak:calc(48px * var(--schaal))}
+.bureau .rij{padding:var(--rij-bureau) 0;gap:var(--s4);flex-wrap:wrap}
+.bureau .veld{min-height:var(--raakvlak)}
+.bureau .knop{display:inline-flex;align-items:center;justify-content:center;
+  width:auto;padding:var(--s3) var(--s5);min-height:var(--raakvlak);margin-top:0}
+main{padding-bottom:var(--s7)}
+.kop{margin:0 0 var(--s6)}
+.kop p{margin:var(--s2) 0 0}
+.kaart{margin-bottom:var(--s5)}
+.kaart+.kap,.demo-hint+.kap{margin-top:var(--s6)}
+.groei{flex:1 1 10rem;min-width:0}
+.meta-rechts{margin-left:auto;text-align:right;flex:0 1 auto}
+.stip-top{margin-top:.45em}
+.paar{display:flex;flex-wrap:wrap;gap:var(--s2) var(--s4);align-items:baseline}
+.paar b{display:inline}
+.merkregel{border-left:3px solid var(--lijn-hard);padding:var(--s3) var(--s4);
+  margin:var(--s3) 0 0;font-size:.875rem;line-height:1.45;color:var(--inkt-2)}
+.keuze{display:flex;gap:var(--s4);align-items:flex-start;padding:var(--rij-bureau) 0;
+  border-bottom:1px solid var(--lijn);min-height:var(--raakvlak);cursor:pointer}
+.keuze:last-child{border-bottom:0}
+.keuze input{margin:.3em 0 0;width:20px;height:20px;flex:0 0 auto;accent-color:var(--accent)}
+.keuze b{font-size:.9375rem;font-weight:600;display:block}
+.keuze small{font-size:.875rem;color:var(--inkt-2);display:block;line-height:1.45}
+.acties{display:flex;flex-wrap:wrap;gap:var(--s4);align-items:center;margin-top:var(--s5)}
+</style>
+</head>
+<body>
+
+<div class="demo-balk">
+  <a href="../index.html">← Start</a>
+  <span>Toegang · bureaumodus</span>
+  <span class="rechts">
+    <span>Demo-chroom — deze balk hoort niet bij het product.</span>
+    <button type="button" data-thema-knop onclick="wisselThema()" aria-label="Wissel tussen licht en donker thema">Donker</button>
+  </span>
+</div>
+
+<div class="bureau">
+
+<nav class="nav" aria-label="Hoofdnavigatie">
+  <span class="merk">PowerLedger</span>
+  <a href="overzicht.html">Overzicht</a>
+  <a href="overzicht.html#stelplaatsen">Stelplaatsen</a>
+  <a href="todos.html">Todo's</a>
+  <a href="documenten.html">Documenten</a>
+  <a href="toegang.html" class="aan" aria-current="page">Toegang</a>
+</nav>
+
+<main>
+  <div class="kop">
+    <h1 class="schermtitel">Toegang</h1>
+    <p class="toelichting">Lezen kan zonder account: wie de kast open krijgt, scant de QR aan de binnenkant. Schrijven vereist een uitnodiging — daarom heeft elke regel in een tijdlijn een naam.</p>
+  </div>
+
+  <div class="bureau-grid">
+    <div class="kolom">
+
+      <h2 class="kap">blijvende toegang</h2>
+      <div class="kaart">
+
+        <div class="rij">
+          <span class="groei">
+            <b>Geert Vermeulen</b>
+            <small>Beheerder · alle 11 stelplaatsen — lezen, schrijven, beheren. Nodigt uit en wijst todo's toe.</small>
+          </span>
+          <span class="meta-rechts mono">11 sites</span>
+        </div>
+
+        <div class="rij">
+          <span class="groei">
+            <b>Jan Verhoeven</b>
+            <small>Elektricien, uitvoerder · alle 11 stelplaatsen — lezen en schrijven. Voert de nulmeting Antwerpen uit; laatst gelogd <span class="mono">20-08</span> op <a class="link" href="bord-svb-b.html">Mechelen · SVB-B</a>.</small>
+          </span>
+          <span class="meta-rechts mono">11 sites</span>
+        </div>
+
+        <div class="rij">
+          <span class="groei">
+            <b>Peeters</b>
+            <small>Elektricien De Lijn · alle 11 stelplaatsen — lezen en schrijven. Laatst gelogd <span class="mono">12-03</span> op <a class="link" href="bord-svb-b.html">Mechelen · SVB-B</a>: kring 14 uitgezet.</small>
+          </span>
+          <span class="meta-rechts mono">11 sites</span>
+        </div>
+
+      </div>
+
+      <h2 class="kap">eenmalig uitgenodigd</h2>
+      <div class="kaart">
+        <div class="rij">
+          <div class="groei">
+            <span class="paar"><b>De Wilde Elektro</b> <span class="status-tekst">Eenmalige uitnodiging</span></span>
+            <small>Externe aannemer · Mechelen · SVB-B · kring <span class="mono">14</span> — kabelherstelling.
+              Uitgenodigd in maart 2026 door Geert Vermeulen. Schrijfrecht gebruikt op <span class="mono">04-03</span>: 1 event, 1 foto.</small>
+            <p class="merkregel">Zonder deze regel bestaat <span class="mono">04-03</span> · Kabelherstelling · <span class="mono" aria-label="kring 1 4">k14</span> niet in de tijdlijn van SVB-B. De kabel ligt honderd meter verderop in de grond; aan het bordfront is niets te zien. Er is geen tweede weg naar die informatie.</p>
+            <p style="margin:var(--s3) 0 0"><a class="link" href="bord-svb-b.html">De regel die hieraan hangt, in het borddossier</a></p>
+          </div>
+          <span class="meta-rechts mono">1 site · 1 opdracht</span>
+        </div>
+      </div>
+
+      <h2 class="kap">uitgenodigd, nog niet aangemeld</h2>
+      <div class="kaart">
+        <div class="rij">
+          <span class="groei">
+            <span class="paar"><b>Vinçotte</b> <span class="status-tekst">Uitgenodigd, nog niet aangemeld</span></span>
+            <small>Keurder · Mechelen — alleen lezen. Uitgenodigd op <span class="mono">21-08-2026</span> bij het delen van het <a class="link" href="statusrapport.html">statusrapport</a>.</small>
+          </span>
+          <span class="meta-rechts mono">21-08-2026</span>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="kolom">
+      <h2 class="kap">uitnodigen</h2>
+      <div class="kaart">
+        <form id="formulier">
+          <div class="veld">
+            <label class="lab" for="naam">naam of firma <span class="verplicht">verplicht</span></label>
+            <input id="naam" type="text" required autocomplete="off">
+          </div>
+
+          <div class="veld">
+            <label class="lab" for="site">stelplaats</label>
+            <select id="site">
+              <option>Mechelen</option>
+              <option>Antwerpen-Noord</option>
+              <option>Zwijndrecht</option>
+              <option>Deurne</option>
+              <option>Wilrijk</option>
+              <option>Merksem</option>
+              <option>Hoboken</option>
+              <option>Ekeren</option>
+              <option>Berchem</option>
+              <option>Boom</option>
+              <option>Kontich</option>
+              <option>Alle 11 stelplaatsen</option>
+            </select>
+          </div>
+
+          <label class="keuze"><input type="radio" name="soort" value="blijvend" checked>
+            <span><b>Blijvend</b><small>Lezen en schrijven tot de uitnodiging ingetrokken wordt.</small></span></label>
+          <label class="keuze"><input type="radio" name="soort" value="eenmalig">
+            <span><b>Eenmalig, voor één opdracht</b><small>Voor een externe aannemer. Schrijven blijft beperkt tot die opdracht; wat gelogd is, blijft staan.</small></span></label>
+
+          <div class="acties">
+            <button type="submit" class="knop">Uitnodigen</button>
+          </div>
+        </form>
+
+        <p class="body-tekst" id="bevestiging" hidden style="margin:var(--s5) 0 0"></p>
+        <p class="toelichting" id="bevestiging-2" hidden style="margin:var(--s2) 0 0">Zolang de uitnodiging niet aanvaard is, staat de regel op <span class="status-tekst">Uitgenodigd, nog niet aangemeld</span>.</p>
+      </div>
+
+      <p class="toelichting">Een QR-sticker die zonder login toegang geeft, is een sleutel die gefotografeerd kan worden. Wie de code kopieert, kan het dossier van buiten de kast lezen. Dat is in deze versie een aanvaard gevolg van het toegangsprincipe.</p>
+    </div>
+  </div>
+
+  <p class="sr" role="status" aria-live="polite" id="melding"></p>
+</main>
+
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  var d = document.documentElement.dataset.thema ||
+    (matchMedia('(prefers-color-scheme: dark)').matches ? 'donker' : 'licht');
+  document.querySelectorAll('[data-thema-knop]').forEach(function (b) {
+    b.textContent = d === 'donker' ? 'Licht' : 'Donker';
+  });
+
+  document.getElementById('formulier').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var naam = document.getElementById('naam').value.trim();
+    if (!naam) {
+      document.getElementById('naam').focus();
+      document.getElementById('melding').textContent = 'Naam of firma ontbreekt.';
+      return;
+    }
+    var site = document.getElementById('site').value;
+    var soort = document.querySelector('input[name="soort"]:checked').value;
+    var regel = naam + ' — ' + site + ' · ' +
+      (soort === 'eenmalig' ? 'eenmalig, voor één opdracht' : 'blijvend') +
+      '. Uitgenodigd om 16:18 door Geert Vermeulen.';
+    var b = document.getElementById('bevestiging');
+    b.textContent = regel;
+    b.hidden = false;
+    document.getElementById('bevestiging-2').hidden = false;
+    document.getElementById('melding').textContent = regel;
+    this.reset();
+  });
+});
+</script>
+</body>
+</html>

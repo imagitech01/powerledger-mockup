@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Zoeken — PowerLedger</title>
+<link rel="stylesheet" href="../styles.css">
+<script src="../thema.js" defer></script>
+<style>
+  [hidden]{display:none !important}
+  label.veld{display:block}
+  .demo-balk{flex-wrap:wrap;row-gap:var(--s2)}
+  .kop{margin:var(--s5) 0 var(--s4)}
+  .sectie{margin-top:var(--s6)}
+  .site-rij{align-items:flex-start}
+  .site-rij .stip{margin-top:6px}
+  .site-rij .tekst{flex:1 1 auto;min-width:0}
+  .reden{font-family:var(--mono);font-size:.8125rem;letter-spacing:.02em;color:var(--inkt-3);display:block;line-height:1.4}
+  .borden{margin:0 0 0 var(--s5);padding-left:var(--s4);border-left:1px solid var(--lijn)}
+  .bord-rij .tekst{flex:1 1 auto;min-width:0}
+  .bord-rij .chev{color:var(--accent);flex:0 0 auto;font-size:1.1rem}
+  .leeg{padding:var(--rij-veld) 0}
+</style>
+</head>
+<body>
+
+<div class="demo-balk">
+  <a href="../index.html">&larr; Start</a>
+  <span>Zoeken</span>
+  <span class="rechts">
+    <span>demo-chroom, geen productonderdeel</span>
+    <button type="button" data-thema-knop onclick="wisselThema()" aria-label="Wissel tussen licht en donker thema">Donker</button>
+  </span>
+</div>
+
+<main class="telefoon">
+
+  <div class="kop">
+    <h1 class="schermtitel">Zoeken</h1>
+    <p class="toelichting">Onderweg voorbereiden: stelplaats of bord. 11 stelplaatsen, <span class="mono">7 / 11</span> opgenomen.</p>
+  </div>
+
+  <label class="veld" for="q">
+    <span class="lab">stelplaats of bord</span>
+    <input id="q" type="search" autocomplete="off" aria-describedby="q-uitleg">
+  </label>
+  <p class="toelichting" id="q-uitleg">Zoeken werkt ook zonder de kast open te doen. Ter plaatse is de QR aan de binnenkant van de kastdeur sneller.</p>
+
+  <section class="sectie" id="lijst">
+    <h2 class="kap">stelplaatsen</h2>
+
+    <div class="site" data-zoek="mechelen">
+      <div class="rij site-rij">
+        <span class="stip s-rood" aria-hidden="true"></span>
+        <span class="tekst"><b>Mechelen</b><span class="reden">Vervallen &middot; 2 uit &middot; 6 todo&rsquo;s</span></span>
+      </div>
+      <div class="borden">
+        <a class="rij bord-rij" data-zoek="svb-b werkplaats laagspanning mechelen" href="bord-svb-b.html">
+          <span class="stip s-rood" aria-hidden="true"></span>
+          <span class="tekst"><b>SVB-B</b><span class="reden">Vervallen &middot; werkplaats &middot; LS</span></span>
+          <span class="chev" aria-hidden="true">&rsaquo;</span>
+        </a>
+        <div class="rij bord-rij" data-zoek="svb-a bussenhal laagspanning mechelen">
+          <span class="stip s-groen" aria-hidden="true"></span>
+          <span class="tekst"><b>SVB-A</b><span class="reden">Niets open &middot; bussenhal &middot; LS &middot; bevestigd 04-08</span></span>
+        </div>
+        <div class="rij bord-rij" data-zoek="hs-cabine noord hoogspanning mechelen">
+          <span class="stip s-oranje" aria-hidden="true"></span>
+          <span class="tekst"><b>HS-cabine Noord</b><span class="reden">Loopt af &middot; HS &middot; kwartaalcontrole over 3 mnd</span></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="site rij site-rij" data-zoek="antwerpen-noord antwerpen noord">
+      <span class="stip s-oranje" aria-hidden="true"></span>
+      <span class="tekst"><b>Antwerpen-Noord</b><span class="reden">Loopt af &middot; keuring over 6 wk</span></span>
+    </div>
+
+    <div class="site rij site-rij" data-zoek="zwijndrecht">
+      <span class="stip s-geel" aria-hidden="true"></span>
+      <span class="tekst"><b>Zwijndrecht</b><span class="reden">Gevolgen open &middot; 1 vaststelling</span></span>
+    </div>
+
+    <div class="site rij site-rij" data-zoek="deurne">
+      <span class="stip s-grijs" aria-hidden="true"></span>
+      <span class="tekst"><b>Deurne</b><span class="reden">Nog niet bevestigd &middot; opgenomen 21-08</span></span>
+    </div>
+
+    <div class="site rij site-rij" data-zoek="wilrijk">
+      <span class="stip s-groen" aria-hidden="true"></span>
+      <span class="tekst"><b>Wilrijk</b><span class="reden">Niets open &middot; bevestigd 04-08</span></span>
+    </div>
+
+    <div class="site rij site-rij" data-zoek="merksem">
+      <span class="stip s-groen" aria-hidden="true"></span>
+      <span class="tekst"><b>Merksem</b><span class="reden">Niets open &middot; bevestigd 28-07</span></span>
+    </div>
+
+    <div class="site rij site-rij" data-zoek="hoboken">
+      <span class="stip s-groen" aria-hidden="true"></span>
+      <span class="tekst"><b>Hoboken</b><span class="reden">Niets open &middot; bevestigd 12-08</span></span>
+    </div>
+
+    <div class="site rij site-rij" data-zoek="ekeren">
+      <span class="stip s-groen" aria-hidden="true"></span>
+      <span class="tekst"><b>Ekeren</b><span class="reden">Niets open &middot; bevestigd 06-08</span></span>
+    </div>
+
+    <div class="site rij site-rij" data-zoek="berchem">
+      <span class="stip s-geel" aria-hidden="true"></span>
+      <span class="tekst"><b>Berchem</b><span class="reden">Gevolgen open &middot; 2 todo&rsquo;s</span></span>
+    </div>
+
+    <div class="site rij site-rij" data-zoek="boom">
+      <span class="stip s-grijs" aria-hidden="true"></span>
+      <span class="tekst"><b>Boom</b><span class="reden">Nog niet bevestigd &middot; geen dossier</span></span>
+    </div>
+
+    <div class="site rij site-rij" data-zoek="kontich">
+      <span class="stip s-grijs" aria-hidden="true"></span>
+      <span class="tekst"><b>Kontich</b><span class="reden">Nog niet bevestigd &middot; geen dossier</span></span>
+    </div>
+
+    <p class="leeg body-tekst" id="leeg" hidden role="status">Niets gevonden.</p>
+  </section>
+
+  <p class="demo-hint">In dit prototype is alleen Mechelen &rsaquo; SVB-B uitgewerkt. De andere stelplaatsen en borden staan er als lijst.</p>
+</main>
+
+<script>
+(function(){
+  var q = document.getElementById('q'), leeg = document.getElementById('leeg');
+  var sites = Array.prototype.slice.call(document.querySelectorAll('.site'));
+  q.addEventListener('input', function(){
+    var t = q.value.trim().toLowerCase();
+    var zichtbaar = 0;
+    sites.forEach(function(s){
+      var borden = Array.prototype.slice.call(s.querySelectorAll('.bord-rij'));
+      var raak = !t || s.getAttribute('data-zoek').indexOf(t) >= 0;
+      var bordRaak = borden.filter(function(b){ return t && b.getAttribute('data-zoek').indexOf(t) >= 0; });
+      var toon = raak || bordRaak.length > 0;
+      s.hidden = !toon;
+      if(toon) zichtbaar++;
+      borden.forEach(function(b){
+        b.hidden = !(!t || raak || bordRaak.indexOf(b) >= 0);
+      });
+    });
+    leeg.hidden = zichtbaar > 0;
+  });
+})();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PowerLedger — Stelplaats Mechelen</title>
+<link rel="stylesheet" href="../styles.css">
+<script src="../thema.js" defer></script>
+<style>
+/* Bureaumodus. Uitsluitend tokens uit styles.css, nooit een letterlijke kleurwaarde.
+   Schaalfactor 0,875 (DESIGN.md § Layout & Spacing) op dichtheid en raakvlak.
+   De typografische ladder blijft ongeschaald: de ondergrens van 13 px
+   uit DESIGN.md § Typography gaat voor op de schaalfactor. */
+.bureau{--schaal:.875;--raakvlak:calc(48px * var(--schaal))}
+.bureau .rij{padding:var(--rij-bureau) 0;gap:var(--s4);flex-wrap:wrap}
+.bureau .knop,.bureau .knop-2{display:inline-flex;align-items:center;justify-content:center;
+  width:auto;padding:var(--s3) var(--s5);min-height:var(--raakvlak);margin-top:0}
+.kaart a.rij:hover,.kaart a.rij:focus-visible{background:var(--grond)}
+main{padding-bottom:var(--s7)}
+.kop{margin:0 0 var(--s6)}
+.kop p{margin:var(--s2) 0 0}
+.kaart{margin-bottom:var(--s5)}
+.kaart+.kap,.demo-hint+.kap{margin-top:var(--s6)}
+.groei{flex:1 1 10rem;min-width:0}
+.meta-rechts{margin-left:auto;text-align:right;flex:0 1 auto}
+.stip-top{margin-top:.45em}
+.paar{display:flex;flex-wrap:wrap;gap:var(--s2) var(--s4);align-items:baseline}
+.paar b{display:inline}
+.kruimel{margin:0 0 var(--s4)}
+.vervallen{color:var(--status-rood);font-weight:600}
+.acties{display:flex;flex-wrap:wrap;gap:var(--s4);align-items:center;margin:0 0 var(--s6)}
+</style>
+</head>
+<body>
+
+<div class="demo-balk">
+  <a href="../index.html">← Start</a>
+  <span>Sitedossier Mechelen · bureaumodus</span>
+  <span class="rechts">
+    <span>Demo-chroom — deze balk hoort niet bij het product.</span>
+    <button type="button" data-thema-knop onclick="wisselThema()" aria-label="Wissel tussen licht en donker thema">Donker</button>
+  </span>
+</div>
+
+<div class="bureau">
+
+<nav class="nav" aria-label="Hoofdnavigatie">
+  <span class="merk">PowerLedger</span>
+  <a href="overzicht.html">Overzicht</a>
+  <a href="overzicht.html#stelplaatsen" class="aan" aria-current="page">Stelplaatsen</a>
+  <a href="todos.html">Todo's</a>
+  <a href="documenten.html">Documenten</a>
+  <a href="toegang.html">Toegang</a>
+</nav>
+
+<main>
+  <p class="kruimel toelichting"><a class="link" href="overzicht.html#stelplaatsen">Stelplaatsen</a> › Mechelen</p>
+
+  <div class="kop">
+    <h1 class="schermtitel">Stelplaats Mechelen</h1>
+    <p class="statusregel"><span class="stip s-rood" aria-hidden="true"></span>
+      <span>Vervallen — 2 staan uit, 6 todo's</span></p>
+    <p class="toelichting">3 borden · laatste registratie <span class="mono">20-08</span> · <em>Uitwendige invloeden</em> op SVB-B is vervallen sinds <span class="mono">01-06-2026</span>.</p>
+  </div>
+
+  <div class="acties">
+    <a class="knop" href="statusrapport.html">Statusrapport delen</a>
+    <a class="link" href="todos.html">Todo's van deze site</a>
+  </div>
+
+  <div class="bureau-grid">
+
+    <div class="kolom">
+      <h2 class="kap">borden op deze site</h2>
+      <div class="kaart">
+
+        <a class="rij" href="bord-svb-b.html">
+          <span class="stip s-rood stip-top" aria-hidden="true"></span>
+          <span class="groei">
+            <span class="paar"><b>SVB-B</b> <span class="status-tekst">Vervallen</span></span>
+            <small>Laagspanning · werkplaats — 2 staan uit, 6 todo's. Laatst bevestigd <span class="mono">04-03</span>.</small>
+          </span>
+          <span class="meta-rechts mono">2 uit · 6 todo's</span>
+        </a>
+
+        <div class="rij">
+          <span class="stip s-groen stip-top" aria-hidden="true"></span>
+          <span class="groei">
+            <span class="paar"><b>SVB-A</b> <span class="status-tekst">Niets open</span></span>
+            <small>Laagspanning · bussenhal — niets open. Bevestigd <span class="mono">04-08</span>.</small>
+          </span>
+          <span class="meta-rechts mono">bevestigd 04-08</span>
+        </div>
+
+        <div class="rij">
+          <span class="stip s-oranje stip-top" aria-hidden="true"></span>
+          <span class="groei">
+            <span class="paar"><b>HS-cabine Noord</b> <span class="status-tekst">Loopt af</span></span>
+            <small>Hoogspanning — kwartaalcontrole staat over 3 maanden.</small>
+          </span>
+          <span class="meta-rechts mono">controle over 3 mnd</span>
+        </div>
+
+      </div>
+
+      <p class="demo-hint">Demo-chroom: in dit prototype is alleen SVB-B doorklikbaar. In het product opent elke bordregel het borddossier.</p>
+
+      <h2 class="kap">wat komt eraan op deze site</h2>
+      <div class="kaart">
+        <div class="rij">
+          <span class="mono">3 mnd</span>
+          <span class="groei"><b>HS-kwartaalcontrole</b><small>HS-cabine Noord.</small></span>
+        </div>
+        <div class="rij">
+          <span class="mono">2029</span>
+          <span class="groei"><b>Attest Mechelen vervalt</b><small>Keuring van <span class="mono">14-06-2024</span> door Vinçotte, attest A, geldig tot <span class="mono">14-06-2029</span>.</small></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="kolom">
+      <h2 class="kap">sitebrede documenten</h2>
+      <div class="kaart">
+        <p class="toelichting" style="margin:0">Op siteniveau staat er nog niets geregistreerd. Wat er is, hangt aan de borden en staat hieronder.</p>
+      </div>
+
+      <h2 class="kap">documenten van de borden</h2>
+      <div class="kaart">
+
+        <div class="rij">
+          <span class="groei"><b>Eendraadschema</b><small>SVB-B</small></span>
+          <span class="meta-rechts tijd">pdf · 2,4 MB · bijgewerkt 14-06-2024</span>
+        </div>
+        <div class="rij">
+          <span class="groei"><b>Kabelberekening</b><small>SVB-B</small></span>
+          <span class="meta-rechts tijd">pdf · 810 kB · 14-06-2024</span>
+        </div>
+        <div class="rij">
+          <span class="groei"><b>Risicoanalyse</b><small>SVB-B</small></span>
+          <span class="meta-rechts tijd">pdf · 1,1 MB · 09-02-2023</span>
+        </div>
+        <div class="rij">
+          <span class="groei"><b>Uitwendige invloeden</b><small>SVB-B — vernieuwen staat 12 dagen te laat.</small></span>
+          <span class="meta-rechts tijd"><span class="vervallen">vervallen 01-06-2026</span></span>
+        </div>
+        <div class="rij">
+          <span class="groei"><b>Keuringsverslag</b><small>SVB-B — attest A door Vinçotte.</small></span>
+          <span class="meta-rechts tijd">pdf · geldig tot 14-06-2029</span>
+        </div>
+
+      </div>
+      <p class="toelichting">Deze lijst toont de documenten die in het dossier van Mechelen staan. Zie het <a class="link" href="documenten.html">documentenoverzicht</a> over alle stelplaatsen.</p>
+    </div>
+
+  </div>
+</main>
+
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  var d = document.documentElement.dataset.thema ||
+    (matchMedia('(prefers-color-scheme: dark)').matches ? 'donker' : 'licht');
+  document.querySelectorAll('[data-thema-knop]').forEach(function (b) {
+    b.textContent = d === 'donker' ? 'Licht' : 'Donker';
+  });
+});
+</script>
+</body>
+</html>

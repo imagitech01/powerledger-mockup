@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vastleggen — PowerLedger</title>
+<link rel="stylesheet" href="../styles.css">
+<script src="../thema.js" defer></script>
+<style>
+  [hidden]{display:none !important}
+  label.veld{display:block}
+  .demo-balk{flex-wrap:wrap;row-gap:var(--s2)}
+  .telefoon{padding-bottom:200px}
+  .terug a{display:inline-flex;align-items:center;min-height:var(--raakvlak)}
+  .kop{margin:0 0 var(--s4)}
+  .sectie{margin-top:var(--s6)}
+  .context{padding:var(--rij-veld) 0;border-top:1px solid var(--lijn);border-bottom:1px solid var(--lijn);
+    display:flex;gap:var(--s3);align-items:center;flex-wrap:wrap}
+  .context .tekst{flex:1 1 auto;min-width:0}
+  .veld textarea{min-height:72px}
+  .context small{display:block}
+  .keuze{display:flex;align-items:center;gap:var(--s3);min-height:var(--raakvlak);
+    border-top:1px solid var(--lijn);cursor:pointer}
+  .veld .lab + .keuze{border-top:0}
+  .keuze input{width:20px;height:20px;flex:0 0 auto}
+  .keuze small{color:var(--inkt-2);font-weight:400}
+  .fout{color:var(--status-rood);font-size:.875rem;line-height:1.45;margin:calc(-1 * var(--s2)) 0 var(--s4)}
+  .onderbalk{padding-bottom:var(--s5)}
+  .gevolg{border-left:2px solid var(--lijn);padding-left:var(--s4);margin-top:var(--s4)}
+</style>
+</head>
+<body>
+
+<div class="demo-balk">
+  <a href="../index.html">&larr; Start</a>
+  <span>Loggen 3 &mdash; vastleggen</span>
+  <span class="rechts">
+    <span>demo-chroom, geen productonderdeel</span>
+    <button type="button" data-thema-knop onclick="wisselThema()" aria-label="Wissel tussen licht en donker thema">Donker</button>
+  </span>
+</div>
+
+<main class="telefoon">
+  <p class="terug"><a class="link" id="terug" href="loggen-2.html?w=toestand">&larr; Kring kiezen</a></p>
+
+  <div class="kop">
+    <h1 class="schermtitel" id="titel">Toestand vastleggen</h1>
+    <p class="toelichting" id="onderkop">Ik laat iets anders achter.</p>
+  </div>
+
+  <div class="context">
+    <span class="tekst">
+      <b>SVB-B &middot; Kring <span class="mono" id="kring-mono" aria-label="kring 3 1 punt 4">31.4</span></b>
+      <small class="toelichting" id="nieuwe-kring" hidden>Nieuwe kring, aangemaakt bij deze registratie.</small>
+      <small class="tijd">Jan Verhoeven &middot; 21-08 16:18</small>
+    </span>
+    <a class="link" id="wijzig" href="loggen-2.html?w=toestand">Wijzigen</a>
+  </div>
+
+  <p class="demo-hint" id="demo-andere" hidden></p>
+
+  <!-- toestand -->
+  <section class="sectie" id="v-toestand">
+    <h2 class="kap">wat laat je achter</h2>
+
+    <label class="veld" for="reden">
+      <span class="lab">reden <span class="verplicht">verplicht</span></span>
+      <textarea id="reden" name="reden" rows="2" aria-describedby="reden-uitleg"></textarea>
+    </label>
+    <p class="fout" id="fout-reden" hidden></p>
+    <p class="toelichting" id="reden-uitleg">Wordt letterlijk getoond, tussen aanhalingstekens, aan wie hierna voor dit bord staat.</p>
+
+    <div class="veld" role="radiogroup" aria-labelledby="lab-eigenaar" aria-describedby="fout-eigenaar">
+      <span class="lab" id="lab-eigenaar">eigenaar <span class="verplicht">verplicht</span></span>
+      <label class="keuze"><input type="radio" name="eigenaar" value="Jan Verhoeven"> <span>Jan Verhoeven <small>&mdash; jezelf</small></span></label>
+      <label class="keuze"><input type="radio" name="eigenaar" value="Geert Vermeulen"> <span>Geert Vermeulen <small>&mdash; beheerder</small></span></label>
+      <label class="keuze"><input type="radio" name="eigenaar" value="Peeters"> <span>Peeters <small>&mdash; elektricien</small></span></label>
+    </div>
+    <p class="fout" id="fout-eigenaar" hidden></p>
+
+    <div class="gevolg">
+      <p class="toelichting">Bij het vastleggen ontstaat de todo <b>Kring <span class="k-nr">31.4</span> vrijgeven na controle</b>, met dezelfde eigenaar. Sluiten gebeurt daar, niet aan het bord.</p>
+    </div>
+  </section>
+
+  <!-- wijziging / vaststelling / bevestiging -->
+  <section class="sectie" id="v-anders" hidden>
+    <h2 class="kap" id="anders-kap">wat is er veranderd</h2>
+    <label class="veld" for="omschrijving">
+      <span class="lab" id="anders-lab">omschrijving</span>
+      <textarea id="omschrijving" name="omschrijving" rows="2"></textarea>
+    </label>
+    <p class="toelichting" id="anders-uitleg"></p>
+  </section>
+
+  <section class="sectie">
+    <h2 class="kap">foto&rsquo;s</h2>
+    <p class="toelichting" id="foto-stand">Nog geen foto&rsquo;s.</p>
+    <input id="fotos" class="sr" type="file" accept="image/*" capture="environment" multiple>
+    <label class="knop-2" for="fotos" style="display:flex;align-items:center;justify-content:center">Foto toevoegen</label>
+  </section>
+
+  <section class="sectie">
+    <h2 class="kap">bordfoto</h2>
+    <p class="toelichting">Een nieuwe foto van het bordfront maakt de volgende scan sneller. De laatste is van <span class="mono">12-03</span>, door Peeters. Overslaan kan.</p>
+  </section>
+
+</main>
+
+<div class="onderbalk">
+  <button type="button" class="knop" id="primair">Bordfoto maken en vastleggen</button>
+  <button type="button" class="knop-2" id="secundair">Bordfoto overslaan en vastleggen</button>
+</div>
+
+<script>
+(function(){
+  function param(n){ var m = location.search.match(new RegExp('[?&]' + n + '=([^&]*)')); return m ? decodeURIComponent(m[1]) : ''; }
+  var w = param('w') || 'toestand';
+  var k = param('k') || '31.4';
+  var nieuw = param('nieuw') === '1';
+
+  var TEKST = {
+    toestand:     ['Toestand vastleggen', 'Ik laat iets anders achter.'],
+    wijziging:    ['Wijziging vastleggen', 'Ik heb iets veranderd.'],
+    vaststelling: ['Vaststelling vastleggen', 'Ik zie iets dat niet klopt.'],
+    bevestiging:  ['Bevestiging vastleggen', 'Ik heb gekeken en het klopt.']
+  };
+  if(!TEKST[w]) w = 'toestand';
+
+  document.getElementById('titel').textContent = TEKST[w][0];
+  document.getElementById('onderkop').textContent = TEKST[w][1];
+  var mono = document.getElementById('kring-mono');
+  mono.textContent = k;
+  mono.setAttribute('aria-label', 'kring ' + k.split('').join(' ').replace(/\./g, 'punt'));
+  Array.prototype.forEach.call(document.querySelectorAll('.k-nr'), function(el){ el.textContent = k; });
+  document.getElementById('nieuwe-kring').hidden = !nieuw;
+  document.getElementById('terug').setAttribute('href', 'loggen-2.html?w=' + w);
+  document.getElementById('wijzig').setAttribute('href', 'loggen-2.html?w=' + w);
+
+  var isToestand = (w === 'toestand');
+  document.getElementById('v-toestand').hidden = !isToestand;
+  document.getElementById('v-anders').hidden = isToestand;
+
+  if(!isToestand){
+    var kap = document.getElementById('anders-kap'), lab = document.getElementById('anders-lab'),
+        uit = document.getElementById('anders-uitleg');
+    if(w === 'wijziging'){
+      kap.textContent = 'wat is er veranderd'; lab.textContent = 'omschrijving';
+      uit.textContent = 'Gevolgen ontstaan automatisch als todo’s, elk met een standaardeigenaar: documentwerk naar de beheerder, fysiek werk naar de uitvoerder die logde.';
+    } else if(w === 'vaststelling'){
+      kap.textContent = 'wat zie je'; lab.textContent = 'omschrijving';
+      uit.textContent = 'Gaat naar triage. De melder hoeft het niet op te lossen, maar blijft het wel volgen in Mijn todo’s.';
+    } else {
+      kap.textContent = 'bevestiging'; lab.textContent = 'opmerking';
+      uit.textContent = 'Zet de teller laatst bevestigd op 21-08. Bevestiging is nodig voor Niets open, nooit voldoende.';
+    }
+    var hint = document.getElementById('demo-andere');
+    hint.textContent = 'In dit prototype is alleen het pad toestand uitgewerkt tot en met het resultaat. Vastleggen brengt je hier terug naar het borddossier.';
+    hint.hidden = false;
+    document.getElementById('primair').textContent = 'Terug naar het borddossier';
+    document.getElementById('secundair').hidden = true;
+  }
+
+  // foto's
+  var fotos = document.getElementById('fotos'), stand = document.getElementById('foto-stand');
+  fotos.addEventListener('change', function(){
+    var n = fotos.files ? fotos.files.length : 0;
+    stand.textContent = n === 0 ? 'Nog geen foto’s.' : (n === 1 ? '1 foto.' : n + ' foto’s.');
+  });
+
+  // verplichte velden: uitleg inline bij het veld, geen modaal, geen banner
+  var reden = document.getElementById('reden');
+  var foutReden = document.getElementById('fout-reden'), foutEig = document.getElementById('fout-eigenaar');
+
+  function eigenaar(){
+    var r = document.querySelector('input[name="eigenaar"]:checked');
+    return r ? r.value : '';
+  }
+  function toon(el, veld, tekst){
+    el.textContent = tekst; el.hidden = false;
+    if(veld) veld.setAttribute('aria-invalid', 'true');
+  }
+  function weg(el, veld){
+    el.hidden = true; el.textContent = '';
+    if(veld) veld.removeAttribute('aria-invalid');
+  }
+  function compleet(){
+    if(!isToestand) return true;
+    var ok = true, eerste = null;
+    if(!reden.value.trim()){
+      toon(foutReden, reden, 'Reden ontbreekt.');
+      eerste = eerste || reden; ok = false;
+    } else { weg(foutReden, reden); }
+    if(!eigenaar()){
+      toon(foutEig, null, 'Eigenaar ontbreekt. De sluitende todo krijgt dezelfde eigenaar.');
+      eerste = eerste || document.querySelector('input[name="eigenaar"]'); ok = false;
+    } else { weg(foutEig, null); }
+    if(!ok && eerste){
+      eerste.focus();
+      if(eerste.scrollIntoView) eerste.scrollIntoView({block:'center'});
+    }
+    return ok;
+  }
+  reden.addEventListener('input', function(){ if(reden.value.trim()) weg(foutReden, reden); });
+  Array.prototype.forEach.call(document.querySelectorAll('input[name="eigenaar"]'), function(r){
+    r.addEventListener('change', function(){ weg(foutEig, null); });
+  });
+
+  function vastleggen(bordfoto){
+    if(!isToestand){ location.href = 'bord-svb-b.html'; return; }
+    if(!compleet()) return;
+    location.href = 'bord-svb-b-gelogd.html?k=' + encodeURIComponent(k) +
+      '&r=' + encodeURIComponent(reden.value.trim()) +
+      '&e=' + encodeURIComponent(eigenaar()) +
+      (bordfoto ? '&bf=1' : '');
+  }
+  document.getElementById('primair').addEventListener('click', function(){ vastleggen(true); });
+  document.getElementById('secundair').addEventListener('click', function(){ vastleggen(false); });
+})();
+</script>
+
+</body>
+</html>

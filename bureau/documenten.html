@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PowerLedger — Documenten</title>
+<link rel="stylesheet" href="../styles.css">
+<script src="../thema.js" defer></script>
+<style>
+/* Bureaumodus. Uitsluitend tokens uit styles.css, nooit een letterlijke kleurwaarde.
+   Schaalfactor 0,875 (DESIGN.md § Layout & Spacing) op dichtheid en raakvlak.
+   De typografische ladder blijft ongeschaald: de ondergrens van 13 px
+   uit DESIGN.md § Typography gaat voor op de schaalfactor. */
+.bureau{--schaal:.875;--raakvlak:calc(48px * var(--schaal))}
+.bureau .rij{padding:var(--rij-bureau) 0;gap:var(--s4);flex-wrap:wrap}
+main{padding-bottom:var(--s7)}
+.kop{margin:0 0 var(--s6)}
+.kop p{margin:var(--s2) 0 0}
+.kaart{margin-bottom:var(--s5)}
+.kaart+.kap,.demo-hint+.kap{margin-top:var(--s6)}
+.groei{flex:1 1 10rem;min-width:0}
+.meta-rechts{margin-left:auto;text-align:right;flex:0 1 auto}
+.stip-top{margin-top:.45em}
+.paar{display:flex;flex-wrap:wrap;gap:var(--s2) var(--s4);align-items:baseline}
+.paar b{display:inline}
+.vervallen{color:var(--status-rood);font-weight:600}
+.binnenkort{color:var(--status-oranje);font-weight:600}
+.ontbreekt{color:var(--inkt-3);font-weight:600}
+</style>
+</head>
+<body>
+
+<div class="demo-balk">
+  <a href="../index.html">← Start</a>
+  <span>Documenten · bureaumodus</span>
+  <span class="rechts">
+    <span>Demo-chroom — deze balk hoort niet bij het product.</span>
+    <button type="button" data-thema-knop onclick="wisselThema()" aria-label="Wissel tussen licht en donker thema">Donker</button>
+  </span>
+</div>
+
+<div class="bureau">
+
+<nav class="nav" aria-label="Hoofdnavigatie">
+  <span class="merk">PowerLedger</span>
+  <a href="overzicht.html">Overzicht</a>
+  <a href="overzicht.html#stelplaatsen">Stelplaatsen</a>
+  <a href="todos.html">Todo's</a>
+  <a href="documenten.html" class="aan" aria-current="page">Documenten</a>
+  <a href="toegang.html">Toegang</a>
+</nav>
+
+<main>
+  <div class="kop">
+    <h1 class="schermtitel">Documenten</h1>
+    <p class="toelichting">Over de stelplaatsen heen. 1 document vervallen · 1 keuring verloopt binnen 6 weken · 2 stelplaatsen zonder dossier.</p>
+  </div>
+
+  <h2 class="kap">vervallen en ontbrekend</h2>
+  <div class="kaart">
+
+    <div class="rij">
+      <span class="stip s-rood stip-top" aria-hidden="true"></span>
+      <span class="groei">
+        <span class="paar"><b>Uitwendige invloeden</b> <span class="status-tekst">Vervallen</span></span>
+        <small>Mechelen · <a class="link" href="bord-svb-b.html">SVB-B</a> — vernieuwen staat 12 dagen te laat.</small>
+      </span>
+      <span class="meta-rechts tijd"><span class="vervallen">vervallen 01-06-2026</span></span>
+    </div>
+
+    <div class="rij">
+      <span class="stip s-oranje stip-top" aria-hidden="true"></span>
+      <span class="groei">
+        <span class="paar"><b>Keuringsverslag</b> <span class="status-tekst">Loopt af</span></span>
+        <small>Antwerpen-Noord · laagspanning — nog niets aangevraagd.</small>
+      </span>
+      <span class="meta-rechts tijd"><span class="binnenkort">verloopt over 6 wk</span></span>
+    </div>
+
+    <div class="rij">
+      <span class="stip s-grijs stip-top" aria-hidden="true"></span>
+      <span class="groei">
+        <span class="paar"><b>Boom</b> <span class="status-tekst">Nog niet bevestigd</span></span>
+        <small>Geen dossier — er staat nog geen enkel document geregistreerd.</small>
+      </span>
+      <span class="meta-rechts tijd"><span class="ontbreekt">alle types ontbreken</span></span>
+    </div>
+
+    <div class="rij">
+      <span class="stip s-grijs stip-top" aria-hidden="true"></span>
+      <span class="groei">
+        <span class="paar"><b>Kontich</b> <span class="status-tekst">Nog niet bevestigd</span></span>
+        <small>Geen dossier — er staat nog geen enkel document geregistreerd.</small>
+      </span>
+      <span class="meta-rechts tijd"><span class="ontbreekt">alle types ontbreken</span></span>
+    </div>
+
+  </div>
+
+  <h2 class="kap">geregistreerd</h2>
+  <div class="kaart">
+
+    <div class="rij">
+      <span class="groei"><b>Eendraadschema</b><small>Mechelen · <a class="link" href="bord-svb-b.html">SVB-B</a></small></span>
+      <span class="meta-rechts tijd">pdf · 2,4 MB · bijgewerkt 14-06-2024</span>
+    </div>
+
+    <div class="rij">
+      <span class="groei"><b>Kabelberekening</b><small>Mechelen · <a class="link" href="bord-svb-b.html">SVB-B</a></small></span>
+      <span class="meta-rechts tijd">pdf · 810 kB · 14-06-2024</span>
+    </div>
+
+    <div class="rij">
+      <span class="groei"><b>Risicoanalyse</b><small>Mechelen · <a class="link" href="bord-svb-b.html">SVB-B</a></small></span>
+      <span class="meta-rechts tijd">pdf · 1,1 MB · 09-02-2023</span>
+    </div>
+
+    <div class="rij">
+      <span class="groei"><b>Keuringsverslag</b><small>Mechelen · <a class="link" href="bord-svb-b.html">SVB-B</a> — attest A door Vinçotte, keuring van <span class="mono">14-06-2024</span>.</small></span>
+      <span class="meta-rechts tijd">pdf · geldig tot 14-06-2029</span>
+    </div>
+
+    <div class="rij">
+      <span class="groei"><b>Keuringsverslag</b><small>Zwijndrecht — attest.</small></span>
+      <span class="meta-rechts tijd">geldig tot okt '27</span>
+    </div>
+
+  </div>
+
+  <p class="toelichting">Wat ontbreekt staat er ook. Een dossier zonder documenten is <span class="status-tekst">Nog niet bevestigd</span> — grijs, niet groen.</p>
+  <p class="toelichting">Er wordt niets uit een pdf gelezen of afgeleid. Wat hier staat, heeft iemand geregistreerd.</p>
+
+  <p class="demo-hint">Demo-chroom: de pdf-bestanden zelf zitten niet in dit prototype, dus de documentregels openen niets. In het product opent een regel de pdf.</p>
+</main>
+
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  var d = document.documentElement.dataset.thema ||
+    (matchMedia('(prefers-color-scheme: dark)').matches ? 'donker' : 'licht');
+  document.querySelectorAll('[data-thema-knop]').forEach(function (b) {
+    b.textContent = d === 'donker' ? 'Licht' : 'Donker';
+  });
+});
+</script>
+</body>
+</html>

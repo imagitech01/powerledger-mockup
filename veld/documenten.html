@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Documenten SVB-B — PowerLedger</title>
+<link rel="stylesheet" href="../styles.css">
+<script src="../thema.js" defer></script>
+<style>
+  [hidden]{display:none !important}
+  .demo-balk{flex-wrap:wrap;row-gap:var(--s2)}
+  .terug a{display:inline-flex;align-items:center;min-height:var(--raakvlak)}
+  .kop{margin:0 0 var(--s5)}
+  .sectie{margin-top:var(--s6)}
+  .rij .tekst{flex:1 1 auto;min-width:0}
+  .vervallen{color:var(--status-rood);font-weight:600}
+  .ontbreekt{color:var(--inkt-3)}
+  .todo{margin-top:var(--s3);padding-top:var(--s3);border-top:1px solid var(--lijn)}
+</style>
+</head>
+<body>
+
+<div class="demo-balk">
+  <a href="../index.html">&larr; Start</a>
+  <span>Documenten SVB-B</span>
+  <span class="rechts">
+    <span>demo-chroom, geen productonderdeel</span>
+    <button type="button" data-thema-knop onclick="wisselThema()" aria-label="Wissel tussen licht en donker thema">Donker</button>
+  </span>
+</div>
+
+<main class="telefoon">
+  <p class="terug"><a class="link" href="bord-svb-b.html">&larr; SVB-B</a></p>
+
+  <div class="kop">
+    <h1 class="schermtitel">Documenten</h1>
+    <p class="toelichting">SVB-B &middot; laagspanning &middot; 5 verwachte types</p>
+  </div>
+
+  <section class="sectie">
+    <h2 class="kap">documenten</h2>
+
+    <div class="rij">
+      <span class="tekst">
+        <b>Eendraadschema</b>
+        <small class="tijd">pdf &middot; 2,4 MB &middot; bijgewerkt 14-06-2024</small>
+        <small class="todo">Todo: Eendraadschema bijwerken &mdash; Geert Vermeulen &middot; <span class="vervallen">3 dagen te laat</span></small>
+      </span>
+    </div>
+
+    <div class="rij">
+      <span class="tekst">
+        <b>Kabelberekening</b>
+        <small class="tijd">pdf &middot; 810 kB &middot; 14-06-2024</small>
+      </span>
+    </div>
+
+    <div class="rij">
+      <span class="tekst">
+        <b>Risicoanalyse</b>
+        <small class="tijd">pdf &middot; 1,1 MB &middot; 09-02-2023</small>
+      </span>
+    </div>
+
+    <div class="rij">
+      <span class="tekst">
+        <b>Uitwendige invloeden</b>
+        <small class="tijd"><span class="vervallen">vervallen 01-06-2026</span></small>
+        <small class="todo">Todo: Uitwendige invloeden vernieuwen &mdash; Geert Vermeulen &middot; <span class="vervallen">12 dagen te laat</span></small>
+      </span>
+    </div>
+
+    <div class="rij">
+      <span class="tekst">
+        <b>Keuringsverslag</b>
+        <small class="tijd">pdf &middot; attest A &middot; geldig tot 14-06-2029</small>
+      </span>
+    </div>
+  </section>
+
+  <section class="sectie">
+    <h2 class="kap">waarom dit bord rood staat</h2>
+    <p class="toelichting">De status <span class="body-tekst">Vervallen</span> komt van het vervallen document <em>Uitwendige invloeden</em>. Er wordt niets uit de pdf&rsquo;s gelezen of afgeleid; wat hier staat, heeft een mens geregistreerd.</p>
+  </section>
+
+  <p class="demo-hint">Op SVB-B zijn alle vijf verwachte types geregistreerd; een ontbrekend type zou hier staan met het woord <span class="ontbreekt">ontbreekt</span>. De pdf-bestanden zelf zitten niet in dit prototype.</p>
+</main>
+
+</body>
+</html>

@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Iets loggen — PowerLedger</title>
+<link rel="stylesheet" href="../styles.css">
+<script src="../thema.js" defer></script>
+<style>
+  [hidden]{display:none !important}
+  .demo-balk{flex-wrap:wrap;row-gap:var(--s2)}
+  .terug a{display:inline-flex;align-items:center;min-height:var(--raakvlak)}
+  .kop{margin:0 0 var(--s5)}
+  .sectie{margin-top:var(--s6)}
+  .wkw{border-bottom:1px solid var(--lijn);margin-bottom:var(--raakvlak-tussen);align-items:center}
+  .wkw .tekst{flex:1 1 auto;min-width:0}
+  .wkw .chev{color:var(--accent);flex:0 0 auto;font-size:1.1rem}
+  .context{padding:var(--rij-veld) 0;border-top:1px solid var(--lijn);border-bottom:1px solid var(--lijn)}
+</style>
+</head>
+<body>
+
+<div class="demo-balk">
+  <a href="../index.html">&larr; Start</a>
+  <span>Loggen 1 &mdash; werkwoord</span>
+  <span class="rechts">
+    <span>demo-chroom, geen productonderdeel</span>
+    <button type="button" data-thema-knop onclick="wisselThema()" aria-label="Wissel tussen licht en donker thema">Donker</button>
+  </span>
+</div>
+
+<main class="telefoon">
+  <p class="terug"><a class="link" href="bord-svb-b.html">&larr; SVB-B</a></p>
+
+  <div class="kop">
+    <h1 class="schermtitel">Iets loggen</h1>
+  </div>
+
+  <div class="context">
+    <p class="toelichting">Bord: <b>SVB-B</b> &middot; Stelplaats Mechelen &rsaquo; Werkplaats</p>
+    <p class="tijd">Aangemeld als Jan Verhoeven &middot; 21-08 16:18</p>
+  </div>
+
+  <section class="sectie">
+    <h2 class="kap">wat leg je vast</h2>
+
+    <a class="rij wkw" href="loggen-2.html?w=wijziging">
+      <span class="tekst"><b>Wijziging</b><small>Ik heb iets veranderd. Gevolgen ontstaan automatisch als todo&rsquo;s.</small></span>
+      <span class="chev" aria-hidden="true">&rsaquo;</span>
+    </a>
+
+    <a class="rij wkw" href="loggen-2.html?w=vaststelling">
+      <span class="tekst"><b>Vaststelling</b><small>Ik zie iets dat niet klopt. Gaat naar triage. De melder hoeft het niet op te lossen, maar blijft het wel volgen.</small></span>
+      <span class="chev" aria-hidden="true">&rsaquo;</span>
+    </a>
+
+    <a class="rij wkw" href="loggen-2.html?w=toestand">
+      <span class="tekst"><b>Toestand</b><small>Ik laat iets anders achter. Reden en eigenaar zijn verplicht.</small></span>
+      <span class="chev" aria-hidden="true">&rsaquo;</span>
+    </a>
+
+    <a class="rij wkw" href="loggen-2.html?w=bevestiging">
+      <span class="tekst"><b>Bevestiging</b><small>Ik heb gekeken en het klopt. Zet de teller laatst bevestigd.</small></span>
+      <span class="chev" aria-hidden="true">&rsaquo;</span>
+    </a>
+  </section>
+
+  <section class="sectie">
+    <h2 class="kap">sluiten</h2>
+    <p class="toelichting">Sluiten gebeurt in de todo, niet hier. Een toestand wordt afgesloten door zijn eigenaar in <a class="link" href="mijn-todos.html">Mijn todo&rsquo;s</a>.</p>
+  </section>
+
+  <p class="demo-hint">In dit prototype is het pad <b>toestand</b> volledig uitgewerkt tot en met het resultaat.</p>
+</main>
+
+</body>
+</html>

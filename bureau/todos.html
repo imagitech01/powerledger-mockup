@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PowerLedger — Todo's</title>
+<link rel="stylesheet" href="../styles.css">
+<script src="../thema.js" defer></script>
+<style>
+/* Bureaumodus. Uitsluitend tokens uit styles.css, nooit een letterlijke kleurwaarde.
+   Schaalfactor 0,875 (DESIGN.md § Layout & Spacing) op dichtheid en raakvlak.
+   De typografische ladder blijft ongeschaald: de ondergrens van 13 px
+   uit DESIGN.md § Typography gaat voor op de schaalfactor. */
+.bureau{--schaal:.875;--raakvlak:calc(48px * var(--schaal))}
+.bureau .rij{padding:var(--rij-bureau) 0;gap:var(--s4);flex-wrap:wrap}
+main{padding-bottom:var(--s7)}
+.kop{margin:0 0 var(--s6)}
+.kop p{margin:var(--s2) 0 0}
+.kaart{margin-bottom:var(--s5)}
+.kaart+.kap,.demo-hint+.kap{margin-top:var(--s6)}
+.groei{flex:1 1 10rem;min-width:0}
+.meta-rechts{margin-left:auto;text-align:right;flex:0 1 auto}
+.te-laat{color:var(--status-rood);font-weight:600}
+.binnenkort{color:var(--status-oranje);font-weight:600}
+.geen-termijn{color:var(--inkt-3)}
+.vink{width:32px;height:32px;flex:0 0 auto;margin:0;accent-color:var(--accent);cursor:pointer}
+.gevolg{display:block;font-size:.875rem;line-height:1.45;color:var(--inkt-2);margin-top:var(--s2)}
+.af b,.af small{color:var(--inkt-3)}
+.af b{text-decoration:line-through}
+.leeg{padding:var(--s5) 0}
+</style>
+</head>
+<body>
+
+<div class="demo-balk">
+  <a href="../index.html">← Start</a>
+  <span>Todo's · bureaumodus</span>
+  <span class="rechts">
+    <span>Demo-chroom — deze balk hoort niet bij het product.</span>
+    <button type="button" data-thema-knop onclick="wisselThema()" aria-label="Wissel tussen licht en donker thema">Donker</button>
+  </span>
+</div>
+
+<div class="bureau">
+
+<nav class="nav" aria-label="Hoofdnavigatie">
+  <span class="merk">PowerLedger</span>
+  <a href="overzicht.html">Overzicht</a>
+  <a href="overzicht.html#stelplaatsen">Stelplaatsen</a>
+  <a href="todos.html" class="aan" aria-current="page">Todo's</a>
+  <a href="documenten.html">Documenten</a>
+  <a href="toegang.html">Toegang</a>
+</nav>
+
+<main>
+  <div class="kop">
+    <h1 class="schermtitel">Todo's</h1>
+    <p class="toelichting" id="teller">6 open todo's · 2 te laat. Afvinken kan door de eigenaar of de beheerder.</p>
+  </div>
+
+  <h2 class="kap">open</h2>
+  <div class="kaart" id="lijst">
+
+    <div class="rij" data-todo>
+      <input class="vink" type="checkbox" id="t1" aria-describedby="t1-h">
+      <span class="groei">
+        <label for="t1"><b>Uitwendige invloeden vernieuwen</b></label>
+        <small id="t1-h">Herkomst: document vervallen <span class="mono">01-06-2026</span> · <a class="link" href="bord-svb-b.html">Mechelen · SVB-B</a> — eigenaar Geert Vermeulen</small>
+        <span class="gevolg" data-gevolg hidden></span>
+      </span>
+      <span class="meta-rechts tijd"><span class="te-laat">12 dagen te laat</span></span>
+    </div>
+
+    <div class="rij" data-todo>
+      <input class="vink" type="checkbox" id="t2" aria-describedby="t2-h">
+      <span class="groei">
+        <label for="t2"><b>Eendraadschema bijwerken</b></label>
+        <small id="t2-h">Herkomst: wijziging kring <span class="mono">26</span> · <span class="mono">18-02</span> · <a class="link" href="bord-svb-b.html">Mechelen · SVB-B</a> — eigenaar Geert Vermeulen</small>
+        <span class="gevolg" data-gevolg hidden></span>
+      </span>
+      <span class="meta-rechts tijd"><span class="te-laat">3 dagen te laat</span></span>
+    </div>
+
+    <div class="rij" data-todo>
+      <input class="vink" type="checkbox" id="t3" aria-describedby="t3-h">
+      <span class="groei">
+        <label for="t3"><b>Selectiviteit nazien</b></label>
+        <small id="t3-h">Herkomst: wijziging kring <span class="mono">26</span> · <span class="mono">18-02</span> · <a class="link" href="bord-svb-b.html">Mechelen · SVB-B</a> — eigenaar Jan Verhoeven</small>
+        <span class="gevolg" data-gevolg hidden></span>
+      </span>
+      <span class="meta-rechts tijd"><span class="binnenkort">over 5 dagen</span></span>
+    </div>
+
+    <div class="rij" data-todo
+      data-sluit="Automaat 0 (320 A) staat niet meer als uit op SVB-B. De reden is nu vastgelegd bij het afvinken.">
+      <input class="vink" type="checkbox" id="t4" aria-describedby="t4-h">
+      <span class="groei">
+        <label for="t4"><b>Uitzoeken waarom automaat <span class="mono">0</span> uit staat</b></label>
+        <small id="t4-h">Herkomst: opname · <span class="mono">03-06</span> · <a class="link" href="bord-svb-b.html">Mechelen · SVB-B</a> — eigenaar Jan Verhoeven. Sluit de toestand <em>Automaat 0 (320 A) — bestond al bij opname</em>.</small>
+        <span class="gevolg" data-gevolg hidden></span>
+      </span>
+      <span class="meta-rechts tijd"><span class="binnenkort">over 2 wk</span></span>
+    </div>
+
+    <div class="rij" data-todo>
+      <input class="vink" type="checkbox" id="t5" aria-describedby="t5-h">
+      <span class="groei">
+        <label for="t5"><b>Keuring aanvragen</b></label>
+        <small id="t5-h">Herkomst: wijziging kring <span class="mono">26</span> · <span class="mono">18-02</span> · <a class="link" href="bord-svb-b.html">Mechelen · SVB-B</a> — eigenaar Geert Vermeulen</small>
+        <span class="gevolg" data-gevolg hidden></span>
+      </span>
+      <span class="meta-rechts tijd">over 6 wk</span>
+    </div>
+
+    <div class="rij" data-todo
+      data-sluit="Kring 14 staat niet meer als uit op SVB-B. De tijdlijn houdt vast wie hem uitzette en waarom.">
+      <input class="vink" type="checkbox" id="t6" aria-describedby="t6-h">
+      <span class="groei">
+        <label for="t6"><b>Kring <span class="mono">14</span> vrijgeven na controle</b></label>
+        <small id="t6-h">Herkomst: toestand · <span class="mono">12-03</span> · <a class="link" href="bord-svb-b.html">Mechelen · SVB-B</a> — eigenaar Peeters. Sluit de toestand <em>Kring 14 — uit sinds 12 maart door Peeters</em>.</small>
+        <span class="gevolg" data-gevolg hidden></span>
+      </span>
+      <span class="meta-rechts tijd"><span class="geen-termijn">geen termijn</span></span>
+    </div>
+
+  </div>
+
+  <p class="leeg body-tekst" id="leeg" hidden>Niets open.</p>
+
+  <p class="toelichting">Afvinken sluit de todo, en daarmee de toestand waar hij aan hangt. Sluiten gebeurt hier, niet aan het bord.</p>
+
+  <p class="sr" role="status" aria-live="polite" id="melding"></p>
+</main>
+
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  var d = document.documentElement.dataset.thema ||
+    (matchMedia('(prefers-color-scheme: dark)').matches ? 'donker' : 'licht');
+  document.querySelectorAll('[data-thema-knop]').forEach(function (b) {
+    b.textContent = d === 'donker' ? 'Licht' : 'Donker';
+  });
+
+  var rijen = Array.prototype.slice.call(document.querySelectorAll('[data-todo]'));
+  var teller = document.getElementById('teller');
+  var leeg = document.getElementById('leeg');
+  var melding = document.getElementById('melding');
+
+  function bijwerken() {
+    var open = rijen.filter(function (r) { return !r.querySelector('.vink').checked; });
+    var telaat = open.filter(function (r) { return r.querySelector('.te-laat'); });
+    teller.textContent = open.length === 0
+      ? 'Niets open. 6 todo’s afgevinkt vandaag.'
+      : open.length + ' open todo’s · ' + telaat.length + ' te laat. Afvinken kan door de eigenaar of de beheerder.';
+    leeg.hidden = open.length !== 0;
+  }
+
+  rijen.forEach(function (rij) {
+    var vink = rij.querySelector('.vink');
+    var gevolg = rij.querySelector('[data-gevolg]');
+    vink.addEventListener('change', function () {
+      if (vink.checked) {
+        rij.classList.add('af');
+        var tekst = 'Afgevinkt om 16:18 door Geert Vermeulen.';
+        if (rij.dataset.sluit) tekst += ' ' + rij.dataset.sluit;
+        gevolg.textContent = tekst;
+        gevolg.hidden = false;
+        melding.textContent = rij.querySelector('b').textContent + ' — ' + tekst;
+      } else {
+        rij.classList.remove('af');
+        gevolg.hidden = true;
+        gevolg.textContent = '';
+        melding.textContent = rij.querySelector('b').textContent + ' — staat weer open.';
+      }
+      bijwerken();
+    });
+  });
+
+  bijwerken();
+});
+</script>
+</body>
+</html>

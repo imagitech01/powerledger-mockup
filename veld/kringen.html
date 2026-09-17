@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kringen SVB-B — PowerLedger</title>
+<link rel="stylesheet" href="../styles.css">
+<script src="../thema.js" defer></script>
+<style>
+  [hidden]{display:none !important}
+  .demo-balk{flex-wrap:wrap;row-gap:var(--s2)}
+  .terug a{display:inline-flex;align-items:center;min-height:var(--raakvlak)}
+  .kop{margin:0 0 var(--s5)}
+  .sectie{margin-top:var(--s6)}
+  .rij .tekst{flex:1 1 auto;min-width:0}
+  .quote{color:var(--inkt-2)}
+  .nummers{display:flex;flex-wrap:wrap;gap:var(--s3);margin:var(--s4) 0 0;padding:0;list-style:none}
+  .nummers li{font-family:var(--mono);font-size:.875rem;letter-spacing:.02em;color:var(--inkt);
+    border:1px solid var(--lijn);border-radius:var(--r-sm);padding:var(--s2) var(--s3);background:var(--paneel)}
+  .sectie-status{margin-bottom:var(--s2)}
+</style>
+</head>
+<body>
+
+<div class="demo-balk">
+  <a href="../index.html">&larr; Start</a>
+  <span>Kringoverzicht SVB-B</span>
+  <span class="rechts">
+    <span>demo-chroom, geen productonderdeel</span>
+    <button type="button" data-thema-knop onclick="wisselThema()" aria-label="Wissel tussen licht en donker thema">Donker</button>
+  </span>
+</div>
+
+<main class="telefoon">
+  <p class="terug"><a class="link" id="terug" href="bord-svb-b.html">&larr; SVB-B</a></p>
+
+  <div class="kop">
+    <h1 class="schermtitel">Kringen</h1>
+    <p class="toelichting">SVB-B &middot; <span id="totaal">26</span> kringen bekend. Kringen ontstaan bij hun eerste vermelding in een event.</p>
+  </div>
+
+  <section class="sectie">
+    <h2 class="kap">vraagt aandacht</h2>
+
+    <div class="rij" id="rij-31-4" hidden>
+      <span class="tag">UIT</span>
+      <span class="tekst">
+        <b>Kring 31.4 &middot; <span class="mono" aria-label="kring 3 1 punt 4">k31.4</span></b>
+        <small>Uit sinds vandaag <span class="mono">16:20</span> door Jan Verhoeven &mdash; <span class="quote">&ldquo;nieuwe voeding nog niet afgemonteerd &mdash; niet vrijgeven&rdquo;</span></small>
+        <small>Todo: Kring 31.4 vrijgeven na controle &mdash; Jan Verhoeven &middot; geen termijn</small>
+      </span>
+    </div>
+
+    <a class="rij" href="kring-14.html">
+      <span class="tag">UIT</span>
+      <span class="tekst">
+        <b>Kring 14 &middot; <span class="mono" aria-label="kring 1 4">k14</span></b>
+        <small>Hefbrug werkplaats &mdash; uit sinds 12 maart door Peeters &mdash; <span class="quote">&ldquo;defect armatuur, niet vrijgeven&rdquo;</span></small>
+        <small><span class="mono">3</span> events in <span class="mono">6</span> maanden</small>
+      </span>
+    </a>
+
+    <div class="rij">
+      <span class="tag">UIT</span>
+      <span class="tekst">
+        <b>Automaat 0 (320 A) &middot; <span class="mono" aria-label="kring 0">k0</span></b>
+        <small>Bestond al bij opname &mdash; reden onbekend.</small>
+      </span>
+    </div>
+
+    <div class="rij">
+      <span class="tekst">
+        <b>Kring 26 &middot; <span class="mono" aria-label="kring 2 6">k26</span></b>
+        <span class="statusregel"><span class="stip s-geel" aria-hidden="true"></span><span>Gevolgen open</span></span>
+        <small>3 gevolgen open sinds kring 26 bijgeplaatst op <span class="mono">18-02</span></small>
+      </span>
+    </div>
+  </section>
+
+  <section class="sectie">
+    <h2 class="kap">overige bekend</h2>
+    <p class="statusregel sectie-status"><span class="stip s-groen" aria-hidden="true"></span><span>Niets open &mdash; <span id="rest-aantal">23</span> kringen</span></p>
+    <ul class="nummers">
+      <li>C1</li><li>C2</li><li>C3</li><li>C4</li><li>C5</li>
+      <li>C16</li><li>C17</li><li>C18</li><li>C21</li><li>C22</li><li>C23</li>
+      <li>12</li><li>15</li><li>16</li><li>17</li><li>18</li><li>19</li>
+      <li>24</li><li>25</li>
+      <li>31.3</li><li id="chip-31-4">31.4</li><li>31.5</li><li>31.6</li>
+    </ul>
+    <p class="toelichting">Nummers die hier niet staan, zijn op dit bord nog nooit gelogd. De gaten in de nummering zijn de gaten die op het bord staan.</p>
+  </section>
+
+  <p class="demo-hint">In dit prototype is alleen kring 14 als kringdetail uitgewerkt.</p>
+</main>
+
+<script>
+(function(){
+  if(!/(?:\?|&)nieuw=1(?:&|$)/.test(location.search)) return;
+  document.getElementById('rij-31-4').hidden = false;
+  document.getElementById('chip-31-4').remove();
+  document.getElementById('rest-aantal').textContent = '22';
+  document.getElementById('terug').setAttribute('href','bord-svb-b-gelogd.html');
+})();
+</script>
+
+</body>
+</html>

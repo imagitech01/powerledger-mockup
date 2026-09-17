@@ -1,0 +1,261 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PowerLedger — Overzicht</title>
+<link rel="stylesheet" href="../styles.css">
+<script src="../thema.js" defer></script>
+<style>
+/* Bureaumodus. Uitsluitend tokens uit styles.css, nooit een letterlijke kleurwaarde.
+   Schaalfactor 0,875 (DESIGN.md § Layout & Spacing) op dichtheid en raakvlak.
+   De typografische ladder blijft ongeschaald: de ondergrens van 13 px
+   uit DESIGN.md § Typography gaat voor op de schaalfactor. */
+.bureau{--schaal:.875;--raakvlak:calc(48px * var(--schaal))}
+.bureau .rij{padding:var(--rij-bureau) 0;gap:var(--s4);flex-wrap:wrap}
+.bureau .veld{min-height:var(--raakvlak)}
+.bureau .knop,.bureau .knop-2{display:inline-flex;align-items:center;justify-content:center;
+  width:auto;padding:var(--s3) var(--s5);min-height:var(--raakvlak);margin-top:0}
+.kaart a.rij:hover,.kaart a.rij:focus-visible{background:var(--grond)}
+main{padding-bottom:var(--s7)}
+.kop{margin:0 0 var(--s6)}
+.kop p{margin:var(--s2) 0 0}
+.kaart{margin-bottom:var(--s5)}
+.kaart+.kap,.demo-hint+.kap{margin-top:var(--s6)}
+.groei{flex:1 1 10rem;min-width:0}
+.meta-rechts{margin-left:auto;text-align:right;flex:0 1 auto}
+.stip-top{margin-top:.45em}
+.eyebrow{display:block;margin-bottom:var(--s1)}
+.eyebrow .status-tekst{margin-right:var(--s2)}
+.paar{display:flex;flex-wrap:wrap;gap:var(--s2) var(--s4);align-items:baseline}
+.paar b{display:inline}
+.groot-mono{font-family:var(--mono);font-size:1.15rem;font-weight:600;letter-spacing:.02em}
+.balk{height:var(--s3);background:var(--lijn);border:1px solid var(--lijn-hard);
+  border-radius:var(--r-sm);overflow:hidden;margin:var(--s3) 0}
+.balk i{display:block;height:100%;background:var(--inkt-3)}
+.uit{color:var(--inkt-2)}
+</style>
+</head>
+<body>
+
+<div class="demo-balk">
+  <a href="../index.html">← Start</a>
+  <span>Overzicht · bureaumodus</span>
+  <span class="rechts">
+    <span>Demo-chroom — deze balk hoort niet bij het product.</span>
+    <button type="button" data-thema-knop onclick="wisselThema()" aria-label="Wissel tussen licht en donker thema">Donker</button>
+  </span>
+</div>
+
+<div class="bureau">
+
+<nav class="nav" aria-label="Hoofdnavigatie">
+  <span class="merk">PowerLedger</span>
+  <a href="overzicht.html" class="aan" aria-current="page">Overzicht</a>
+  <a href="overzicht.html#stelplaatsen">Stelplaatsen</a>
+  <a href="todos.html">Todo's</a>
+  <a href="documenten.html">Documenten</a>
+  <a href="toegang.html">Toegang</a>
+</nav>
+
+<main>
+  <div class="kop">
+    <h1 class="schermtitel">4 van 11 stelplaatsen hebben open punten. 3 zijn nog niet bevestigd.</h1>
+    <p class="toelichting">Stand van donderdag 21 augustus 2026, 16:18 · Antwerpen · 11 stelplaatsen.</p>
+  </div>
+
+  <div class="bureau-grid">
+
+    <div class="kolom">
+
+      <h2 class="kap">waar moet je op acteren</h2>
+      <div class="kaart">
+
+        <div class="rij" data-punt="automaat-0">
+          <span class="stip s-rood stip-top" aria-hidden="true"></span>
+          <span class="groei">
+            <span class="eyebrow"><span class="status-tekst">Vervallen</span>Mechelen · <span class="mono">SVB-B</span></span>
+            <b>Automaat <span class="mono">0</span> staat uit sinds <span class="mono">12-03</span></b>
+            <small>Bestond al bij opname — reden onbekend.</small>
+          </span>
+          <span class="meta-rechts actie"><a class="link" href="toewijzen.html?punt=automaat-0">Toewijzen</a></span>
+        </div>
+
+        <div class="rij" data-punt="keuring-antwerpen-noord">
+          <span class="stip s-oranje stip-top" aria-hidden="true"></span>
+          <span class="groei">
+            <span class="eyebrow"><span class="status-tekst">Loopt af</span>Antwerpen-Noord</span>
+            <b>Keuring vervalt over 6 weken</b>
+            <small>Nog niets aangevraagd.</small>
+          </span>
+          <span class="meta-rechts actie"><a class="link" href="toewijzen.html?punt=keuring-antwerpen-noord">Toewijzen</a></span>
+        </div>
+
+        <div class="rij" data-punt="vaststelling-zwijndrecht">
+          <span class="stip s-geel stip-top" aria-hidden="true"></span>
+          <span class="groei">
+            <span class="eyebrow"><span class="status-tekst">Gevolgen open</span>Zwijndrecht</span>
+            <b>Vaststelling</b>
+            <small>Jan Verhoeven · <span class="mono">20-08 16:20</span> — &ldquo;stopcontacten bijgeplaatst zonder aarding&rdquo;</small>
+          </span>
+          <span class="meta-rechts actie"><a class="link" href="toewijzen.html?punt=vaststelling-zwijndrecht">Toewijzen</a></span>
+        </div>
+
+        <div class="rij" data-punt="gevolgen-kring-26">
+          <span class="stip s-geel stip-top" aria-hidden="true"></span>
+          <span class="groei">
+            <span class="eyebrow"><span class="status-tekst">Gevolgen open</span>Mechelen · <span class="mono">SVB-B</span></span>
+            <b>3 gevolgen open sinds kring <span class="mono">26</span> bijgeplaatst</b>
+            <small>Wijziging van <span class="mono">18-02</span> · 3 todo's, waarvan 1 te laat.</small>
+          </span>
+          <span class="meta-rechts actie"><a class="link" href="toewijzen.html?punt=gevolgen-kring-26">Toewijzen</a></span>
+        </div>
+
+      </div>
+
+      <h2 class="kap" id="stelplaatsen">status van alle stelplaatsen</h2>
+      <div class="kaart">
+
+        <a class="rij" href="site-mechelen.html">
+          <span class="stip s-rood stip-top" aria-hidden="true"></span>
+          <span class="groei paar"><b>Mechelen</b> <span class="status-tekst">Vervallen</span></span>
+          <span class="meta-rechts mono">2 uit · 6 todo's</span>
+        </a>
+
+        <div class="rij">
+          <span class="stip s-oranje stip-top" aria-hidden="true"></span>
+          <span class="groei paar"><b>Antwerpen-Noord</b> <span class="status-tekst">Loopt af</span></span>
+          <span class="meta-rechts mono">keuring over 6 wk</span>
+        </div>
+
+        <div class="rij">
+          <span class="stip s-geel stip-top" aria-hidden="true"></span>
+          <span class="groei paar"><b>Zwijndrecht</b> <span class="status-tekst">Gevolgen open</span></span>
+          <span class="meta-rechts mono">1 vaststelling</span>
+        </div>
+
+        <div class="rij">
+          <span class="stip s-grijs stip-top" aria-hidden="true"></span>
+          <span class="groei paar"><b>Deurne</b> <span class="status-tekst">Nog niet bevestigd</span></span>
+          <span class="meta-rechts mono">opgenomen 21-08</span>
+        </div>
+
+        <div class="rij">
+          <span class="stip s-groen stip-top" aria-hidden="true"></span>
+          <span class="groei paar"><b>Wilrijk</b> <span class="status-tekst">Niets open</span></span>
+          <span class="meta-rechts mono">bevestigd 04-08</span>
+        </div>
+
+        <div class="rij">
+          <span class="stip s-groen stip-top" aria-hidden="true"></span>
+          <span class="groei paar"><b>Merksem</b> <span class="status-tekst">Niets open</span></span>
+          <span class="meta-rechts mono">bevestigd 28-07</span>
+        </div>
+
+        <div class="rij">
+          <span class="stip s-groen stip-top" aria-hidden="true"></span>
+          <span class="groei paar"><b>Hoboken</b> <span class="status-tekst">Niets open</span></span>
+          <span class="meta-rechts mono">bevestigd 12-08</span>
+        </div>
+
+        <div class="rij">
+          <span class="stip s-groen stip-top" aria-hidden="true"></span>
+          <span class="groei paar"><b>Ekeren</b> <span class="status-tekst">Niets open</span></span>
+          <span class="meta-rechts mono">bevestigd 06-08</span>
+        </div>
+
+        <div class="rij">
+          <span class="stip s-geel stip-top" aria-hidden="true"></span>
+          <span class="groei paar"><b>Berchem</b> <span class="status-tekst">Gevolgen open</span></span>
+          <span class="meta-rechts mono">2 todo's</span>
+        </div>
+
+        <div class="rij">
+          <span class="stip s-grijs stip-top" aria-hidden="true"></span>
+          <span class="groei paar"><b>Boom</b> <span class="status-tekst">Nog niet bevestigd</span></span>
+          <span class="meta-rechts mono">geen dossier</span>
+        </div>
+
+        <div class="rij">
+          <span class="stip s-grijs stip-top" aria-hidden="true"></span>
+          <span class="groei paar"><b>Kontich</b> <span class="status-tekst">Nog niet bevestigd</span></span>
+          <span class="meta-rechts mono">geen dossier</span>
+        </div>
+
+      </div>
+      <p class="demo-hint">Demo-chroom: in dit prototype is alleen Mechelen doorklikbaar. In het product opent elke regel het sitedossier.</p>
+    </div>
+
+    <div class="kolom">
+
+      <h2 class="kap">wat komt eraan</h2>
+      <div class="kaart">
+        <div class="rij">
+          <span class="mono">6 wk</span>
+          <span class="groei"><b>Keuring LS Antwerpen-Noord</b><small>Nog niets aangevraagd.</small></span>
+        </div>
+        <div class="rij">
+          <span class="mono">3 mnd</span>
+          <span class="groei"><b>HS-kwartaalcontrole</b><small>Alle sites.</small></span>
+        </div>
+        <div class="rij">
+          <span class="mono">okt '27</span>
+          <span class="groei"><b>Attest Zwijndrecht vervalt</b></span>
+        </div>
+        <div class="rij">
+          <span class="mono">2029</span>
+          <span class="groei"><b>Attest Mechelen vervalt</b></span>
+        </div>
+      </div>
+
+      <h2 class="kap">nulmeting Antwerpen</h2>
+      <div class="kaart">
+        <p class="paar" style="margin:0"><span class="groot-mono">7 / 11</span> <span class="body-tekst">stelplaatsen opgenomen.</span></p>
+        <div class="balk" role="img" aria-label="7 van 11 stelplaatsen opgenomen"><i style="width:63.6%"></i></div>
+        <p class="toelichting" style="margin:0">Opgenomen door Jan Verhoeven. 4 stelplaatsen nog niet opgenomen; Boom en Kontich hebben nog geen dossier.</p>
+        <p class="toelichting" style="margin:var(--s3) 0 0">Deurne is opgenomen op <span class="mono">21-08</span> en staat op <span class="status-tekst">Nog niet bevestigd</span>. Documenten en foto's zijn er; niemand heeft nog bevestigd dat het klopt.</p>
+      </div>
+
+      <h2 class="kap">weekoverzicht</h2>
+      <div class="kaart">
+        <p class="toelichting" style="margin:0 0 var(--s3)">Een vast overzicht per mail: wat veranderde, wat verloopt, wat op de beheerder wacht.</p>
+        <div class="veld">
+          <label class="lab" for="ritme">frequentie</label>
+          <select id="ritme">
+            <option>Wekelijks — maandag 07:00</option>
+            <option>Tweewekelijks — maandag 07:00</option>
+            <option>Maandelijks — eerste maandag 07:00</option>
+          </select>
+        </div>
+        <p class="toelichting" style="margin:0 0 var(--s3)">Ontvanger: Geert Vermeulen.</p>
+        <p style="margin:0 0 var(--s3)"><a class="link" href="weekoverzicht.html">Voorbeeld van het weekoverzicht bekijken</a></p>
+        <p class="toelichting" style="margin:0">Daarnaast komt er een directe melding, en alleen bij vijf gebeurtenissen. Die lijst is gesloten: zwijgen betekent dat geen van de vijf zich voordeed.</p>
+      </div>
+
+    </div>
+  </div>
+</main>
+
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  var d = document.documentElement.dataset.thema ||
+    (matchMedia('(prefers-color-scheme: dark)').matches ? 'donker' : 'licht');
+  document.querySelectorAll('[data-thema-knop]').forEach(function (b) {
+    b.textContent = d === 'donker' ? 'Licht' : 'Donker';
+  });
+  // Toont wat op toewijzen.html is vastgelegd, zodat het overzicht de handeling weerspiegelt.
+  try {
+    var t = JSON.parse(sessionStorage.getItem('pl-toewijzingen') || '{}');
+    Object.keys(t).forEach(function (k) {
+      var el = document.querySelector('[data-punt="' + k + '"] .actie');
+      if (!el) return;
+      el.className = 'meta-rechts actie toelichting';
+      el.textContent = 'Toegewezen aan ' + t[k].wie + ' · ' + t[k].termijn;
+    });
+  } catch (e) {}
+});
+</script>
+</body>
+</html>

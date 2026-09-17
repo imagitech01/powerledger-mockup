@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PowerLedger — Statusrapport Mechelen</title>
+<link rel="stylesheet" href="../styles.css">
+<script src="../thema.js" defer></script>
+<style>
+/* Bureaumodus. Uitsluitend tokens uit styles.css, nooit een letterlijke kleurwaarde.
+   Schaalfactor 0,875 (DESIGN.md § Layout & Spacing) op dichtheid en raakvlak.
+   De typografische ladder blijft ongeschaald: de ondergrens van 13 px
+   uit DESIGN.md § Typography gaat voor op de schaalfactor. */
+.bureau{--schaal:.875;--raakvlak:calc(48px * var(--schaal))}
+.bureau .rij{padding:var(--rij-bureau) 0;gap:var(--s4);flex-wrap:wrap}
+.bureau .knop{display:inline-flex;align-items:center;justify-content:center;
+  width:auto;padding:var(--s3) var(--s5);min-height:var(--raakvlak);margin-top:0}
+main{padding-bottom:var(--s7);max-width:56rem}
+.kop{margin:0 0 var(--s6)}
+.kop p{margin:var(--s2) 0 0}
+.kaart{margin-bottom:var(--s5)}
+.kaart+.kap,.demo-hint+.kap{margin-top:var(--s6)}
+.groei{flex:1 1 10rem;min-width:0}
+.meta-rechts{margin-left:auto;text-align:right;flex:0 1 auto}
+.stip-top{margin-top:.45em}
+.paar{display:flex;flex-wrap:wrap;gap:var(--s2) var(--s4);align-items:baseline}
+.paar b{display:inline}
+.kruimel{margin:0 0 var(--s4)}
+.vervallen{color:var(--status-rood);font-weight:600}
+.te-laat{color:var(--status-rood);font-weight:600}
+.binnenkort{color:var(--status-oranje);font-weight:600}
+.ontbreekt{color:var(--inkt-3);font-weight:600}
+.acties{display:flex;flex-wrap:wrap;gap:var(--s4);align-items:center;margin:var(--s6) 0 0}
+.grens{border-top:1px solid var(--lijn);margin-top:var(--s6);padding-top:var(--s5)}
+</style>
+</head>
+<body>
+
+<div class="demo-balk">
+  <a href="../index.html">← Start</a>
+  <span>Statusrapport Mechelen · bureaumodus</span>
+  <span class="rechts">
+    <span>Demo-chroom — deze balk hoort niet bij het product.</span>
+    <button type="button" data-thema-knop onclick="wisselThema()" aria-label="Wissel tussen licht en donker thema">Donker</button>
+  </span>
+</div>
+
+<div class="bureau">
+
+<nav class="nav" aria-label="Hoofdnavigatie">
+  <span class="merk">PowerLedger</span>
+  <a href="overzicht.html">Overzicht</a>
+  <a href="overzicht.html#stelplaatsen" class="aan" aria-current="page">Stelplaatsen</a>
+  <a href="todos.html">Todo's</a>
+  <a href="documenten.html">Documenten</a>
+  <a href="toegang.html">Toegang</a>
+</nav>
+
+<main>
+  <p class="kruimel toelichting"><a class="link" href="site-mechelen.html">Stelplaats Mechelen</a> › Statusrapport</p>
+
+  <div class="kop">
+    <h1 class="schermtitel">Stelplaats Mechelen — de staat zoals wij hem kennen</h1>
+    <p class="toelichting">Momentopname van <span class="mono">21-08-2026 16:18</span> · samengesteld door Geert Vermeulen · bestemd voor Vinçotte, keurder.</p>
+    <p class="statusregel" style="margin-top:var(--s4)"><span class="stip s-rood" aria-hidden="true"></span>
+      <span>Vervallen — 2 staan uit, 6 todo's</span></p>
+  </div>
+
+  <h2 class="kap">borden</h2>
+  <div class="kaart">
+    <div class="rij">
+      <span class="stip s-rood stip-top" aria-hidden="true"></span>
+      <span class="groei"><span class="paar"><b>SVB-B</b> <span class="status-tekst">Vervallen</span></span>
+        <small>Laagspanning · werkplaats. Laatst bevestigd <span class="mono">04-03</span>.</small></span>
+      <span class="meta-rechts mono">2 uit · 6 todo's</span>
+    </div>
+    <div class="rij">
+      <span class="stip s-groen stip-top" aria-hidden="true"></span>
+      <span class="groei"><span class="paar"><b>SVB-A</b> <span class="status-tekst">Niets open</span></span>
+        <small>Laagspanning · bussenhal. Bevestigd <span class="mono">04-08</span>.</small></span>
+      <span class="meta-rechts mono">bevestigd 04-08</span>
+    </div>
+    <div class="rij">
+      <span class="stip s-oranje stip-top" aria-hidden="true"></span>
+      <span class="groei"><span class="paar"><b>HS-cabine Noord</b> <span class="status-tekst">Loopt af</span></span>
+        <small>Hoogspanning. Kwartaalcontrole over 3 maanden.</small></span>
+      <span class="meta-rechts mono">controle over 3 mnd</span>
+    </div>
+  </div>
+
+  <h2 class="kap">wat ontbreekt of vervallen is</h2>
+  <div class="kaart">
+    <div class="rij">
+      <span class="groei"><b>Uitwendige invloeden — SVB-B</b>
+        <small>Vernieuwen staat 12 dagen te laat, eigenaar Geert Vermeulen.</small></span>
+      <span class="meta-rechts tijd"><span class="vervallen">vervallen 01-06-2026</span></span>
+    </div>
+    <div class="rij">
+      <span class="groei"><b>Automaat <span class="mono">0</span> <span class="mono">(320 A)</span> — SVB-B</b>
+        <small>Staat uit. Bestond al bij de opname — reden onbekend. Uitzoeken is toegewezen aan Jan Verhoeven.</small></span>
+      <span class="meta-rechts tijd"><span class="ontbreekt">reden ontbreekt</span></span>
+    </div>
+    <div class="rij">
+      <span class="groei"><b>Kring <span class="mono">14</span> — SVB-B</b>
+        <small>Uit sinds 12 maart door Peeters — &ldquo;defect armatuur, niet vrijgeven&rdquo;. Nog niet vrijgegeven.</small></span>
+      <span class="meta-rechts tijd">open sinds 12-03</span>
+    </div>
+    <div class="rij">
+      <span class="groei"><b>3 gevolgen van de wijziging van <span class="mono">18-02</span> — SVB-B</b>
+        <small>Eendraadschema bijwerken (<span class="te-laat">3 dagen te laat</span>) · selectiviteit nazien (<span class="binnenkort">over 5 dagen</span>) · keuring aanvragen (over 6 wk).</small></span>
+      <span class="meta-rechts tijd">3 open</span>
+    </div>
+    <div class="rij">
+      <span class="groei"><b>Bevestiging SVB-B</b>
+        <small>Laatst bevestigd op <span class="mono">04-03</span>. Sindsdien is er 1 event gelogd op dit bord.</small></span>
+      <span class="meta-rechts tijd">04-03</span>
+    </div>
+    <div class="rij">
+      <span class="groei"><b>Buiten deze momentopname</b>
+        <small>Van SVB-A en HS-cabine Noord zijn in dit rapport geen documenten opgenomen.</small></span>
+      <span class="meta-rechts tijd"><span class="ontbreekt">niet opgenomen</span></span>
+    </div>
+  </div>
+  <p class="toelichting">Een onvolledig dossier hoort in de momentopname. Wat ontbreekt, staat er als ontbrekend.</p>
+
+  <h2 class="kap">documenten SVB-B</h2>
+  <div class="kaart">
+    <div class="rij"><span class="groei"><b>Eendraadschema</b></span><span class="meta-rechts tijd">pdf · 2,4 MB · bijgewerkt 14-06-2024</span></div>
+    <div class="rij"><span class="groei"><b>Kabelberekening</b></span><span class="meta-rechts tijd">pdf · 810 kB · 14-06-2024</span></div>
+    <div class="rij"><span class="groei"><b>Risicoanalyse</b></span><span class="meta-rechts tijd">pdf · 1,1 MB · 09-02-2023</span></div>
+    <div class="rij"><span class="groei"><b>Uitwendige invloeden</b></span><span class="meta-rechts tijd"><span class="vervallen">vervallen 01-06-2026</span></span></div>
+    <div class="rij"><span class="groei"><b>Keuringsverslag</b><small>Attest A door Vinçotte, keuring van <span class="mono">14-06-2024</span>.</small></span><span class="meta-rechts tijd">pdf · geldig tot 14-06-2029</span></div>
+  </div>
+
+  <h2 class="kap">gelogd sinds de keuring van 14-06-2024</h2>
+  <div class="kaart">
+    <div class="rij"><span class="tijd">06-11-2025</span><span class="groei"><b>Kring <span class="mono">14</span> bijgeplaatst</b><small>Jan Verhoeven · SVB-B</small></span></div>
+    <div class="rij"><span class="tijd">18-02</span><span class="groei"><b>Kring <span class="mono">26</span> bijgeplaatst</b><small>Jan Verhoeven · SVB-B · 3 gevolgen open</small></span></div>
+    <div class="rij"><span class="tijd">04-03</span><span class="groei"><b>Kabelherstelling · <span class="mono">k14</span></b><small>De Wilde Elektro · SVB-B · 1 foto</small></span></div>
+    <div class="rij"><span class="tijd">12-03</span><span class="groei"><b>Kring <span class="mono">14</span> uitgezet</b><small>Peeters · SVB-B · staat nog open</small></span></div>
+    <div class="rij"><span class="tijd">20-08</span><span class="groei"><b>Kring <span class="mono">26</span> bevestigd</b><small>Jan Verhoeven · SVB-B</small></span></div>
+  </div>
+  <p class="toelichting">5 events sinds de laatste keuring. De volledige tijdlijn staat in het <a class="link" href="bord-svb-b.html">borddossier van SVB-B</a>.</p>
+
+  <div class="grens">
+    <p class="toelichting">PowerLedger doet geen uitspraak over conformiteit, veiligheid of aansprakelijkheid. Dit rapport toont wie wat wanneer registreerde, en wat er sindsdien niet gebeurd is. Er wordt niets uit een pdf gelezen of afgeleid.</p>
+  </div>
+
+  <div class="acties">
+    <button type="button" class="knop" id="deel">Delen met de keurder</button>
+    <a class="link" href="site-mechelen.html">Terug naar het sitedossier</a>
+  </div>
+
+  <div id="gedeeld" hidden>
+    <h2 class="kap" tabindex="-1" style="margin-top:var(--s6)">gedeeld</h2>
+    <div class="kaart">
+      <p class="body-tekst" style="margin:0">Momentopname vastgezet op <span class="mono">21-08-2026 16:18</span> en gedeeld met Vinçotte.</p>
+      <p class="toelichting" style="margin:var(--s2) 0 0">Vinçotte krijgt leesrecht op Stelplaats Mechelen: <span class="status-tekst">Uitgenodigd, nog niet aangemeld</span> · <span class="mono">21-08-2026</span>. Schrijven blijft bij de uitvoerders. Zie <a class="link" href="toegang.html">Toegang</a>.</p>
+    </div>
+  </div>
+
+  <p class="sr" role="status" aria-live="polite" id="melding"></p>
+</main>
+
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  var d = document.documentElement.dataset.thema ||
+    (matchMedia('(prefers-color-scheme: dark)').matches ? 'donker' : 'licht');
+  document.querySelectorAll('[data-thema-knop]').forEach(function (b) {
+    b.textContent = d === 'donker' ? 'Licht' : 'Donker';
+  });
+
+  document.getElementById('deel').addEventListener('click', function () {
+    var vak = document.getElementById('gedeeld');
+    vak.hidden = false;
+    this.disabled = true;
+    document.getElementById('melding').textContent =
+      'Gedeeld om 16:18. Vinçotte is uitgenodigd, nog niet aangemeld.';
+    vak.querySelector('.kap').focus();
+  });
+});
+</script>
+</body>
+</html>

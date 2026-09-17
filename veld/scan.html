@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>QR gescand — PowerLedger</title>
+<link rel="stylesheet" href="../styles.css">
+<script src="../thema.js" defer></script>
+<style>
+  [hidden]{display:none !important}
+  .demo-balk{flex-wrap:wrap;row-gap:var(--s2)}
+  .scan-kop{margin:var(--s6) 0 var(--s5)}
+  .scan-regel{padding:var(--rij-veld) 0;border-bottom:1px solid var(--lijn)}
+</style>
+</head>
+<body>
+
+<div class="demo-balk">
+  <a href="../index.html">&larr; Start</a>
+  <span>Scan</span>
+  <span class="rechts">
+    <span>demo-chroom, geen productonderdeel</span>
+    <button type="button" data-thema-knop onclick="wisselThema()" aria-label="Wissel tussen licht en donker thema">Donker</button>
+  </span>
+</div>
+
+<main class="telefoon">
+  <p class="kap">qr gescand</p>
+
+  <div class="scan-kop">
+    <h1 class="schermtitel">SVB-B</h1>
+    <p class="toelichting">Stelplaats Mechelen &rsaquo; Werkplaats &middot; laagspanning</p>
+  </div>
+
+  <div class="scan-regel">
+    <p class="body-tekst">Je hebt de QR aan de binnenkant van de kastdeur gescand.</p>
+  </div>
+  <div class="scan-regel">
+    <p class="toelichting">Lezen kan zonder aanmelden. Loggen gebeurt met een account.</p>
+    <p class="tijd">Aangemeld als Jan Verhoeven.</p>
+  </div>
+</main>
+
+<div class="onderbalk">
+  <a class="knop" href="bord-svb-b.html">Borddossier openen</a>
+</div>
+
+</body>
+</html>

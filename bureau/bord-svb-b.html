@@ -1,0 +1,267 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PowerLedger — SVB-B</title>
+<link rel="stylesheet" href="../styles.css">
+<script src="../thema.js" defer></script>
+<style>
+/* Bureaumodus. Uitsluitend tokens uit styles.css, nooit een letterlijke kleurwaarde.
+   Schaalfactor 0,875 (DESIGN.md § Layout & Spacing) op dichtheid en raakvlak.
+   De typografische ladder blijft ongeschaald: de ondergrens van 13 px
+   uit DESIGN.md § Typography gaat voor op de schaalfactor. */
+.bureau{--schaal:.875;--raakvlak:calc(48px * var(--schaal))}
+.bureau .rij{padding:var(--rij-bureau) 0;gap:var(--s4);flex-wrap:wrap}
+.bureau .knop,.bureau .knop-2{display:inline-flex;align-items:center;justify-content:center;
+  width:auto;padding:var(--s3) var(--s5);min-height:var(--raakvlak);margin-top:0}
+main{padding-bottom:var(--s7)}
+.kop{margin:0 0 var(--s5)}
+.kop p{margin:var(--s2) 0 0}
+.kaart{margin-bottom:var(--s5)}
+.kaart+.kap,.demo-hint+.kap{margin-top:var(--s6)}
+.groei{flex:1 1 10rem;min-width:0}
+.meta-rechts{margin-left:auto;text-align:right;flex:0 1 auto}
+.stip-top{margin-top:.45em}
+.paar{display:flex;flex-wrap:wrap;gap:var(--s2) var(--s4);align-items:baseline}
+.paar b{display:inline}
+.kruimel{margin:0 0 var(--s4)}
+.vervallen{color:var(--status-rood);font-weight:600}
+.te-laat{color:var(--status-rood);font-weight:600}
+.binnenkort{color:var(--status-oranje);font-weight:600}
+.formule{margin:var(--s3) 0 0}
+.formule summary{cursor:pointer;font-size:.875rem;color:var(--accent);
+  text-decoration:underline;text-underline-offset:2px;min-height:var(--raakvlak);
+  display:flex;align-items:center}
+.formule dl{margin:var(--s3) 0 0;display:grid;grid-template-columns:auto 1fr;gap:var(--s2) var(--s5)}
+.formule dt{font-family:var(--mono);font-size:.8125rem;letter-spacing:.02em;color:var(--inkt-3)}
+.formule dd{margin:0;font-size:.875rem;color:var(--inkt-2);line-height:1.45}
+.sluit{display:block;font-size:.875rem;color:var(--inkt-2);line-height:1.45;margin-top:var(--s2)}
+.chips{display:flex;flex-wrap:wrap;gap:var(--s2)}
+.chip{font-family:var(--mono);font-size:.8125rem;letter-spacing:.02em;border:1px solid var(--lijn);
+  border-radius:var(--r-sm);padding:var(--s2) var(--s3);color:var(--inkt-2)}
+.evfoto{width:56px;height:40px;object-fit:cover;border:1px solid var(--lijn-hard);
+  border-radius:var(--r-sm);flex:0 0 auto}
+</style>
+</head>
+<body>
+
+<div class="demo-balk">
+  <a href="../index.html">← Start</a>
+  <span>Borddossier SVB-B · bureaumodus</span>
+  <span class="rechts">
+    <span>Demo-chroom — deze balk hoort niet bij het product.</span>
+    <button type="button" data-thema-knop onclick="wisselThema()" aria-label="Wissel tussen licht en donker thema">Donker</button>
+  </span>
+</div>
+
+<div class="bureau">
+
+<nav class="nav" aria-label="Hoofdnavigatie">
+  <span class="merk">PowerLedger</span>
+  <a href="overzicht.html">Overzicht</a>
+  <a href="overzicht.html#stelplaatsen" class="aan" aria-current="page">Stelplaatsen</a>
+  <a href="todos.html">Todo's</a>
+  <a href="documenten.html">Documenten</a>
+  <a href="toegang.html">Toegang</a>
+</nav>
+
+<main>
+  <p class="kruimel toelichting"><a class="link" href="site-mechelen.html">Stelplaats Mechelen</a> › Werkplaats</p>
+
+  <div class="bureau-grid">
+    <div>
+      <div class="kop">
+        <h1 class="schermtitel">SVB-B</h1>
+        <p class="toelichting">Laagspanning · Stelplaats Mechelen › Werkplaats</p>
+        <p class="statusregel" style="margin-top:var(--s4)"><span class="stip s-rood" aria-hidden="true"></span>
+          <span>Vervallen — 2 staan uit, 6 todo's</span></p>
+        <p class="tijd" style="margin:var(--s2) 0 0">Attest A geldig tot 2029 · laatst bevestigd 04-03</p>
+
+        <details class="formule">
+          <summary>Hoe dit statuswoord berekend is</summary>
+          <dl>
+            <dt>attest</dt><dd>A, keuring van 14-06-2024 door Vinçotte, geldig tot 14-06-2029.</dd>
+            <dt>documenten</dt><dd><em>Uitwendige invloeden</em> vervallen sinds 01-06-2026. Dit is de factor die het woord op <span class="status-tekst">Vervallen</span> zet.</dd>
+            <dt>wijzigingen</dt><dd>2 sinds de keuring van 14-06-2024: kring 14 bijgeplaatst 06-11-2025, kring 26 bijgeplaatst 18-02.</dd>
+            <dt>open todo's</dt><dd>3 gevolgen van de wijziging van 18-02.</dd>
+            <dt>staat uit</dt><dd>2 — kring 14 en automaat 0.</dd>
+            <dt>bevestiging</dt><dd>Laatst bevestigd op 04-03. Zonder bevestiging kan een bord nooit <span class="status-tekst">Niets open</span> worden.</dd>
+          </dl>
+          <p class="toelichting" style="margin:var(--s3) 0 0">Het woord is een rekensom over feiten, geen beoordeling.</p>
+        </details>
+      </div>
+    </div>
+
+    <div>
+      <img class="bordfoto" src="../media/bordfront-svb-b.png"
+        alt="Bordfront SVB-B, gemaakt door Peeters op 12 maart.">
+      <p class="bijschrift">
+        <span>Bordfoto <span class="mono">12-03</span> · Peeters</span>
+        <span class="tijd">Vergelijken — één bordfoto bekend.</span>
+      </p>
+    </div>
+  </div>
+
+  <div class="bureau-grid" style="margin-top:var(--s6)">
+
+    <div class="kolom">
+
+      <h2 class="kap">staat nu uit</h2>
+      <div class="kaart">
+
+        <div class="rij">
+          <span class="tag">UIT</span>
+          <span class="groei">
+            <b>Kring 14 · <span class="mono" aria-label="kring 1 4">k14</span> — hefbrug werkplaats</b>
+            <small>Uit sinds 12 maart door Peeters — &ldquo;defect armatuur, niet vrijgeven&rdquo;</small>
+            <span class="sluit">Sluitende todo: <em>Kring 14 vrijgeven na controle</em> — Peeters · geen termijn.
+              <a class="link" href="todos.html">Afvinken in Todo's</a></span>
+          </span>
+        </div>
+
+        <div class="rij">
+          <span class="tag">UIT</span>
+          <span class="groei">
+            <b>Automaat 0 (320 A) · <span class="mono" aria-label="kring 0">k0</span></b>
+            <small>Bestond al bij opname — reden onbekend.</small>
+            <span class="sluit">Sluitende todo: <em>Uitzoeken waarom automaat 0 uit staat</em> — Jan Verhoeven · <span class="binnenkort">over 2 wk</span>.
+              <a class="link" href="todos.html">Afvinken in Todo's</a></span>
+          </span>
+        </div>
+
+      </div>
+
+      <h2 class="kap">recent gebeurd</h2>
+      <div class="kaart">
+
+        <div class="rij">
+          <span class="tijd">20-08</span>
+          <span class="groei"><b>Kring 26 bevestigd · <span class="mono" aria-label="kring 2 6">k26</span></b><small>Jan Verhoeven</small></span>
+        </div>
+
+        <div class="rij">
+          <span class="tijd">12-03</span>
+          <span class="groei"><b>Kring 14 uitgezet · <span class="mono" aria-label="kring 1 4">k14</span></b><small>Peeters — &ldquo;defect armatuur, niet vrijgeven&rdquo; · staat nog open</small></span>
+        </div>
+
+        <div class="rij">
+          <span class="tijd">04-03</span>
+          <img class="evfoto" src="../media/automaat-0-tape.png"
+            alt="Foto bij de kabelherstelling van 4 maart, gelogd door De Wilde Elektro.">
+          <span class="groei"><b>Kabelherstelling · <span class="mono" aria-label="kring 1 4">k14</span></b><small>De Wilde Elektro · 1 foto — eenmalig uitgenodigd door Geert Vermeulen. Zie <a class="link" href="toegang.html">Toegang</a>
+<p class="demo-hint" style="margin-top:var(--s2)">Plaatsvervangende foto. De echte bewijsfoto hoort de herstelde grondkabel te tonen, niet de kast — vervang dit beeld voor de sessie met Jan.</p>.</small></span>
+        </div>
+
+        <div class="rij">
+          <span class="tijd">18-02</span>
+          <span class="groei"><b>Kring 26 bijgeplaatst · <span class="mono" aria-label="kring 2 6">k26</span></b><small>Jan Verhoeven · 3 gevolgen open</small></span>
+        </div>
+
+        <div class="rij">
+          <span class="tijd">06-11-2025</span>
+          <span class="groei"><b>Kring 14 bijgeplaatst · <span class="mono" aria-label="kring 1 4">k14</span></b><small>Jan Verhoeven</small></span>
+        </div>
+
+        <div class="rij">
+          <span class="tijd">14-06-2024</span>
+          <span class="groei"><b>Keuring — attest A</b><small>Vinçotte · geldig tot 2029</small></span>
+        </div>
+
+      </div>
+      <p class="toelichting">6 events gelogd op dit bord. Kring <span class="mono">14</span>: 3 events in 6 maanden.</p>
+    </div>
+
+    <div class="kolom">
+
+      <h2 class="kap">gevolgen open</h2>
+      <div class="kaart">
+        <div class="rij">
+          <span class="groei"><b>Eendraadschema bijwerken</b><small>Wijziging kring <span class="mono">26</span> · <span class="mono">18-02</span> — Geert Vermeulen</small></span>
+          <span class="meta-rechts tijd"><span class="te-laat">3 dagen te laat</span></span>
+        </div>
+        <div class="rij">
+          <span class="groei"><b>Selectiviteit nazien</b><small>Wijziging kring <span class="mono">26</span> · <span class="mono">18-02</span> — Jan Verhoeven</small></span>
+          <span class="meta-rechts tijd"><span class="binnenkort">over 5 dagen</span></span>
+        </div>
+        <div class="rij">
+          <span class="groei"><b>Keuring aanvragen</b><small>Wijziging kring <span class="mono">26</span> · <span class="mono">18-02</span> — Geert Vermeulen</small></span>
+          <span class="meta-rechts tijd">over 6 wk</span>
+        </div>
+      </div>
+      <p class="toelichting"><a class="link" href="todos.html">Alle todo's, met de todo's die de toestanden sluiten</a></p>
+
+      <h2 class="kap">documenten</h2>
+      <div class="kaart">
+        <div class="rij">
+          <span class="groei"><b>Eendraadschema</b></span>
+          <span class="meta-rechts tijd">pdf · 2,4 MB · bijgewerkt 14-06-2024</span>
+        </div>
+        <div class="rij">
+          <span class="groei"><b>Kabelberekening</b></span>
+          <span class="meta-rechts tijd">pdf · 810 kB · 14-06-2024</span>
+        </div>
+        <div class="rij">
+          <span class="groei"><b>Risicoanalyse</b></span>
+          <span class="meta-rechts tijd">pdf · 1,1 MB · 09-02-2023</span>
+        </div>
+        <div class="rij">
+          <span class="groei"><b>Uitwendige invloeden</b><small>Vernieuwen staat 12 dagen te laat.</small></span>
+          <span class="meta-rechts tijd"><span class="vervallen">vervallen 01-06-2026</span></span>
+        </div>
+        <div class="rij">
+          <span class="groei"><b>Keuringsverslag</b><small>Attest A door Vinçotte.</small></span>
+          <span class="meta-rechts tijd">pdf · geldig tot 14-06-2029</span>
+        </div>
+      </div>
+
+      <p class="demo-hint">Demo-chroom: de pdf-bestanden zitten niet in dit prototype, dus de documentregels openen niets.</p>
+
+      <h2 class="kap">kringen op dit bord — 26 bekend, 3 vragen aandacht</h2>
+      <div class="kaart">
+        <div class="rij">
+          <span class="tag">UIT</span>
+          <span class="groei"><b>Kring 14 · <span class="mono" aria-label="kring 1 4">k14</span></b><small>Uit sinds <span class="mono">12-03</span> door Peeters.</small></span>
+        </div>
+        <div class="rij">
+          <span class="tag">UIT</span>
+          <span class="groei"><b>Automaat 0 · <span class="mono" aria-label="kring 0">k0</span></b><small>Tape over de automaat, reden onbekend.</small></span>
+        </div>
+        <div class="rij">
+          <span class="stip s-geel stip-top" aria-hidden="true"></span>
+          <span class="groei"><span class="paar"><b>Kring 26 · <span class="mono" aria-label="kring 2 6">k26</span></b> <span class="status-tekst">Gevolgen open</span></span><small>3 gevolgen sinds <span class="mono">18-02</span>.</small></span>
+        </div>
+        <div class="rij">
+          <span class="stip s-groen stip-top" aria-hidden="true"></span>
+          <div class="groei">
+            <span class="paar"><span class="status-tekst">Niets open</span> <span class="toelichting">— 23 overige bekende kringen</span></span>
+            <div class="chips" style="margin-top:var(--s3)">
+              <span class="chip">C1</span><span class="chip">C2</span><span class="chip">C3</span><span class="chip">C4</span>
+              <span class="chip">C5</span><span class="chip">C16</span><span class="chip">C17</span><span class="chip">C18</span>
+              <span class="chip">C21</span><span class="chip">C22</span><span class="chip">C23</span><span class="chip">12</span>
+              <span class="chip">15</span><span class="chip">16</span><span class="chip">17</span><span class="chip">18</span>
+              <span class="chip">19</span><span class="chip">24</span><span class="chip">25</span><span class="chip">31.3</span>
+              <span class="chip">31.4</span><span class="chip">31.5</span><span class="chip">31.6</span>
+            </div>
+            <span class="sluit">De gaten in de nummering staan er zoals ze op het bord staan.</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</main>
+
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  var d = document.documentElement.dataset.thema ||
+    (matchMedia('(prefers-color-scheme: dark)').matches ? 'donker' : 'licht');
+  document.querySelectorAll('[data-thema-knop]').forEach(function (b) {
+    b.textContent = d === 'donker' ? 'Licht' : 'Donker';
+  });
+});
+</script>
+</body>
+</html>

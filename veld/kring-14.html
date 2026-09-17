@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kring 14 — PowerLedger</title>
+<link rel="stylesheet" href="../styles.css">
+<script src="../thema.js" defer></script>
+<style>
+  [hidden]{display:none !important}
+  .demo-balk{flex-wrap:wrap;row-gap:var(--s2)}
+  .terug a{display:inline-flex;align-items:center;min-height:var(--raakvlak)}
+  .kop{margin:0 0 var(--s4)}
+  .sectie{margin-top:var(--s6)}
+  .rij .tekst{flex:1 1 auto;min-width:0}
+  .ev{flex-wrap:wrap}
+  .ev .tijd{flex:0 0 auto}
+  .ev .tekst{flex:1 1 14ch;min-width:0}
+  .quote{color:var(--inkt-2)}
+  .patroon{padding:var(--rij-veld) 0;border-top:1px solid var(--lijn);border-bottom:1px solid var(--lijn)}
+  .bewijs{display:block;width:100%;height:auto;max-height:320px;object-fit:contain;margin-top:var(--s3);
+    border:1px solid var(--lijn-hard);border-radius:var(--r-md);background:var(--paneel)}
+  .bijschrift{display:block}
+  .todo{margin-top:var(--s3);padding-top:var(--s3);border-top:1px solid var(--lijn)}
+</style>
+</head>
+<body>
+
+<div class="demo-balk">
+  <a href="../index.html">&larr; Start</a>
+  <span>Kringdetail 14</span>
+  <span class="rechts">
+    <span>demo-chroom, geen productonderdeel</span>
+    <button type="button" data-thema-knop onclick="wisselThema()" aria-label="Wissel tussen licht en donker thema">Donker</button>
+  </span>
+</div>
+
+<main class="telefoon">
+  <p class="terug"><a class="link" href="bord-svb-b.html">&larr; SVB-B</a></p>
+
+  <div class="kop">
+    <h1 class="schermtitel">Kring 14 <span class="mono" aria-label="kring 1 4">k14</span></h1>
+    <p class="toelichting">Hefbrug werkplaats &middot; SVB-B &middot; Stelplaats Mechelen &rsaquo; Werkplaats</p>
+  </div>
+
+  <p class="patroon body-tekst"><span class="mono">3</span> events in <span class="mono">6</span> maanden</p>
+
+  <section class="sectie">
+    <h2 class="kap">staat nu uit</h2>
+    <div class="rij">
+      <span class="tag">UIT</span>
+      <span class="tekst">
+        <b>Kring 14</b>
+        <small>Uit sinds 12 maart door Peeters &mdash; <span class="quote">&ldquo;defect armatuur, niet vrijgeven&rdquo;</span></small>
+        <small class="todo">Todo: Kring 14 vrijgeven na controle &mdash; Peeters &middot; geen termijn</small>
+      </span>
+    </div>
+  </section>
+
+  <section class="sectie">
+    <h2 class="kap">chronologie</h2>
+
+    <div class="rij ev">
+      <span class="tijd">12-03</span>
+      <span class="tekst">
+        <b>Kring 14 uitgezet</b>
+        <small>Peeters &middot; staat nog open</small>
+      </span>
+    </div>
+
+    <div class="rij ev" id="foto-04-03" tabindex="-1">
+      <span class="tijd">04-03</span>
+      <span class="tekst">
+        <b>Kabelherstelling</b>
+        <small>De Wilde Elektro &middot; 1 foto</small>
+        <small>Eenmalig uitgenodigd door Geert Vermeulen. Werk aan de grondkabel, buiten de kast.</small>
+        <img class="bewijs" src="../media/automaat-0-tape.png" alt="Foto bij de kabelherstelling van 04-03 op kring 14, gemaakt door De Wilde Elektro.">
+        <small class="bijschrift">Foto <span class="mono">04-03</span> &middot; De Wilde Elektro</small>
+      </span>
+    </div>
+<p class="demo-hint" style="margin-top:var(--s2)">Plaatsvervangende foto. De echte bewijsfoto hoort de herstelde grondkabel te tonen, niet de kast — vervang dit beeld voor de sessie met Jan.</p>
+
+    <div class="rij ev">
+      <span class="tijd">06-11-2025</span>
+      <span class="tekst">
+        <b>Kring 14 bijgeplaatst</b>
+        <small>Jan Verhoeven</small>
+      </span>
+    </div>
+  </section>
+
+  <p class="demo-hint">De pdf&rsquo;s en losse eventschermen zitten niet in dit prototype.</p>
+</main>
+
+</body>
+</html>

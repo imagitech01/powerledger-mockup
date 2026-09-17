@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PowerLedger — Weekoverzicht</title>
+<link rel="stylesheet" href="../styles.css">
+<script src="../thema.js" defer></script>
+<style>
+/* Bureaumodus. Uitsluitend tokens uit styles.css, nooit een letterlijke kleurwaarde.
+   Schaalfactor 0,875 (DESIGN.md § Layout & Spacing) op dichtheid en raakvlak.
+   De typografische ladder blijft ongeschaald: de ondergrens van 13 px
+   uit DESIGN.md § Typography gaat voor op de schaalfactor. */
+.bureau{--schaal:.875;--raakvlak:calc(48px * var(--schaal))}
+.bureau .rij{padding:var(--rij-bureau) 0;gap:var(--s4);flex-wrap:wrap}
+main{padding-bottom:var(--s7)}
+.kop{margin:0 0 var(--s6)}
+.kop p{margin:var(--s2) 0 0}
+.kaart{margin-bottom:var(--s5)}
+.kaart+.kap,.demo-hint+.kap{margin-top:var(--s6)}
+.groei{flex:1 1 10rem;min-width:0}
+.meta-rechts{margin-left:auto;text-align:right;flex:0 1 auto}
+.stip-top{margin-top:.45em}
+.paar{display:flex;flex-wrap:wrap;gap:var(--s2) var(--s4);align-items:baseline}
+.paar b{display:inline}
+.te-laat{color:var(--status-rood);font-weight:600}
+.binnenkort{color:var(--status-oranje);font-weight:600}
+.mailkop{border-bottom:1px solid var(--lijn);padding-bottom:var(--s4);margin-bottom:var(--s4)}
+.mailkop dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:var(--s2) var(--s5)}
+.mailkop dt{font-family:var(--mono);font-size:.8125rem;letter-spacing:.02em;color:var(--inkt-3)}
+.mailkop dd{margin:0;font-size:.875rem;line-height:1.45}
+.mailsectie{margin-top:var(--s6)}
+.mailsectie:first-of-type{margin-top:0}
+.nummer{font-family:var(--mono);font-size:.8125rem;letter-spacing:.02em;color:var(--inkt-3);flex:0 0 auto}
+</style>
+</head>
+<body>
+
+<div class="demo-balk">
+  <a href="../index.html">← Start</a>
+  <span>Weekoverzicht · bureaumodus</span>
+  <span class="rechts">
+    <span>Demo-chroom — deze balk hoort niet bij het product.</span>
+    <button type="button" data-thema-knop onclick="wisselThema()" aria-label="Wissel tussen licht en donker thema">Donker</button>
+  </span>
+</div>
+
+<div class="bureau">
+
+<nav class="nav" aria-label="Hoofdnavigatie">
+  <span class="merk">PowerLedger</span>
+  <a href="overzicht.html" class="aan" aria-current="page">Overzicht</a>
+  <a href="overzicht.html#stelplaatsen">Stelplaatsen</a>
+  <a href="todos.html">Todo's</a>
+  <a href="documenten.html">Documenten</a>
+  <a href="toegang.html">Toegang</a>
+</nav>
+
+<main>
+  <div class="kop">
+    <h1 class="schermtitel">Weekoverzicht</h1>
+    <p class="toelichting">Twee kanalen met twee betekenissen. Links het ritme: de mail die maandagochtend komt, ook als er niets aan de hand is. Rechts de urgentie: de gesloten lijst van gebeurtenissen die een directe melding veroorzaken.</p>
+  </div>
+
+  <div class="bureau-grid">
+
+    <div class="kolom">
+      <h2 class="kap">de mail van maandagochtend</h2>
+      <div class="kaart">
+
+        <div class="mailkop">
+          <dl>
+            <dt>aan</dt><dd>Geert Vermeulen</dd>
+            <dt>onderwerp</dt><dd>PowerLedger — weekoverzicht Antwerpen</dd>
+            <dt>ritme</dt><dd>Elke maandag 07:00</dd>
+            <dt>stand</dt><dd>Samengesteld uit de stand van <span class="mono">21-08-2026 16:18</span></dd>
+          </dl>
+        </div>
+
+        <p class="body-tekst" style="margin:0 0 var(--s5)">4 van 11 stelplaatsen hebben open punten. 3 zijn nog niet bevestigd.</p>
+
+        <div class="mailsectie">
+          <h3 class="kap">wat veranderde</h3>
+          <div class="rij">
+            <span class="tijd">20-08 16:20</span>
+            <span class="groei"><b>Vaststelling op Zwijndrecht</b><small>Jan Verhoeven — &ldquo;stopcontacten bijgeplaatst zonder aarding&rdquo;</small></span>
+          </div>
+          <div class="rij">
+            <span class="tijd">20-08</span>
+            <span class="groei"><b>Kring <span class="mono">26</span> bevestigd</b><small>Jan Verhoeven · Mechelen · <a class="link" href="bord-svb-b.html">SVB-B</a></small></span>
+          </div>
+          <div class="rij">
+            <span class="tijd">21-08</span>
+            <span class="groei"><b>Deurne opgenomen</b><small>Jan Verhoeven · staat op <span class="status-tekst">Nog niet bevestigd</span>. Nulmeting: 7 / 11 stelplaatsen opgenomen.</small></span>
+          </div>
+        </div>
+
+        <div class="mailsectie">
+          <h3 class="kap">wat verloopt</h3>
+          <div class="rij">
+            <span class="stip s-oranje stip-top" aria-hidden="true"></span>
+            <span class="groei"><span class="paar"><b>Keuring LS Antwerpen-Noord</b> <span class="status-tekst">Loopt af</span></span><small>Over 6 weken. Nog niets aangevraagd.</small></span>
+          </div>
+          <div class="rij">
+            <span class="stip s-rood stip-top" aria-hidden="true"></span>
+            <span class="groei"><span class="paar"><b>Uitwendige invloeden · SVB-B</b> <span class="status-tekst">Vervallen</span></span><small>Vervallen sinds <span class="mono">01-06-2026</span>.</small></span>
+          </div>
+          <div class="rij">
+            <span class="mono">3 mnd</span>
+            <span class="groei"><b>HS-kwartaalcontrole</b><small>Alle sites.</small></span>
+          </div>
+        </div>
+
+        <div class="mailsectie">
+          <h3 class="kap">wat op de beheerder wacht</h3>
+          <div class="rij">
+            <span class="groei"><b>Uitwendige invloeden vernieuwen</b><small>Document vervallen · Mechelen · SVB-B</small></span>
+            <span class="meta-rechts tijd"><span class="te-laat">12 dagen te laat</span></span>
+          </div>
+          <div class="rij">
+            <span class="groei"><b>Eendraadschema bijwerken</b><small>Wijziging kring <span class="mono">26</span> · <span class="mono">18-02</span></small></span>
+            <span class="meta-rechts tijd"><span class="te-laat">3 dagen te laat</span></span>
+          </div>
+          <div class="rij">
+            <span class="groei"><b>Keuring aanvragen</b><small>Wijziging kring <span class="mono">26</span> · <span class="mono">18-02</span></small></span>
+            <span class="meta-rechts tijd">over 6 wk</span>
+          </div>
+        </div>
+
+        <p style="margin:var(--s6) 0 0"><a class="link" href="overzicht.html">Het overzicht openen</a></p>
+        <p class="toelichting" style="margin:var(--s3) 0 0">Deze mail komt ook als er niets open staat. Dan staat er: <em>Niets open.</em></p>
+      </div>
+    </div>
+
+    <div class="kolom">
+      <h2 class="kap">directe melding — gesloten lijst</h2>
+      <div class="kaart">
+
+        <div class="rij">
+          <span class="nummer">1</span>
+          <span class="groei"><b>Een nieuwe vaststelling</b><small>Laatst: <span class="mono">20-08 16:20</span> — Zwijndrecht, Jan Verhoeven.</small></span>
+        </div>
+
+        <div class="rij">
+          <span class="nummer">2</span>
+          <span class="groei"><b>Een toestand zonder reden</b><small>Geen. Toestanden die bij een opname zijn overgenomen tonen <em>Bestond al bij opname — reden onbekend</em> en sturen geen melding.</small></span>
+        </div>
+
+        <div class="rij">
+          <span class="nummer">3</span>
+          <span class="groei"><b>Een todo waarvan de termijn verstrijkt</b><small>Laatst: <em>Eendraadschema bijwerken</em>, <span class="te-laat">3 dagen te laat</span>. Daarvoor: <em>Uitwendige invloeden vernieuwen</em>, <span class="te-laat">12 dagen te laat</span>.</small></span>
+        </div>
+
+        <div class="rij">
+          <span class="nummer">4</span>
+          <span class="groei"><b>Een attest of document dat vervalt</b><small>Laatst: <em>Uitwendige invloeden</em> · SVB-B, vervallen <span class="mono">01-06-2026</span>.</small></span>
+        </div>
+
+        <div class="rij">
+          <span class="nummer">5</span>
+          <span class="groei"><b>Een keuring die binnen zes weken verloopt zonder aanvraag</b><small>Laatst: keuring LS Antwerpen-Noord, <span class="binnenkort">over 6 wk</span>.</small></span>
+        </div>
+
+      </div>
+
+      <p class="toelichting">Deze lijst is gesloten. Buiten deze vijf gebeurtenissen stuurt PowerLedger geen directe melding. Daardoor betekent zwijgen iets: geen melding is geen ruis maar een uitspraak.</p>
+      <p class="toelichting">Het ritme-kanaal blijft wel komen. Zo is stilte in het urgentiekanaal te onderscheiden van een systeem dat niets meer stuurt.</p>
+
+      <h2 class="kap">instelling</h2>
+      <div class="kaart">
+        <p class="toelichting" style="margin:0">De frequentie van het weekoverzicht staat op het <a class="link" href="overzicht.html">overzicht</a>, onder <em>weekoverzicht</em>. De gesloten lijst hierboven is niet instelbaar.</p>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  var d = document.documentElement.dataset.thema ||
+    (matchMedia('(prefers-color-scheme: dark)').matches ? 'donker' : 'licht');
+  document.querySelectorAll('[data-thema-knop]').forEach(function (b) {
+    b.textContent = d === 'donker' ? 'Licht' : 'Donker';
+  });
+});
+</script>
+</body>
+</html>

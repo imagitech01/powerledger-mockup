@@ -1,0 +1,300 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Welke kring — PowerLedger</title>
+<link rel="stylesheet" href="../styles.css">
+<script src="../thema.js" defer></script>
+<style>
+  [hidden]{display:none !important}
+  label.veld{display:block}
+  .demo-balk{flex-wrap:wrap;row-gap:var(--s2)}
+  .terug a{display:inline-flex;align-items:center;min-height:var(--raakvlak)}
+  .kop{margin:0 0 var(--s4)}
+  .sectie{margin-top:var(--s5)}
+
+  .wegen{display:flex;gap:0;margin:var(--s4) 0}
+  .wegen button{flex:1 1 0;min-height:var(--raakvlak);background:transparent;color:var(--inkt-2);
+    border:1px solid var(--lijn-hard);border-right-width:0;font:600 .9375rem/1.2 var(--sans);cursor:pointer;padding:var(--s3)}
+  .wegen button:last-child{border-right-width:1px;border-radius:0 var(--r-md) var(--r-md) 0}
+  .wegen button:first-child{border-radius:var(--r-md) 0 0 var(--r-md)}
+  .wegen button[aria-pressed="true"]{border:2px solid var(--inkt);color:var(--inkt);border-right-width:2px}
+
+  .fotokader{position:relative;height:280px;overflow:hidden;background:var(--paneel);
+    border:1px solid var(--lijn-hard);border-radius:var(--r-md);touch-action:none;cursor:zoom-in}
+  .fotolaag{position:absolute;left:0;top:0;width:100%;transform-origin:0 0}
+  .fotolaag img{display:block;width:100%;height:auto}
+  .hot{position:absolute;transform:translate(-50%,-50%);width:15px;height:15px;padding:0;
+    border:.5px solid var(--accent);border-radius:1px;cursor:pointer;
+    background:color-mix(in srgb, var(--paneel) 72%, transparent);color:var(--inkt);
+    font-family:var(--mono);font-size:5px;line-height:1;letter-spacing:0}
+  .fotolaag.klein .hot{display:none}
+
+  .knoprij{display:flex;gap:var(--raakvlak-tussen);margin-top:var(--s3)}
+  .knoprij button{flex:1 1 0;min-width:var(--raakvlak);min-height:var(--raakvlak);background:transparent;
+    color:var(--inkt-2);border:1px solid var(--lijn-hard);border-radius:var(--r-lg);
+    font:600 .9375rem/1 var(--sans);cursor:pointer}
+  .fotohint{margin-top:var(--s3)}
+
+  .rij .tekst{flex:1 1 auto;min-width:0}
+  .kring-rij{align-items:center;border-bottom:1px solid var(--lijn);margin-bottom:var(--raakvlak-tussen)}
+  .kring-rij .chev{color:var(--accent);flex:0 0 auto;font-size:1.1rem}
+  .nieuw-blok{border-left:3px solid var(--accent);padding:var(--s3) var(--s4);margin-top:var(--s4);
+    background:color-mix(in srgb, var(--accent) 8%, var(--grond))}
+  .gelijkend{display:flex;flex-wrap:wrap;gap:var(--s3);margin:var(--s3) 0 0;padding:0;list-style:none}
+  .gelijkend li{font-family:var(--mono);font-size:.875rem;border:1px solid var(--lijn);border-radius:var(--r-sm);
+    padding:var(--s2) var(--s3);background:var(--paneel)}
+</style>
+</head>
+<body>
+
+<div class="demo-balk">
+  <a href="../index.html">&larr; Start</a>
+  <span>Loggen 2 &mdash; kring</span>
+  <span class="rechts">
+    <span>demo-chroom, geen productonderdeel</span>
+    <button type="button" data-thema-knop onclick="wisselThema()" aria-label="Wissel tussen licht en donker thema">Donker</button>
+  </span>
+</div>
+
+<main class="telefoon">
+  <p class="terug"><a class="link" href="loggen-1.html">&larr; Werkwoord</a></p>
+
+  <div class="kop">
+    <h1 class="schermtitel">Welke kring</h1>
+    <p class="toelichting">SVB-B &middot; <span id="wkw">toestand</span> &middot; Jan Verhoeven</p>
+  </div>
+
+  <div class="wegen" role="group" aria-label="Drie wegen om de kring te kiezen">
+    <button type="button" id="w-foto" aria-pressed="true">Foto</button>
+    <button type="button" id="w-lijst" aria-pressed="false">Lijst</button>
+    <button type="button" id="w-typen" aria-pressed="false">Intypen</button>
+  </div>
+
+  <!-- weg 1: bordfoto met zoom -->
+  <section id="p-foto">
+    <div class="fotokader" id="kader">
+      <div class="fotolaag klein" id="laag">
+        <img id="foto" src="../media/bordfront-svb-b.png" alt="Bordfront SVB-B, gemaakt door Peeters op 12 maart. Tik op de foto om in te zoomen en een automaat aan te tikken.">
+      </div>
+    </div>
+
+    <div class="knoprij">
+      <button type="button" id="uit" aria-label="Uitzoomen">Uitzoomen</button>
+      <button type="button" id="passend" aria-label="Hele bord tonen">Passend</button>
+      <button type="button" id="in" aria-label="Inzoomen">Inzoomen</button>
+    </div>
+    <div class="knoprij" id="panrij" hidden>
+      <button type="button" data-pan="links" aria-label="Naar links">&larr;</button>
+      <button type="button" data-pan="omhoog" aria-label="Omhoog">&uarr;</button>
+      <button type="button" data-pan="omlaag" aria-label="Omlaag">&darr;</button>
+      <button type="button" data-pan="rechts" aria-label="Naar rechts">&rarr;</button>
+    </div>
+
+    <p class="toelichting fotohint" id="fotohint" role="status">Tik op de foto om in te zoomen. Knijpen kan ook.</p>
+    <p class="toelichting">Bordfoto <span class="mono">12-03</span> &middot; Peeters. Klopt de foto niet meer met het bord, gebruik dan Lijst of Intypen.</p>
+  </section>
+
+  <!-- weg 2: lijst -->
+  <section id="p-lijst" hidden>
+    <h2 class="kap">vraagt aandacht</h2>
+    <div id="lijst-aandacht"></div>
+    <h2 class="kap" style="margin-top:var(--s6)">overige bekend</h2>
+    <div id="lijst-rest"></div>
+  </section>
+
+  <!-- weg 3: intypen -->
+  <section id="p-typen" hidden>
+    <label class="veld" for="nummer">
+      <span class="lab">kringnummer <span class="verplicht">verplicht</span></span>
+      <input id="nummer" name="nummer" type="text" inputmode="text" autocomplete="off"
+             aria-describedby="typen-uitleg">
+    </label>
+    <p class="toelichting" id="typen-uitleg"><span class="mono">31,4</span>, <span class="mono">31.4</span> en <span class="mono">31-4</span> zijn hetzelfde. Intypen werkt altijd, ook als er geen label hangt.</p>
+    <button type="button" class="knop" id="typen-verder">Verder</button>
+
+    <div class="nieuw-blok" id="nieuw-blok" hidden role="status">
+      <p class="body-tekst" id="nieuw-vraag"></p>
+      <p class="toelichting">Gelijkende bestaande nummers op dit bord:</p>
+      <ul class="gelijkend" id="nieuw-gelijkend"></ul>
+      <button type="button" class="knop" id="nieuw-ok" style="margin-top:var(--s4)">Aanmaken en verder</button>
+    </div>
+  </section>
+
+</main>
+
+<script>
+(function(){
+  var KRINGEN = ['0','14','26','C1','C2','C3','C4','C5','C16','C17','C18','C21','C22','C23',
+                 '12','15','16','17','18','19','24','25','31.3','31.4','31.5','31.6'];
+
+  // hotspots: positie in procenten van de bordfoto van 12-03
+  var HOT = [
+    ['C1',21.5,12.6],['C2',26.1,12.6],['C3',30.8,12.6],['C4',35.7,12.6],['C5',40.5,12.6],
+    ['C16',46.7,12.6],['C17',51.7,12.6],['C18',57.3,12.6],['C21',63.5,12.6],['C22',69.0,12.6],['C23',74.6,12.6],
+    ['12',26.8,49.5],['14',43.7,49.5],['15',52.8,49.5],['16',61.8,49.5],['17',71.3,49.5],['18',81.4,49.5],['19',91.7,49.5],
+    ['24',54.2,67.3],['25',60.7,67.3],['26',67.2,67.3],
+    ['31.3',54.0,84.3],['31.4',63.5,84.3],['31.5',70.2,84.3],['31.6',74.7,84.3]
+  ];
+
+  var WKW = {wijziging:'wijziging', vaststelling:'vaststelling', toestand:'toestand', bevestiging:'bevestiging'};
+  var w = (location.search.match(/[?&]w=([a-z]+)/) || [])[1];
+  if(!WKW[w]) w = 'toestand';
+  document.getElementById('wkw').textContent = WKW[w];
+
+  function spel(k){ return k.split('').join(' '); }
+  function verder(k, nieuw){
+    location.href = 'loggen-3.html?w=' + encodeURIComponent(w) + '&k=' + encodeURIComponent(k) + (nieuw ? '&nieuw=1' : '');
+  }
+
+  /* ---- wegen ---- */
+  var wegen = [['w-foto','p-foto'],['w-lijst','p-lijst'],['w-typen','p-typen']];
+  wegen.forEach(function(paar){
+    document.getElementById(paar[0]).addEventListener('click', function(){
+      wegen.forEach(function(p){
+        var aan = p[0] === paar[0];
+        document.getElementById(p[0]).setAttribute('aria-pressed', aan ? 'true' : 'false');
+        document.getElementById(p[1]).hidden = !aan;
+      });
+      if(paar[0] === 'w-typen'){ document.getElementById('nummer').focus(); }
+    });
+  });
+
+  /* ---- weg 2: lijst ---- */
+  function rij(k, titel, onder){
+    var a = document.createElement('a');
+    a.className = 'rij kring-rij';
+    a.href = 'loggen-3.html?w=' + encodeURIComponent(w) + '&k=' + encodeURIComponent(k);
+    a.innerHTML = '<span class="tekst"><b>' + titel + ' <span class="mono" aria-label="kring ' + spel(k) + '">k' + k +
+      '</span></b>' + (onder ? '<small>' + onder + '</small>' : '') + '</span><span class="chev" aria-hidden="true">&rsaquo;</span>';
+    return a;
+  }
+  var aandacht = document.getElementById('lijst-aandacht');
+  aandacht.appendChild(rij('14','Kring 14','Hefbrug werkplaats &mdash; uit sinds 12 maart door Peeters'));
+  aandacht.appendChild(rij('0','Automaat 0 (320 A)','Bestond al bij opname &mdash; reden onbekend.'));
+  aandacht.appendChild(rij('26','Kring 26','3 gevolgen open sinds 18-02'));
+  var rest = document.getElementById('lijst-rest');
+  KRINGEN.forEach(function(k){
+    if(k === '14' || k === '0' || k === '26') return;
+    rest.appendChild(rij(k, 'Kring ' + k, ''));
+  });
+
+  /* ---- weg 3: intypen ---- */
+  function normaliseer(s){
+    s = (s || '').trim().toUpperCase().replace(/\s+/g,'');
+    s = s.replace(/(\d)[,\-](\d)/g, '$1.$2');
+    s = s.replace(/^(C?)0+(\d)/, '$1$2');
+    return s;
+  }
+  function gelijkend(x){
+    var uit = KRINGEN.filter(function(k){
+      return k !== x && (k.indexOf(x) === 0 || x.indexOf(k) === 0);
+    });
+    if(!uit.length){
+      uit = KRINGEN.filter(function(k){ return k.charAt(0) === x.charAt(0); });
+    }
+    return uit.slice(0,5);
+  }
+  var invoer = document.getElementById('nummer'), blok = document.getElementById('nieuw-blok');
+  var verderKnop = document.getElementById('typen-verder');
+  verderKnop.addEventListener('click', function(){
+    var k = normaliseer(invoer.value);
+    invoer.value = k;
+    if(!k){ blok.hidden = true; invoer.focus(); return; }
+    if(KRINGEN.indexOf(k) >= 0){ verder(k, false); return; }
+    document.getElementById('nieuw-vraag').textContent = 'Kring ' + k + ' bestaat nog niet op dit bord. Aanmaken?';
+    var ul = document.getElementById('nieuw-gelijkend');
+    ul.innerHTML = '';
+    gelijkend(k).forEach(function(g){ var li = document.createElement('li'); li.textContent = g; ul.appendChild(li); });
+    document.getElementById('nieuw-ok').textContent = 'Kring ' + k + ' aanmaken en verder';
+    blok.hidden = false;
+    verderKnop.hidden = true;
+    document.getElementById('nieuw-ok').onclick = function(){ verder(k, true); };
+  });
+  invoer.addEventListener('input', function(){ blok.hidden = true; verderKnop.hidden = false; });
+
+  /* ---- weg 1: bordfoto met zoom, ook zonder gebaren ---- */
+  var kader = document.getElementById('kader'), laag = document.getElementById('laag'), foto = document.getElementById('foto');
+  var z = 1, tx = 0, ty = 0, zFit = 1, ZMAX = 7, ZTIK = 3.2, ZACT = 3.0;
+  var hint = document.getElementById('fotohint'), panrij = document.getElementById('panrij');
+
+  HOT.forEach(function(h){
+    var b = document.createElement('button');
+    b.type = 'button'; b.className = 'hot';
+    b.style.left = h[1] + '%'; b.style.top = h[2] + '%';
+    b.textContent = h[0];
+    b.setAttribute('aria-label', 'Kring ' + spel(h[0]));
+    b.addEventListener('click', function(e){ e.stopPropagation(); verder(h[0], false); });
+    laag.appendChild(b);
+  });
+
+  function hoogte(){ return foto.offsetHeight || kader.clientWidth * 1.333; }
+  var gemeten = false;
+  function meet(){
+    zFit = Math.min(1, kader.clientHeight / hoogte());
+    if(!gemeten){ gemeten = true; z = zFit; tx = 0; ty = 0; }
+    else if(z < zFit){ z = zFit; }
+    teken();
+  }
+  function teken(){
+    var kw = kader.clientWidth, kh = kader.clientHeight, iw = kw * z, ih = hoogte() * z;
+    tx = iw <= kw ? (kw - iw) / 2 : Math.min(0, Math.max(kw - iw, tx));
+    ty = ih <= kh ? (kh - ih) / 2 : Math.min(0, Math.max(kh - ih, ty));
+    laag.style.transform = 'translate(' + tx + 'px,' + ty + 'px) scale(' + z + ')';
+    var klein = z < ZACT;
+    laag.classList.toggle('klein', klein);
+    kader.style.cursor = klein ? 'zoom-in' : 'default';
+    panrij.hidden = (iw <= kw && ih <= kh);
+    hint.textContent = klein
+      ? 'Tik op de foto om in te zoomen. Knijpen kan ook.'
+      : 'Tik de automaat aan. Zit de kring er niet bij, gebruik Lijst of Intypen.';
+  }
+  function zoom(nz, cx, cy){
+    nz = Math.max(zFit, Math.min(ZMAX, nz));
+    if(cx == null){ cx = kader.clientWidth / 2; cy = kader.clientHeight / 2; }
+    tx = cx - (cx - tx) * nz / z;
+    ty = cy - (cy - ty) * nz / z;
+    z = nz; teken();
+  }
+  document.getElementById('in').addEventListener('click', function(){ zoom(z * 1.6); });
+  document.getElementById('uit').addEventListener('click', function(){ zoom(z / 1.6); });
+  document.getElementById('passend').addEventListener('click', function(){ z = zFit; tx = 0; ty = 0; teken(); });
+  Array.prototype.forEach.call(document.querySelectorAll('[data-pan]'), function(b){
+    b.addEventListener('click', function(){
+      var dx = kader.clientWidth * 0.3, dy = kader.clientHeight * 0.3, r = b.getAttribute('data-pan');
+      if(r === 'links') tx += dx; if(r === 'rechts') tx -= dx;
+      if(r === 'omhoog') ty += dy; if(r === 'omlaag') ty -= dy;
+      teken();
+    });
+  });
+  kader.addEventListener('click', function(e){
+    if(z >= ZACT) return;
+    var r = kader.getBoundingClientRect();
+    zoom(ZTIK, e.clientX - r.left, e.clientY - r.top);
+  });
+
+  // knijpzoom: alternatief, nooit de enige weg
+  var d0 = 0, z0 = 1;
+  function afstand(t){ var dx = t[0].clientX - t[1].clientX, dy = t[0].clientY - t[1].clientY; return Math.sqrt(dx*dx + dy*dy); }
+  kader.addEventListener('touchstart', function(e){
+    if(e.touches.length === 2){ d0 = afstand(e.touches); z0 = z; e.preventDefault(); }
+  }, {passive:false});
+  kader.addEventListener('touchmove', function(e){
+    if(e.touches.length === 2 && d0){
+      e.preventDefault();
+      var r = kader.getBoundingClientRect();
+      var cx = (e.touches[0].clientX + e.touches[1].clientX) / 2 - r.left;
+      var cy = (e.touches[0].clientY + e.touches[1].clientY) / 2 - r.top;
+      zoom(z0 * afstand(e.touches) / d0, cx, cy);
+    }
+  }, {passive:false});
+  kader.addEventListener('touchend', function(){ d0 = 0; });
+
+  if(foto.complete) meet(); else foto.addEventListener('load', meet);
+  addEventListener('resize', meet);
+})();
+</script>
+
+</body>
+</html>

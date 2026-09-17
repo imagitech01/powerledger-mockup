@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mijn todo's — PowerLedger</title>
+<link rel="stylesheet" href="../styles.css">
+<script src="../thema.js" defer></script>
+<style>
+  [hidden]{display:none !important}
+  .demo-balk{flex-wrap:wrap;row-gap:var(--s2)}
+  .terug a{display:inline-flex;align-items:center;min-height:var(--raakvlak)}
+  .kop{margin:0 0 var(--s5)}
+  .sectie{margin-top:var(--s6)}
+  .todo-rij{align-items:flex-start}
+  .todo-rij .vink{flex:0 0 auto;width:32px;height:32px;display:flex;align-items:center;justify-content:center}
+  .todo-rij .vink input{width:24px;height:24px}
+  .todo-rij .tekst{flex:1 1 auto;min-width:0}
+  .todo-rij .termijn{flex:0 0 auto;font-family:var(--mono);font-size:.8125rem;letter-spacing:.02em;color:var(--inkt-3)}
+  .todo-rij .termijn.t-oranje{color:var(--status-oranje)}
+  .todo-rij .termijn.t-rood{color:var(--status-rood)}
+  .afgevinkt{color:var(--inkt-2);font-size:.875rem;display:block;margin-top:var(--s2)}
+  .quote{color:var(--inkt-2)}
+</style>
+</head>
+<body>
+
+<div class="demo-balk">
+  <a href="../index.html">&larr; Start</a>
+  <span>Mijn todo&rsquo;s</span>
+  <span class="rechts">
+    <span>demo-chroom, geen productonderdeel</span>
+    <button type="button" data-thema-knop onclick="wisselThema()" aria-label="Wissel tussen licht en donker thema">Donker</button>
+  </span>
+</div>
+
+<main class="telefoon">
+  <p class="terug"><a class="link" id="terug" href="bord-svb-b.html">&larr; SVB-B</a></p>
+
+  <div class="kop">
+    <h1 class="schermtitel">Mijn todo&rsquo;s</h1>
+    <p class="toelichting">Jan Verhoeven &middot; 21-08 16:18</p>
+  </div>
+
+  <section class="sectie">
+    <h2 class="kap">aan mij toegewezen</h2>
+
+    <div class="rij todo-rij" id="todo-nieuw" hidden>
+      <span class="vink"><input type="checkbox" id="v0" aria-label="Kring 31.4 vrijgeven na controle afvinken"></span>
+      <span class="tekst">
+        <b><label for="v0">Kring 31.4 vrijgeven na controle</label></b>
+        <small>Toestand &middot; <span class="mono">21-08 16:20</span> &middot; SVB-B &middot; Jan Verhoeven</small>
+        <small>Afvinken sluit de toestand op kring 31.4.</small>
+        <small class="afgevinkt" hidden>Afgevinkt.</small>
+      </span>
+      <span class="termijn">geen termijn</span>
+    </div>
+
+    <div class="rij todo-rij">
+      <span class="vink"><input type="checkbox" id="v1" aria-label="Selectiviteit nazien afvinken"></span>
+      <span class="tekst">
+        <b><label for="v1">Selectiviteit nazien</label></b>
+        <small>Wijziging kring 26 &middot; <span class="mono">18-02</span> &middot; SVB-B &middot; Jan Verhoeven</small>
+        <small class="afgevinkt" hidden>Afgevinkt.</small>
+      </span>
+      <span class="termijn t-oranje">over 5 dagen</span>
+    </div>
+
+    <div class="rij todo-rij">
+      <span class="vink"><input type="checkbox" id="v2" aria-label="Uitzoeken waarom automaat 0 uit staat afvinken"></span>
+      <span class="tekst">
+        <b><label for="v2">Uitzoeken waarom automaat 0 uit staat</label></b>
+        <small>Opname &middot; <span class="mono">03-06</span> &middot; SVB-B &middot; Jan Verhoeven</small>
+        <small class="afgevinkt" hidden>Afgevinkt.</small>
+      </span>
+      <span class="termijn t-oranje">over 2 wk</span>
+    </div>
+  </section>
+
+  <section class="sectie">
+    <h2 class="kap">wat ik zelf gemeld heb</h2>
+
+    <div class="rij">
+      <span class="tekst">
+        <b>Vaststelling &middot; Zwijndrecht</b>
+        <small>Gemeld <span class="mono">20-08 16:20</span> door Jan Verhoeven &mdash; <span class="quote">&ldquo;stopcontacten bijgeplaatst zonder aarding&rdquo;</span></small>
+        <small>Staat bij Geert Vermeulen. Nog niemand toegewezen.</small>
+      </span>
+    </div>
+
+  </section>
+
+  <p class="demo-hint">Afvinken werkt hier alleen op dit scherm; het prototype rekent de status van het bord niet opnieuw uit.</p>
+</main>
+
+<script>
+(function(){
+  if(/(?:\?|&)nieuw=1(?:&|$)/.test(location.search)){
+    document.getElementById('todo-nieuw').hidden = false;
+    document.getElementById('terug').setAttribute('href','bord-svb-b-gelogd.html');
+  }
+  Array.prototype.forEach.call(document.querySelectorAll('.todo-rij input[type="checkbox"]'), function(v){
+    v.addEventListener('change', function(){
+      var regel = v.closest('.todo-rij').querySelector('.afgevinkt');
+      regel.hidden = !v.checked;
+    });
+  });
+})();
+</script>
+
+</body>
+</html>
