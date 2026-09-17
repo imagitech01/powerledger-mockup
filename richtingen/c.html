@@ -1,0 +1,266 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SVB-B — Dossier</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,wght@0,500;0,600;0,700;1,500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --grond:#F1EAD6; --paneel:#FAF6EA; --inkt:#2A2318; --inkt-2:#5C5240; --inkt-3:#7C7159;
+  --lijn:#DBCEA9; --lijn-2:#C7B98D; --accent:#26415F; --accent-inkt:#FAF6EA;
+  --stripe-rood:#8B2E22; --stripe-oranje:#8A5518; --stripe-geel:#8A6B12;
+  --stripe-grijs:#585141; --stripe-groen:#33593A;
+  --serif: "Source Serif 4", Georgia, "Times New Roman", serif;
+  --sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono: ui-monospace, SFMono-Regular, Menlo, monospace;
+  --s1:4px; --s2:8px; --s3:12px; --s4:16px; --s5:20px; --s6:28px; --s7:40px;
+  --raakvlak:48px; --r:3px;
+}
+html[data-theme="dark"]{
+  --grond:#1B1710; --paneel:#241F16; --inkt:#EDE3CB; --inkt-2:#C1B598; --inkt-3:#948968;
+  --lijn:#3C3423; --lijn-2:#4C4330; --accent:#9CBEE3; --accent-inkt:#1B1710;
+  --stripe-rood:#D97C6D; --stripe-oranje:#D9A15C; --stripe-geel:#D8C066;
+  --stripe-grijs:#ABA184; --stripe-groen:#79AE84;
+}
+@media (prefers-color-scheme: dark){
+  html:not([data-theme="light"]){
+    --grond:#1B1710; --paneel:#241F16; --inkt:#EDE3CB; --inkt-2:#C1B598; --inkt-3:#948968;
+    --lijn:#3C3423; --lijn-2:#4C4330; --accent:#9CBEE3; --accent-inkt:#1B1710;
+    --stripe-rood:#D97C6D; --stripe-oranje:#D9A15C; --stripe-geel:#D8C066;
+    --stripe-grijs:#ABA184; --stripe-groen:#79AE84;
+  }
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{background:var(--grond);color:var(--inkt);font-family:var(--sans);font-size:15.5px;
+  line-height:1.5;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+.telefoon{max-width:390px;margin:0 auto;padding:0 var(--s5) 120px}
+
+.themaknop{position:fixed;top:var(--s3);right:var(--s3);z-index:20;background:var(--paneel);
+  border:1px solid var(--lijn-2);color:var(--inkt-2);border-radius:var(--r);
+  padding:var(--s2) var(--s3);font:500 .75rem var(--sans);cursor:pointer}
+
+.kop{padding:var(--s7) 0 var(--s6)}
+.schermtitel{font-family:var(--serif);font-size:2rem;font-weight:600;line-height:1.1;
+  letter-spacing:0;margin:0;color:var(--inkt)}
+.toelichting{font-size:.875rem;font-weight:400;line-height:1.5;color:var(--inkt-2);margin:var(--s2) 0 0}
+
+/* ---- statuspaneel: gekleurde kantlijn + woord, kleur draagt nooit alleen de betekenis ---- */
+.statuspaneel{border:1px solid var(--lijn);border-left:6px solid var(--stripe-rood);border-radius:var(--r);
+  background:var(--paneel);margin-bottom:var(--s6)}
+.statuspaneel summary{list-style:none;cursor:pointer;padding:var(--s4) var(--s5);min-height:var(--raakvlak);
+  display:flex;flex-direction:column;justify-content:center;gap:var(--s2)}
+.statuspaneel summary::-webkit-details-marker{display:none}
+.statuswoord{font-family:var(--serif);font-size:1.1875rem;font-weight:600;color:var(--stripe-rood)}
+.tijd{font-family:var(--mono);font-size:.8125rem;line-height:1.4;letter-spacing:.01em;color:var(--inkt-3)}
+.meer{color:var(--accent);text-decoration:underline;text-underline-offset:3px;font-size:.8125rem;
+  font-style:italic;display:inline-block;margin-top:var(--s1)}
+.uitleg-body{border-top:1px solid var(--lijn);padding:var(--s4) var(--s5) var(--s5)}
+.uitleg-body ul{margin:0;padding-left:var(--s5)}
+.uitleg-body li{font-size:.875rem;line-height:1.55;color:var(--inkt-2);margin-bottom:var(--s2)}
+.uitleg-body p{font-size:.8125rem;font-style:italic;color:var(--inkt-3);margin:var(--s3) 0 0}
+.mono{font-family:var(--mono);font-size:.875rem;letter-spacing:.01em;color:var(--inkt)}
+
+.foto-blok{margin-bottom:var(--s7)}
+.foto-lijst{border:1px solid var(--lijn-2);padding:var(--s2);background:var(--paneel);border-radius:var(--r)}
+.bordfoto{display:block;width:100%;height:160px;border-radius:1px;object-fit:cover;background:var(--paneel)}
+.bijschrift{display:flex;justify-content:space-between;gap:var(--s3);font-size:.8125rem;font-style:italic;
+  color:var(--inkt-2);margin-top:var(--s3);padding:0 var(--s1)}
+a.link{color:var(--accent);text-decoration:underline;text-underline-offset:3px;font-style:normal}
+
+.sectie{margin-top:var(--s7)}
+.kap{font-family:var(--serif);font-style:italic;font-weight:500;font-size:1rem;color:var(--inkt);
+  margin:0 0 var(--s4);padding-bottom:var(--s2);border-bottom:1px solid var(--lijn)}
+
+.rij{display:flex;gap:var(--s3);padding:var(--s4) 0;border-bottom:1px solid var(--lijn);
+  align-items:flex-start;min-height:var(--raakvlak);text-decoration:none;color:inherit}
+.rij:last-child{border-bottom:0}
+a.rij:hover,a.rij:focus-visible{background:color-mix(in srgb, var(--accent) 6%, transparent)}
+.rij.uitrij{border-left:4px solid var(--stripe-rood);padding-left:var(--s3)}
+.rij .tekst{flex:1 1 auto;min-width:0}
+.rij b{font-size:.9375rem;font-weight:600;display:block;line-height:1.35;color:var(--inkt)}
+.rij small{font-size:.8438rem;color:var(--inkt-2);display:block;line-height:1.5;margin-top:2px}
+.quote{color:var(--inkt-2);font-style:italic}
+.tag{font-family:var(--mono);font-size:.6875rem;padding:var(--s1) var(--s2);color:var(--stripe-rood);
+  letter-spacing:.05em;flex:0 0 auto;font-weight:600;border:1px solid var(--stripe-rood);border-radius:2px;margin-top:1px}
+
+/* ---- tijdlijn als ledger ---- */
+.ledger{border-top:1px solid var(--lijn)}
+.ev{display:grid;grid-template-columns:60px 1fr;gap:var(--s4);padding:var(--s4) 0;
+  border-bottom:1px solid var(--lijn);min-height:var(--raakvlak);align-items:start;text-decoration:none;color:inherit}
+a.ev:hover,a.ev:focus-visible{background:color-mix(in srgb, var(--accent) 6%, transparent)}
+.ev:last-child{border-bottom:0}
+.ev .tijd{font-size:.75rem;padding-top:2px}
+.ev .tekst{min-width:0}
+.ev b{font-size:.9375rem;font-weight:600;display:block;line-height:1.35;color:var(--inkt)}
+.ev small{font-size:.8438rem;color:var(--inkt-2);display:block;line-height:1.5;margin-top:2px}
+
+.onderbalk{position:fixed;left:0;right:0;bottom:0;max-width:390px;margin:0 auto;
+  padding:var(--s3) var(--s5) var(--s5);background:linear-gradient(to top, var(--grond) 65%, transparent)}
+.knop{display:block;width:100%;min-height:var(--raakvlak);background:var(--accent);color:var(--accent-inkt);
+  border:0;border-radius:var(--r);font:600 .9375rem/1 var(--serif);text-align:center;
+  text-decoration:none;padding:var(--s5);cursor:pointer;box-shadow:0 2px 8px color-mix(in srgb, var(--inkt) 20%, transparent)}
+.knop:hover{filter:brightness(1.06)}
+
+.legende{margin-top:var(--s7);padding-top:var(--s4);border-top:1px solid var(--lijn)}
+.legende-titel{font-family:var(--serif);font-style:italic;font-size:.9375rem;color:var(--inkt-2);margin:0 0 var(--s3)}
+.legende-lijst{display:flex;flex-wrap:wrap;gap:var(--s3) var(--s5)}
+.legende-item{display:flex;align-items:center;gap:var(--s2);font-size:.8125rem;color:var(--inkt-2)}
+.streepje{width:4px;height:16px;flex:0 0 auto;display:inline-block;border-radius:1px}
+.st-rood{background:var(--stripe-rood)} .st-oranje{background:var(--stripe-oranje)} .st-geel{background:var(--stripe-geel)}
+.st-grijs{background:var(--stripe-grijs)} .st-groen{background:var(--stripe-groen)}
+
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+</style>
+</head>
+<body>
+
+<button type="button" class="themaknop" onclick="document.documentElement.dataset.theme = document.documentElement.dataset.theme==='dark' ? 'light' : 'dark'" aria-label="Wissel tussen licht en donker thema">Thema</button>
+
+<main class="telefoon">
+
+  <div class="kop">
+    <h1 class="schermtitel">SVB-B</h1>
+    <p class="toelichting">Stelplaats Mechelen &rsaquo; Werkplaats &middot; laagspanning</p>
+  </div>
+
+  <details class="statuspaneel">
+    <summary>
+      <span class="statuswoord">Vervallen &mdash; 2 staan uit, 6 todo&rsquo;s</span>
+      <span class="tijd">Attest A geldig tot 2029 &middot; laatst bevestigd 04-03</span>
+      <span class="meer">Hoe deze status berekend is</span>
+    </summary>
+    <div class="uitleg-body">
+      <ul>
+        <li>Attest: A, geldig tot <span class="mono">2029</span>.</li>
+        <li>Documenten: Uitwendige invloeden vervallen <span class="mono">01-06-2026</span>.</li>
+        <li>Open todo&rsquo;s: <span class="mono">3</span>.</li>
+        <li>Laatst bevestigd: <span class="mono">04-03</span>.</li>
+        <li>Wijzigingen sinds de keuring van <span class="mono">14-06-2024</span>: kring 14 bijgeplaatst <span class="mono">06-11-2025</span>, kring 26 bijgeplaatst <span class="mono">18-02</span>.</li>
+      </ul>
+      <p>De statuskleur is een rekensom over feiten, geen beoordeling.</p>
+    </div>
+  </details>
+
+  <div class="foto-blok">
+    <div class="foto-lijst">
+      <img class="bordfoto" src="../media/bordfront-svb-b.png" alt="Bordfront SVB-B, gemaakt door Peeters op 12 maart.">
+    </div>
+    <p class="bijschrift"><span>Bordfoto <span class="mono">12-03</span> &middot; Peeters</span><a class="link" href="vergelijken.html">Vergelijken</a></p>
+  </div>
+
+  <section class="sectie">
+    <h2 class="kap">Staat nu uit</h2>
+
+    <a class="rij uitrij" href="kring-14.html">
+      <span class="tag">UIT</span>
+      <span class="tekst">
+        <b>Kring 14 &middot; <span class="mono" aria-label="kring 1 4">k14</span></b>
+        <small>Uit sinds 12 maart door Peeters &mdash; <span class="quote">&ldquo;defect armatuur, niet vrijgeven&rdquo;</span></small>
+      </span>
+    </a>
+
+    <div class="rij uitrij">
+      <span class="tag">UIT</span>
+      <span class="tekst">
+        <b>Automaat 0 (320 A) &middot; <span class="mono" aria-label="kring 0">k0</span></b>
+        <small>Bestond al bij opname &mdash; reden onbekend.</small>
+        <small>Todo: Uitzoeken waarom automaat 0 uit staat &mdash; Jan Verhoeven &middot; over 2 wk</small>
+      </span>
+    </div>
+  </section>
+
+  <section class="sectie">
+    <h2 class="kap">Recent gebeurd</h2>
+
+    <div class="ledger">
+      <div class="ev">
+        <span class="tijd">20-08</span>
+        <span class="tekst">
+          <b>Kring 26 bevestigd &middot; <span class="mono" aria-label="kring 2 6">k26</span></b>
+          <small>Jan Verhoeven</small>
+        </span>
+      </div>
+
+      <a class="ev" href="kring-14.html">
+        <span class="tijd">12-03</span>
+        <span class="tekst">
+          <b>Kring 14 uitgezet &middot; <span class="mono" aria-label="kring 1 4">k14</span></b>
+          <small>Peeters &middot; staat nog open</small>
+        </span>
+      </a>
+
+      <a class="ev" href="kring-14.html#foto-04-03">
+        <span class="tijd">04-03</span>
+        <span class="tekst">
+          <b>Kabelherstelling &middot; <span class="mono" aria-label="kring 1 4">k14</span></b>
+          <small>De Wilde Elektro &middot; 1 foto</small>
+        </span>
+      </a>
+
+      <div class="ev">
+        <span class="tijd">18-02</span>
+        <span class="tekst">
+          <b>Kring 26 bijgeplaatst &middot; <span class="mono" aria-label="kring 2 6">k26</span></b>
+          <small>Jan Verhoeven &middot; 3 gevolgen open</small>
+        </span>
+      </div>
+
+      <a class="ev" href="kring-14.html">
+        <span class="tijd">06-11-2025</span>
+        <span class="tekst">
+          <b>Kring 14 bijgeplaatst &middot; <span class="mono" aria-label="kring 1 4">k14</span></b>
+          <small>Jan Verhoeven</small>
+        </span>
+      </a>
+
+      <div class="ev">
+        <span class="tijd">14-06-2024</span>
+        <span class="tekst">
+          <b>Keuring &mdash; attest A</b>
+          <small>Vin&ccedil;otte &middot; geldig tot 2029</small>
+        </span>
+      </div>
+    </div>
+  </section>
+
+  <section class="sectie">
+    <h2 class="kap">Dit bord</h2>
+
+    <a class="rij" href="kringen.html">
+      <span class="tekst"><b>Kringoverzicht</b><small>26 kringen bekend &middot; 3 vragen aandacht</small></span>
+    </a>
+    <a class="rij" href="documenten.html">
+      <span class="tekst"><b>Documenten</b><small>5 types &middot; 1 vervallen</small></span>
+    </a>
+    <a class="rij" href="mijn-todos.html">
+      <span class="tekst"><b>Mijn todo&rsquo;s</b><small>Jan Verhoeven</small></span>
+    </a>
+    <a class="rij" href="zoeken.html">
+      <span class="tekst"><b>Ander bord zoeken</b><small>Stelplaatsen en borden</small></span>
+    </a>
+  </section>
+
+  <div class="legende">
+    <p class="legende-titel">Statuskleuren, ter vergelijking</p>
+    <div class="legende-lijst">
+      <span class="legende-item"><span class="streepje st-rood" aria-hidden="true"></span>Rood</span>
+      <span class="legende-item"><span class="streepje st-oranje" aria-hidden="true"></span>Oranje</span>
+      <span class="legende-item"><span class="streepje st-geel" aria-hidden="true"></span>Geel</span>
+      <span class="legende-item"><span class="streepje st-grijs" aria-hidden="true"></span>Grijs</span>
+      <span class="legende-item"><span class="streepje st-groen" aria-hidden="true"></span>Groen</span>
+    </div>
+  </div>
+
+</main>
+
+<div class="onderbalk">
+  <a class="knop" href="loggen-1.html">Iets loggen</a>
+</div>
+
+</body>
+</html>

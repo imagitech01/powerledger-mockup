@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Richtingen — SVB-B</title>
+<style>
+  :root{
+    --bg:#F5F5F3; --panel:#FFFFFF; --ink:#1A1B1D; --ink-2:#5B5E64; --line:#DEDEDA; --accent:#1F5FD0;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{ --bg:#121315; --panel:#1C1D20; --ink:#EDEDEF; --ink-2:#A8ABB2; --line:#33353A; --accent:#6EA8FF; }
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{background:var(--bg);color:var(--ink);font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
+    line-height:1.5;padding:32px 24px 64px}
+  header{max-width:1320px;margin:0 auto 32px}
+  h1{font-size:1.375rem;font-weight:650;margin:0 0 6px;letter-spacing:-.01em}
+  header p{margin:0;color:var(--ink-2);font-size:.9375rem;max-width:64ch}
+  .grid{max-width:1320px;margin:0 auto;display:flex;flex-wrap:wrap;gap:28px;justify-content:center}
+  .kaart{width:390px;background:var(--panel);border:1px solid var(--line);border-radius:8px;overflow:hidden}
+  .kaart-kop{padding:16px 18px 14px;border-bottom:1px solid var(--line)}
+  .kaart-kop h2{font-size:1.0625rem;font-weight:650;margin:0 0 6px;letter-spacing:-.01em}
+  .kaart-kop p{margin:0 0 10px;color:var(--ink-2);font-size:.8438rem;line-height:1.5}
+  .kaart-kop a{color:var(--accent);text-decoration:underline;text-underline-offset:2px;font-size:.8438rem;font-weight:600}
+  .venster{width:390px;height:760px;border:0;display:block;background:var(--bg)}
+  footer{max-width:1320px;margin:40px auto 0;color:var(--ink-2);font-size:.8125rem}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>SVB-B &mdash; drie visuele richtingen</h1>
+  <p>Zelfde scherm, zelfde inhoud en links, drie verschillende visuele talen. Elk venster is op telefoonbreedte (390px) gerenderd. Gebruik de knop rechtsboven in elk venster om licht/donker te wisselen.</p>
+</header>
+
+<div class="grid">
+
+  <article class="kaart">
+    <div class="kaart-kop">
+      <h2>A &middot; Werkbank</h2>
+      <p>De huidige richting, opgeruimd: neutraal en rustig, systeemlettertype, mono voor identifiers, dunne lijnen, status als stip plus woord.</p>
+      <a href="a.html">Open op volledige grootte &rsaquo;</a>
+    </div>
+    <iframe class="venster" src="a.html" title="Richting A: Werkbank" loading="lazy"></iframe>
+  </article>
+
+  <article class="kaart">
+    <div class="kaart-kop">
+      <h2>B &middot; Gereedschap</h2>
+      <p>Een robuust veldinstrument: hoog contrast, grote knoppen, dikke belijning, status als volle kleurband. Utility-grade, geen speelgoed.</p>
+      <a href="b.html">Open op volledige grootte &rsaquo;</a>
+    </div>
+    <iframe class="venster" src="b.html" title="Richting B: Gereedschap" loading="lazy"></iframe>
+  </article>
+
+  <article class="kaart">
+    <div class="kaart-kop">
+      <h2>C &middot; Dossier</h2>
+      <p>Een kalm dossierregister: warm papier, serif koppen, veel witruimte, status als kleurstreep in de kantlijn. Voelt archief-waardig.</p>
+      <a href="c.html">Open op volledige grootte &rsaquo;</a>
+    </div>
+    <iframe class="venster" src="c.html" title="Richting C: Dossier" loading="lazy"></iframe>
+  </article>
+
+</div>
+
+<footer>Vergelijkingspagina, geen productonderdeel &middot; identieke data uit DEMODATA.md, bordfoto uit ../media/bordfront-svb-b.png.</footer>
+
+</body>
+</html>
