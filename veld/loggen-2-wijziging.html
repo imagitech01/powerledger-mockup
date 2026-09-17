@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Wijziging vastleggen — PowerLedger</title>
+<link rel="stylesheet" href="../styles.css">
+<script src="../thema.js" defer></script>
+<style>
+  [hidden]{display:none !important}
+  label.veld{display:block}
+  .demo-balk{flex-wrap:wrap;row-gap:var(--s2)}
+  .telefoon{padding-bottom:200px}
+  .terug a{display:inline-flex;align-items:center;min-height:var(--raakvlak)}
+  .kop{margin:0 0 var(--s4)}
+  .sectie{margin-top:var(--s6)}
+  .context{padding:var(--rij-veld) 0;border-top:1px solid var(--lijn);border-bottom:1px solid var(--lijn)}
+  .type-rij{border-bottom:1px solid var(--lijn);margin-bottom:var(--raakvlak-tussen);align-items:center;
+    width:100%;background:transparent;border-left:0;border-right:0;border-top:0;cursor:pointer;
+    padding:var(--rij-veld) 0;text-align:left;font:inherit;color:inherit}
+  .type-rij .tekst{flex:1 1 auto;min-width:0}
+  .type-rij .vink{flex:0 0 auto;width:22px;height:22px;border:1.5px solid var(--lijn-hard);border-radius:50%;
+    display:flex;align-items:center;justify-content:center;font-size:.75rem;color:transparent}
+  .type-rij[aria-pressed="true"]{background:color-mix(in srgb, var(--accent) 8%, var(--grond))}
+  .type-rij[aria-pressed="true"] .vink{border-color:var(--accent);background:var(--accent);color:var(--accent-inkt)}
+  .raakt{border-left:2px solid var(--lijn);padding-left:var(--s4);margin-top:var(--s4)}
+  .raakt b{color:var(--inkt)}
+  .keuze-inline{display:flex;align-items:center;gap:var(--s3);min-height:var(--raakvlak);cursor:pointer}
+  .keuze-inline input{width:20px;height:20px;flex:0 0 auto}
+  .onderbalk{padding-bottom:var(--s5)}
+  .fout{color:var(--status-rood);font-size:.875rem;line-height:1.45;margin:calc(-1 * var(--s2)) 0 var(--s4)}
+</style>
+</head>
+<body>
+
+<div class="demo-balk">
+  <a href="../index.html">&larr; Start</a>
+  <span>Loggen &mdash; wijziging</span>
+  <span class="rechts">
+    <span>demo-chroom, geen productonderdeel</span>
+    <button type="button" data-thema-knop onclick="wisselThema()" aria-label="Wissel tussen licht en donker thema">Donker</button>
+  </span>
+</div>
+
+<main class="telefoon">
+  <p class="terug"><a class="link" href="loggen-1.html">&larr; Werkwoord</a></p>
+
+  <div class="kop">
+    <h1 class="schermtitel">Wijziging vastleggen</h1>
+    <p class="toelichting">Ik heb iets veranderd. Gevolgen ontstaan automatisch als todo&rsquo;s.</p>
+  </div>
+
+  <div class="context">
+    <p class="toelichting">Bord: <b>SVB-B</b> &middot; wijziging &middot; Jan Verhoeven</p>
+    <p class="tijd">21-08 16:21</p>
+  </div>
+
+  <section class="sectie">
+    <h2 class="kap">wat is er veranderd</h2>
+    <div id="typen" role="radiogroup" aria-label="Wijzigingstype"></div>
+
+    <div class="raakt" id="raakt-blok" hidden>
+      <p class="toelichting" id="raakt-tekst"></p>
+    </div>
+    <p class="fout" id="fout-type" hidden>Kies een wijzigingstype.</p>
+  </section>
+
+  <section class="sectie">
+    <label class="veld" for="kring">
+      <span class="lab">welke kring</span>
+      <input id="kring" name="kring" type="text" inputmode="text" autocomplete="off" value="26">
+    </label>
+    <p class="toelichting">Getoond als <span class="mono" id="kring-preview" aria-label="kring 2 6">Kring 26 &middot; k26</span>. Ander nummer? Typ het gewoon over.</p>
+    <label class="keuze-inline">
+      <input type="checkbox" id="nieuwe-kring">
+      <span>Dit is een nieuwe kring &mdash; nog niet eerder gezien op dit bord.</span>
+    </label>
+  </section>
+
+  <section class="sectie">
+    <label class="veld" for="opmerking">
+      <span class="lab">opmerking <span style="float:right;color:var(--inkt-3);font-weight:400;letter-spacing:.02em">optioneel</span></span>
+      <textarea id="opmerking" name="opmerking" rows="2"></textarea>
+    </label>
+  </section>
+
+  <section class="sectie">
+    <h2 class="kap">foto</h2>
+    <p class="toelichting" id="foto-stand">Nog geen foto.</p>
+    <input id="fotos" class="sr" type="file" accept="image/*" capture="environment" multiple>
+    <label class="knop-2" for="fotos" style="display:flex;align-items:center;justify-content:center">Foto toevoegen (optioneel)</label>
+  </section>
+</main>
+
+<div class="onderbalk">
+  <button type="button" class="knop" id="vastleggen">Vastleggen</button>
+</div>
+
+<script>
+(function(){
+  var TYPES = [
+    ['automaat_bijgeplaatst', 'Automaat bijgeplaatst', 'Nieuwe automaat toegevoegd aan het bord.',
+      ['schema','kabelberekening','keuringsverslag','uitwendige invloeden','risicoanalyse']],
+    ['automaat_vervangen', 'Automaat vervangen (andere curve of ampèrage)', 'Zelfde plek, andere curve of ampèrage.',
+      ['schema','kabelberekening']],
+    ['kring_toegevoegd', 'Kring toegevoegd', 'Nieuwe kring aangelegd vanaf dit bord.',
+      ['schema','kabelberekening','keuringsverslag','uitwendige invloeden','risicoanalyse']],
+    ['kring_verwijderd', 'Kring verwijderd of buiten dienst', 'Kring afgekoppeld of definitief buiten dienst.',
+      ['schema']],
+    ['verdeelbord_uitgebreid', 'Verdeelbord uitgebreid', 'Extra rijen of een nieuw kastdeel bijgeplaatst.',
+      ['schema','kabelberekening','keuringsverslag','uitwendige invloeden','risicoanalyse','aardingsplan']],
+    ['voeding_gewijzigd', 'Voeding gewijzigd', 'Andere voedingskabel, -bron of aansluitpunt.',
+      ['schema','kabelberekening','keuringsverslag','aardingsplan']],
+    ['lokaal_herbestemd', 'Lokaal herbestemd', 'De ruimte achter dit bord krijgt een andere functie.',
+      ['uitwendige invloeden','risicoanalyse','keuringsverslag']],
+    ['andere_wijziging', 'Andere wijziging', 'Iets anders veranderd aan dit bord.',
+      ['schema']]
+  ];
+
+  var wrap = document.getElementById('typen'), gekozen = null;
+  var raaktBlok = document.getElementById('raakt-blok'), raaktTekst = document.getElementById('raakt-tekst');
+  var foutType = document.getElementById('fout-type');
+
+  TYPES.forEach(function(t){
+    var b = document.createElement('button');
+    b.type = 'button'; b.className = 'rij type-rij'; b.setAttribute('aria-pressed', 'false');
+    b.dataset.type = t[0];
+    b.innerHTML = '<span class="vink" aria-hidden="true">&#10003;</span>' +
+      '<span class="tekst"><b>' + t[1] + '</b><small>' + t[2] + '</small></span>';
+    b.addEventListener('click', function(){
+      gekozen = t[0];
+      Array.prototype.forEach.call(wrap.querySelectorAll('.type-rij'), function(r){
+        r.setAttribute('aria-pressed', r.dataset.type === gekozen ? 'true' : 'false');
+      });
+      raaktTekst.innerHTML = 'Raakt: <b>' + t[3].join(', ') + '</b>';
+      raaktBlok.hidden = false;
+      foutType.hidden = true;
+    });
+    wrap.appendChild(b);
+  });
+
+  var kring = document.getElementById('kring'), preview = document.getElementById('kring-preview');
+  function normaliseer(s){
+    s = (s || '').trim().toUpperCase().replace(/\s+/g,'');
+    s = s.replace(/(\d)[,\-](\d)/g, '$1.$2');
+    return s;
+  }
+  function toonPreview(){
+    var k = kring.value.trim() || '26';
+    preview.textContent = 'Kring ' + k + ' · k' + normaliseer(k);
+  }
+  kring.addEventListener('input', toonPreview);
+  toonPreview();
+
+  var fotos = document.getElementById('fotos'), stand = document.getElementById('foto-stand');
+  fotos.addEventListener('change', function(){
+    var n = fotos.files ? fotos.files.length : 0;
+    stand.textContent = n === 0 ? 'Nog geen foto.' : (n === 1 ? '1 foto.' : n + ' foto’s.');
+  });
+
+  document.getElementById('vastleggen').addEventListener('click', function(){
+    if(!gekozen){
+      foutType.hidden = false;
+      wrap.scrollIntoView({block:'center'});
+      return;
+    }
+    var k = normaliseer(kring.value) || '26';
+    var nieuw = document.getElementById('nieuwe-kring').checked ? '1' : '0';
+    var n = document.getElementById('opmerking').value.trim();
+    location.href = 'loggen-3-wijziging.html?t=' + encodeURIComponent(gekozen) +
+      '&k=' + encodeURIComponent(k) + '&nieuw=' + nieuw +
+      (n ? '&n=' + encodeURIComponent(n) : '');
+  });
+})();
+</script>
+
+</body>
+</html>

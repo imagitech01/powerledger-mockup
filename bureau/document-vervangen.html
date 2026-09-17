@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PowerLedger — Eendraadschema SVB-B</title>
+<link rel="stylesheet" href="../styles.css">
+<script src="../thema.js" defer></script>
+<style>
+/* Bureaumodus. Uitsluitend tokens uit styles.css, nooit een letterlijke kleurwaarde.
+   Schaalfactor 0,875 (DESIGN.md § Layout & Spacing) op dichtheid en raakvlak.
+   De typografische ladder blijft ongeschaald: de ondergrens van 13 px
+   uit DESIGN.md § Typography gaat voor op de schaalfactor. */
+.bureau{--schaal:.875;--raakvlak:calc(48px * var(--schaal));max-width:760px}
+.bureau .rij{padding:var(--rij-bureau) 0;gap:var(--s4);flex-wrap:wrap}
+.bureau .veld{min-height:var(--raakvlak)}
+.bureau .knop{display:inline-flex;align-items:center;justify-content:center;
+  width:auto;padding:var(--s3) var(--s5);min-height:var(--raakvlak);margin-top:0}
+main{padding-bottom:var(--s7)}
+.kop{margin:0 0 var(--s5)}
+.kop p{margin:var(--s2) 0 0}
+.statusregel{margin:var(--s3) 0 0}
+.kaart{margin-bottom:var(--s5)}
+.kaart+.kap,.demo-hint+.kap{margin-top:var(--s6)}
+.groei{flex:1 1 10rem;min-width:0}
+.meta-rechts{margin-left:auto;text-align:right;flex:0 1 auto}
+.open-badge{font-family:var(--mono);font-size:.75rem;padding:var(--s2) var(--s3);border:1px solid var(--lijn-hard);
+  color:var(--inkt-2);border-radius:var(--r-sm);letter-spacing:.06em;flex:0 0 auto;font-weight:600}
+.uploadvak{border:1px dashed var(--lijn-hard);border-radius:var(--r-md);padding:var(--s5);text-align:center}
+.gedaan{border-left:3px solid var(--accent);padding:var(--s3) var(--s4);margin-top:var(--s5);
+  background:color-mix(in srgb, var(--accent) 8%, var(--grond))}
+</style>
+</head>
+<body>
+
+<div class="demo-balk">
+  <a href="../index.html">← Start</a>
+  <span>Document vervangen · bureaumodus</span>
+  <span class="rechts">
+    <span>Demo-chroom — deze balk hoort niet bij het product.</span>
+    <button type="button" data-thema-knop onclick="wisselThema()" aria-label="Wissel tussen licht en donker thema">Donker</button>
+  </span>
+</div>
+
+<div class="bureau">
+
+<nav class="nav" aria-label="Hoofdnavigatie">
+  <span class="merk">PowerLedger</span>
+  <a href="overzicht.html">Overzicht</a>
+  <a href="overzicht.html#stelplaatsen">Stelplaatsen</a>
+  <a href="todos.html">Todo's</a>
+  <a href="documenten.html" class="aan" aria-current="page">Documenten</a>
+  <a href="toegang.html">Toegang</a>
+</nav>
+
+<main>
+  <div class="kop">
+    <h1 class="schermtitel">Eendraadschema</h1>
+    <p class="toelichting">Mechelen &middot; <a class="link" href="bord-svb-b.html">SVB-B</a></p>
+    <span class="statusregel"><span class="stip s-oranje" aria-hidden="true"></span>
+      <span>Mogelijk verouderd sinds <span class="mono">21-08</span>: Automaat vervangen op kring <span class="mono">26</span> (Jan Verhoeven)</span></span>
+  </div>
+
+  <h2 class="kap">huidige versie</h2>
+  <div class="kaart">
+    <div class="rij">
+      <span class="groei"><b>Eendraadschema.pdf</b><small>Geüpload <span class="mono">14-06-2024</span> door Bert Van Asch</small></span>
+      <span class="meta-rechts tijd">pdf &middot; 2,4 MB</span>
+    </div>
+  </div>
+
+  <h2 class="kap">openstaande todo</h2>
+  <div class="kaart">
+    <div class="rij">
+      <span class="groei"><b>Eendraadschema bijwerken</b><small>Eigenaar: Bert Van Asch &middot; ontstaan uit de wijziging van <span class="mono">21-08</span></small></span>
+      <span class="open-badge">open</span>
+    </div>
+  </div>
+
+  <h2 class="kap">nieuwe versie uploaden</h2>
+  <div class="kaart">
+    <div class="uploadvak">
+      <label class="veld" for="bestand" style="display:block;border:0;background:transparent;padding:0;margin:0 0 var(--s4)">
+        <span class="lab">nieuwe versie (pdf)</span>
+        <input id="bestand" name="bestand" type="file" accept="application/pdf">
+      </label>
+      <button type="button" class="knop" id="vervangen">Vervangen en todo sluiten</button>
+    </div>
+    <p class="toelichting" style="margin-top:var(--s4)">De oude versie blijft bewaard in de documenthistorie van dit bord; er wordt niets overschreven of verwijderd.</p>
+  </div>
+
+  <div class="gedaan" id="gedaan" hidden role="status">
+    <p class="body-tekst">Nieuwe versie geplaatst, todo <span class="mono">Eendraadschema bijwerken</span> gesloten.</p>
+  </div>
+
+  <p class="toelichting" style="margin-top:var(--s5)"><a class="link" href="documenten.html">&larr; Terug naar Documenten</a></p>
+</main>
+
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  var d = document.documentElement.dataset.thema ||
+    (matchMedia('(prefers-color-scheme: dark)').matches ? 'donker' : 'licht');
+  document.querySelectorAll('[data-thema-knop]').forEach(function (b) {
+    b.textContent = d === 'donker' ? 'Licht' : 'Donker';
+  });
+
+  document.getElementById('vervangen').addEventListener('click', function(){
+    document.getElementById('gedaan').hidden = false;
+  });
+});
+</script>
+</body>
+</html>

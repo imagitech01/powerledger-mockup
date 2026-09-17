@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Uitnodiging — PowerLedger</title>
+<link rel="stylesheet" href="../styles.css">
+<script src="../thema.js" defer></script>
+<style>
+  [hidden]{display:none !important}
+  label.veld{display:block}
+  .demo-balk{flex-wrap:wrap;row-gap:var(--s2)}
+  .terug a{display:inline-flex;align-items:center;min-height:var(--raakvlak)}
+  .kop{margin:0 0 var(--s5)}
+  .sectie{margin-top:var(--s6)}
+  .context{padding:var(--rij-veld) 0;border-top:1px solid var(--lijn);border-bottom:1px solid var(--lijn)}
+  .aanvaard{border-left:3px solid var(--accent);padding:var(--s3) var(--s4);margin-top:var(--s5);
+    background:color-mix(in srgb, var(--accent) 8%, var(--grond))}
+</style>
+</head>
+<body>
+
+<div class="demo-balk">
+  <a href="../index.html">&larr; Start</a>
+  <span>Uitnodiging</span>
+  <span class="rechts">
+    <span>demo-chroom, geen productonderdeel</span>
+    <button type="button" data-thema-knop onclick="wisselThema()" aria-label="Wissel tussen licht en donker thema">Donker</button>
+  </span>
+</div>
+
+<main class="telefoon">
+  <p class="terug"><a class="link" href="aanmelden.html">&larr; Aanmelden</a></p>
+
+  <div class="kop">
+    <h1 class="schermtitel">Je bent uitgenodigd</h1>
+  </div>
+
+  <div class="context">
+    <p class="toelichting"><b>Geert Vermeulen</b> (De Lijn, Antwerpen) nodigt je uit als elektricien voor <b>11 stelplaatsen</b>.</p>
+  </div>
+
+  <section class="sectie" id="s-formulier">
+    <label class="veld" for="naam">
+      <span class="lab">naam</span>
+      <input id="naam" name="naam" type="text" autocomplete="name" value="Jan Verhoeven">
+    </label>
+    <label class="veld" for="email">
+      <span class="lab">e-mailadres</span>
+      <input id="email" name="email" type="email" autocomplete="email" value="jan.verhoeven@delijn.be">
+    </label>
+    <button type="button" class="knop" id="aannemen">Uitnodiging aannemen</button>
+    <p class="toelichting" style="margin-top:var(--s4)">Lezen en schrijven op alle 11 stelplaatsen, tot Geert de uitnodiging intrekt.</p>
+  </section>
+
+  <section class="sectie" id="s-aanvaard" hidden>
+    <div class="aanvaard" role="status">
+      <p class="body-tekst">Uitnodiging aanvaard. Je bent aangemeld als Jan Verhoeven.</p>
+    </div>
+    <p class="toelichting" style="margin-top:var(--s4)">Vanaf nu kan je bij een kast de QR-sticker aan de binnenkant van de deur scannen en meteen loggen — je hoeft je niet opnieuw aan te melden. Deze sessie blijft op dit toestel staan.</p>
+    <a class="knop" href="bord-svb-b.html" style="display:block;margin-top:var(--s5)">Naar SVB-B</a>
+  </section>
+</main>
+
+<script>
+(function(){
+  document.getElementById('aannemen').addEventListener('click', function(){
+    document.getElementById('s-formulier').hidden = true;
+    document.getElementById('s-aanvaard').hidden = false;
+  });
+})();
+</script>
+
+</body>
+</html>

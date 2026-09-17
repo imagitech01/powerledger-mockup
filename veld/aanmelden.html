@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Aanmelden — PowerLedger</title>
+<link rel="stylesheet" href="../styles.css">
+<script src="../thema.js" defer></script>
+<style>
+  [hidden]{display:none !important}
+  label.veld{display:block}
+  .demo-balk{flex-wrap:wrap;row-gap:var(--s2)}
+  .terug a{display:inline-flex;align-items:center;min-height:var(--raakvlak)}
+  .kop{margin:0 0 var(--s5)}
+  .sectie{margin-top:var(--s6)}
+  .context{padding:var(--rij-veld) 0;border-top:1px solid var(--lijn);border-bottom:1px solid var(--lijn)}
+  .verzonden{border-left:3px solid var(--accent);padding:var(--s3) var(--s4);margin-top:var(--s5);
+    background:color-mix(in srgb, var(--accent) 8%, var(--grond))}
+</style>
+</head>
+<body>
+
+<div class="demo-balk">
+  <a href="../index.html">&larr; Start</a>
+  <span>Aanmelden</span>
+  <span class="rechts">
+    <span>demo-chroom, geen productonderdeel</span>
+    <button type="button" data-thema-knop onclick="wisselThema()" aria-label="Wissel tussen licht en donker thema">Donker</button>
+  </span>
+</div>
+
+<main class="telefoon">
+  <p class="terug"><a class="link" href="bord-svb-b.html">&larr; SVB-B</a></p>
+
+  <div class="kop">
+    <h1 class="schermtitel">Aanmelden</h1>
+  </div>
+
+  <div class="context">
+    <p class="toelichting">Om te loggen op SVB-B moet je aangemeld zijn. Lezen kan zonder account.</p>
+  </div>
+
+  <section class="sectie" id="s-formulier">
+    <label class="veld" for="email">
+      <span class="lab">e-mailadres <span class="verplicht">verplicht</span></span>
+      <input id="email" name="email" type="email" inputmode="email" autocomplete="email" value="jan.verhoeven@delijn.be">
+    </label>
+    <p class="fout" id="fout-email" hidden style="color:var(--status-rood);font-size:.875rem;margin:calc(-1 * var(--s2)) 0 var(--s4)">E-mailadres ontbreekt.</p>
+    <button type="button" class="knop" id="verstuur">Stuur me een aanmeldlink</button>
+    <p class="toelichting" style="margin-top:var(--s4)">Geen wachtwoord nodig. De link houdt je aangemeld op dit toestel.</p>
+  </section>
+
+  <section class="sectie" id="s-verzonden" hidden>
+    <div class="verzonden" role="status">
+      <p class="body-tekst" id="verzonden-tekst">Link verzonden naar jan.verhoeven@delijn.be, open hem op deze telefoon.</p>
+    </div>
+    <p class="toelichting" style="margin-top:var(--s4)">Geen mail gezien? Controleer je spamfilter, of vraag de beheerder van je stelplaats om een nieuwe uitnodiging.</p>
+  </section>
+</main>
+
+<script>
+(function(){
+  var email = document.getElementById('email');
+  var form = document.getElementById('s-formulier'), verzonden = document.getElementById('s-verzonden');
+  var fout = document.getElementById('fout-email');
+
+  function toonVerzonden(adres){
+    document.getElementById('verzonden-tekst').textContent = 'Link verzonden naar ' + adres + ', open hem op deze telefoon.';
+    form.hidden = true;
+    verzonden.hidden = false;
+  }
+
+  document.getElementById('verstuur').addEventListener('click', function(){
+    var v = email.value.trim();
+    if(!v){ fout.hidden = false; email.focus(); return; }
+    fout.hidden = true;
+    toonVerzonden(v);
+  });
+  email.addEventListener('input', function(){ fout.hidden = true; });
+
+  if(/(?:\?|&)verzonden=1(?:&|$)/.test(location.search)){
+    toonVerzonden(email.value.trim() || 'jan.verhoeven@delijn.be');
+  }
+})();
+</script>
+
+</body>
+</html>

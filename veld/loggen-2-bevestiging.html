@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bevestiging vastleggen — PowerLedger</title>
+<link rel="stylesheet" href="../styles.css">
+<script src="../thema.js" defer></script>
+<style>
+  [hidden]{display:none !important}
+  label.veld{display:block}
+  .demo-balk{flex-wrap:wrap;row-gap:var(--s2)}
+  .telefoon{padding-bottom:170px}
+  .terug a{display:inline-flex;align-items:center;min-height:var(--raakvlak)}
+  .kop{margin:0 0 var(--s4)}
+  .sectie{margin-top:var(--s6)}
+  .context{padding:var(--rij-veld) 0;border-top:1px solid var(--lijn);border-bottom:1px solid var(--lijn)}
+  .keuze{display:flex;align-items:center;gap:var(--s3);min-height:var(--raakvlak);
+    border-top:1px solid var(--lijn);cursor:pointer}
+  .keuze:last-child{border-bottom:1px solid var(--lijn)}
+  .keuze input{width:22px;height:22px;flex:0 0 auto}
+  .keuze small{color:var(--inkt-2);font-weight:400}
+  .onderbalk{padding-bottom:var(--s5)}
+  .fout{color:var(--status-rood);font-size:.875rem;line-height:1.45;margin:var(--s3) 0 0}
+</style>
+</head>
+<body>
+
+<div class="demo-balk">
+  <a href="../index.html">&larr; Start</a>
+  <span>Loggen &mdash; bevestiging</span>
+  <span class="rechts">
+    <span>demo-chroom, geen productonderdeel</span>
+    <button type="button" data-thema-knop onclick="wisselThema()" aria-label="Wissel tussen licht en donker thema">Donker</button>
+  </span>
+</div>
+
+<main class="telefoon">
+  <p class="terug"><a class="link" href="loggen-1.html">&larr; Werkwoord</a></p>
+
+  <div class="kop">
+    <h1 class="schermtitel">Bevestiging vastleggen</h1>
+    <p class="toelichting">Ik heb gekeken en het klopt. Zet de teller laatst bevestigd.</p>
+  </div>
+
+  <div class="context">
+    <p class="toelichting">Bord: <b>SVB-B</b> &middot; bevestiging &middot; Jan Verhoeven</p>
+    <p class="tijd">21-08 16:22</p>
+  </div>
+
+  <section class="sectie">
+    <h2 class="kap">wat je nakeek</h2>
+
+    <label class="keuze">
+      <input type="checkbox" id="c1">
+      <span><b>Bordfoto klopt nog</b><small>Het bordfront ziet er nog uit als op de foto van 12-03.</small></span>
+    </label>
+    <label class="keuze">
+      <input type="checkbox" id="c2">
+      <span><b>Kringenlijst klopt</b><small>Geen kringen bij die niet in het dossier staan, geen kringen weg die er nog wel staan.</small></span>
+    </label>
+    <label class="keuze">
+      <input type="checkbox" id="c3">
+      <span><b>Documenten aanwezig</b><small>Schema, kabelberekening en keuringsverslag zijn er, ook al staan ze niet allemaal actueel.</small></span>
+    </label>
+
+    <p class="fout" id="fout-check" hidden>Vink alle drie aan om te bevestigen.</p>
+  </section>
+</main>
+
+<div class="onderbalk">
+  <button type="button" class="knop" id="bevestigen">Bevestigen</button>
+</div>
+
+<script>
+(function(){
+  var checks = [document.getElementById('c1'), document.getElementById('c2'), document.getElementById('c3')];
+  var fout = document.getElementById('fout-check');
+  checks.forEach(function(c){ c.addEventListener('change', function(){ fout.hidden = true; }); });
+
+  document.getElementById('bevestigen').addEventListener('click', function(){
+    var alles = checks.every(function(c){ return c.checked; });
+    if(!alles){ fout.hidden = false; return; }
+    location.href = 'loggen-3-bevestiging.html';
+  });
+})();
+</script>
+
+</body>
+</html>

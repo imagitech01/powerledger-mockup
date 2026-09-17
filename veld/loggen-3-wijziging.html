@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Wijziging vastgelegd — PowerLedger</title>
+<link rel="stylesheet" href="../styles.css">
+<script src="../thema.js" defer></script>
+<style>
+  [hidden]{display:none !important}
+  .demo-balk{flex-wrap:wrap;row-gap:var(--s2)}
+  .telefoon{padding-bottom:170px}
+  .kop{margin:0 0 var(--s4)}
+  .sectie{margin-top:var(--s6)}
+  .bewijs{border-left:3px solid var(--accent);padding:var(--s3) var(--s4);margin:0 0 var(--s5);
+    background:color-mix(in srgb, var(--accent) 8%, var(--grond))}
+  .todo-rij{align-items:center}
+  .todo-rij .tekst{flex:1 1 auto;min-width:0}
+  .open-badge{font-family:var(--mono);font-size:.75rem;padding:var(--s2) var(--s3);border:1px solid var(--lijn-hard);
+    color:var(--inkt-2);border-radius:var(--r-sm);letter-spacing:.06em;flex:0 0 auto;font-weight:600}
+  .statusregel{margin-top:var(--s2)}
+  .onderbalk{padding-bottom:var(--s5)}
+</style>
+</head>
+<body>
+
+<div class="demo-balk">
+  <a href="../index.html">&larr; Start</a>
+  <span>Loggen &mdash; wijziging vastgelegd</span>
+  <span class="rechts">
+    <span>demo-chroom, geen productonderdeel</span>
+    <button type="button" data-thema-knop onclick="wisselThema()" aria-label="Wissel tussen licht en donker thema">Donker</button>
+  </span>
+</div>
+
+<main class="telefoon">
+
+  <div class="kop">
+    <h1 class="schermtitel">Vastgelegd</h1>
+  </div>
+
+  <div class="bewijs" role="status">
+    <p class="body-tekst" id="bewijs-tekst">Vastgelegd: Automaat vervangen op kring 26, 21-08 16:21, Jan Verhoeven.</p>
+  </div>
+
+  <section class="sectie">
+    <h2 class="kap">gevolgen (automatisch)</h2>
+    <div id="gevolgen"></div>
+    <p class="toelichting" style="margin-top:var(--s3)">Geert Vermeulen kan elke toewijzing hierboven overschrijven in <span class="mono">Todo&rsquo;s</span>.</p>
+  </section>
+
+  <section class="sectie">
+    <h2 class="kap">status SVB-B nu</h2>
+    <span class="statusregel"><span class="stip s-geel" aria-hidden="true"></span><span>Gevolgen open</span></span>
+    <p class="toelichting" style="margin-top:var(--s3)">Zolang deze todo&rsquo;s openstaan, kan SVB-B niet naar <b>Niets open</b>. Het bord blijft daarnaast <b>Vervallen</b> (rood) door de twee kringen die al uit staan &mdash; deze wijziging maakt dat niet erger, maar ook niet beter.</p>
+  </section>
+
+</main>
+
+<div class="onderbalk">
+  <a class="knop" href="bord-svb-b.html" style="display:block;text-align:center">Naar borddossier SVB-B</a>
+  <a class="knop-2" href="loggen-1.html" style="display:block;text-align:center">Nog iets loggen</a>
+</div>
+
+<script>
+(function(){
+  function param(n){ var m = location.search.match(new RegExp('[?&]' + n + '=([^&]*)')); return m ? decodeURIComponent(m[1]) : ''; }
+
+  var TITELS = {
+    automaat_bijgeplaatst: 'Automaat bijgeplaatst',
+    automaat_vervangen: 'Automaat vervangen',
+    kring_toegevoegd: 'Kring toegevoegd',
+    kring_verwijderd: 'Kring verwijderd of buiten dienst',
+    verdeelbord_uitgebreid: 'Verdeelbord uitgebreid',
+    voeding_gewijzigd: 'Voeding gewijzigd',
+    lokaal_herbestemd: 'Lokaal herbestemd',
+    andere_wijziging: 'Andere wijziging'
+  };
+  var DOCS = {
+    automaat_bijgeplaatst: ['schema','kabelberekening','keuringsverslag','uitwendige invloeden','risicoanalyse'],
+    automaat_vervangen: ['schema','kabelberekening'],
+    kring_toegevoegd: ['schema','kabelberekening','keuringsverslag','uitwendige invloeden','risicoanalyse'],
+    kring_verwijderd: ['schema'],
+    verdeelbord_uitgebreid: ['schema','kabelberekening','keuringsverslag','uitwendige invloeden','risicoanalyse','aardingsplan'],
+    voeding_gewijzigd: ['schema','kabelberekening','keuringsverslag','aardingsplan'],
+    lokaal_herbestemd: ['uitwendige invloeden','risicoanalyse','keuringsverslag'],
+    andere_wijziging: ['schema']
+  };
+  var TODO_LABEL = {
+    schema: 'Eendraadschema bijwerken',
+    kabelberekening: 'Kabelberekening nakijken',
+    keuringsverslag: 'Keuringsverslag laten herzien',
+    'uitwendige invloeden': 'Uitwendige invloeden herzien',
+    risicoanalyse: 'Risicoanalyse herzien',
+    aardingsplan: 'Aardingsplan bijwerken'
+  };
+  var OWNER = {
+    schema: 'Bert Van Asch', aardingsplan: 'Bert Van Asch',
+    kabelberekening: 'Tommy Willems',
+    keuringsverslag: 'Geert Vermeulen',
+    'uitwendige invloeden': 'preventieadviseur', risicoanalyse: 'preventieadviseur'
+  };
+
+  var t = param('t'); if(!TITELS[t]) t = 'automaat_vervangen';
+  var k = param('k') || '26';
+  var docs = DOCS[t];
+
+  document.getElementById('bewijs-tekst').textContent =
+    'Vastgelegd: ' + TITELS[t] + ' op kring ' + k + ', 21-08 16:21, Jan Verhoeven.';
+
+  var wrap = document.getElementById('gevolgen');
+  docs.forEach(function(d){
+    var rij = document.createElement('div');
+    rij.className = 'rij todo-rij';
+    rij.innerHTML = '<span class="tekst"><b>' + TODO_LABEL[d] + '</b><small>&rarr; ' + OWNER[d] + '</small></span>' +
+      '<span class="open-badge">open</span>';
+    wrap.appendChild(rij);
+  });
+})();
+</script>
+
+</body>
+</html>

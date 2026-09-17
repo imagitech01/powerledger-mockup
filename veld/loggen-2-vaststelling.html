@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vaststelling vastleggen — PowerLedger</title>
+<link rel="stylesheet" href="../styles.css">
+<script src="../thema.js" defer></script>
+<style>
+  [hidden]{display:none !important}
+  label.veld{display:block}
+  .demo-balk{flex-wrap:wrap;row-gap:var(--s2)}
+  .telefoon{padding-bottom:170px}
+  .terug a{display:inline-flex;align-items:center;min-height:var(--raakvlak)}
+  .kop{margin:0 0 var(--s4)}
+  .sectie{margin-top:var(--s6)}
+  .context{padding:var(--rij-veld) 0;border-top:1px solid var(--lijn);border-bottom:1px solid var(--lijn)}
+  .veld textarea{min-height:72px}
+  .urgentie{display:flex;gap:0;margin:var(--s3) 0 0}
+  .urgentie button{flex:1 1 0;min-height:var(--raakvlak);background:transparent;color:var(--inkt-2);
+    border:1px solid var(--lijn-hard);border-right-width:0;font:600 .9375rem/1.2 var(--sans);cursor:pointer;padding:var(--s3)}
+  .urgentie button:last-child{border-right-width:1px;border-radius:0 var(--r-md) var(--r-md) 0}
+  .urgentie button:first-child{border-radius:var(--r-md) 0 0 var(--r-md)}
+  .urgentie button[aria-pressed="true"]{border:2px solid var(--inkt);color:var(--inkt);border-right-width:2px}
+  .urgentie button[data-u="gevaarlijk"][aria-pressed="true"]{border-color:var(--status-rood);color:var(--status-rood)}
+  .onderbalk{padding-bottom:var(--s5)}
+  .fout{color:var(--status-rood);font-size:.875rem;line-height:1.45;margin:calc(-1 * var(--s2)) 0 var(--s4)}
+</style>
+</head>
+<body>
+
+<div class="demo-balk">
+  <a href="../index.html">&larr; Start</a>
+  <span>Loggen &mdash; vaststelling</span>
+  <span class="rechts">
+    <span>demo-chroom, geen productonderdeel</span>
+    <button type="button" data-thema-knop onclick="wisselThema()" aria-label="Wissel tussen licht en donker thema">Donker</button>
+  </span>
+</div>
+
+<main class="telefoon">
+  <p class="terug"><a class="link" href="loggen-1.html">&larr; Werkwoord</a></p>
+
+  <div class="kop">
+    <h1 class="schermtitel">Vaststelling vastleggen</h1>
+    <p class="toelichting">Ik zie iets dat niet klopt. Gaat naar triage.</p>
+  </div>
+
+  <div class="context">
+    <p class="toelichting">Bord: <b>SVB-B</b> &middot; vaststelling &middot; Jan Verhoeven</p>
+    <p class="tijd">21-08 16:21</p>
+  </div>
+
+  <section class="sectie">
+    <label class="veld" for="wat">
+      <span class="lab">wat zie je <span class="verplicht">verplicht</span></span>
+      <textarea id="wat" name="wat" rows="3" aria-describedby="wat-uitleg"></textarea>
+    </label>
+    <p class="fout" id="fout-wat" hidden></p>
+    <p class="toelichting" id="wat-uitleg">Wordt letterlijk getoond, tussen aanhalingstekens, bij de triage van Geert.</p>
+  </section>
+
+  <section class="sectie">
+    <label class="veld" for="kring">
+      <span class="lab">waar <span style="float:right;color:var(--inkt-3);font-weight:400;letter-spacing:.02em">optioneel, kring</span></span>
+      <input id="kring" name="kring" type="text" inputmode="text" autocomplete="off" placeholder="bv. 26">
+    </label>
+  </section>
+
+  <section class="sectie">
+    <h2 class="kap">urgentie</h2>
+    <div class="urgentie" role="group" aria-label="Urgentie">
+      <button type="button" data-u="wachten" aria-pressed="true">Kan wachten</button>
+      <button type="button" data-u="gevaarlijk" aria-pressed="false">Gevaarlijk, nu</button>
+    </div>
+  </section>
+
+  <section class="sectie">
+    <h2 class="kap">foto</h2>
+    <p class="toelichting" id="foto-stand">Nog geen foto.</p>
+    <input id="fotos" class="sr" type="file" accept="image/*" capture="environment" multiple>
+    <label class="knop-2" for="fotos" style="display:flex;align-items:center;justify-content:center">Foto toevoegen (optioneel)</label>
+  </section>
+</main>
+
+<div class="onderbalk">
+  <button type="button" class="knop" id="vastleggen">Vastleggen</button>
+</div>
+
+<script>
+(function(){
+  var wat = document.getElementById('wat'), foutWat = document.getElementById('fout-wat');
+  var urgentie = 'wachten';
+  Array.prototype.forEach.call(document.querySelectorAll('.urgentie button'), function(b){
+    b.addEventListener('click', function(){
+      urgentie = b.dataset.u;
+      Array.prototype.forEach.call(document.querySelectorAll('.urgentie button'), function(x){
+        x.setAttribute('aria-pressed', x === b ? 'true' : 'false');
+      });
+    });
+  });
+
+  var fotos = document.getElementById('fotos'), stand = document.getElementById('foto-stand');
+  fotos.addEventListener('change', function(){
+    var n = fotos.files ? fotos.files.length : 0;
+    stand.textContent = n === 0 ? 'Nog geen foto.' : (n === 1 ? '1 foto.' : n + ' foto’s.');
+  });
+
+  wat.addEventListener('input', function(){ if(wat.value.trim()) foutWat.hidden = true; });
+
+  document.getElementById('vastleggen').addEventListener('click', function(){
+    if(!wat.value.trim()){
+      foutWat.textContent = 'Omschrijving ontbreekt.';
+      foutWat.hidden = false;
+      wat.focus();
+      return;
+    }
+    var k = document.getElementById('kring').value.trim();
+    location.href = 'loggen-3-vaststelling.html?o=' + encodeURIComponent(wat.value.trim()) +
+      '&u=' + encodeURIComponent(urgentie) + (k ? '&k=' + encodeURIComponent(k) : '');
+  });
+})();
+</script>
+
+</body>
+</html>

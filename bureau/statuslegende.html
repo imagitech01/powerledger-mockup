@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PowerLedger — Statuslegende</title>
+<link rel="stylesheet" href="../styles.css">
+<script src="../thema.js" defer></script>
+<style>
+/* Bureaumodus. Uitsluitend tokens uit styles.css, nooit een letterlijke kleurwaarde.
+   Schaalfactor 0,875 (DESIGN.md § Layout & Spacing) op dichtheid en raakvlak.
+   De typografische ladder blijft ongeschaald: de ondergrens van 13 px
+   uit DESIGN.md § Typography gaat voor op de schaalfactor. */
+.bureau{--schaal:.875;--raakvlak:calc(48px * var(--schaal));max-width:820px}
+.bureau .rij{padding:var(--rij-bureau) 0;gap:var(--s4);flex-wrap:wrap}
+main{padding-bottom:var(--s7)}
+.kop{margin:0 0 var(--s6)}
+.kop p{margin:var(--s2) 0 0}
+.kaart{margin-bottom:var(--s5)}
+.kaart+.kap,.demo-hint+.kap{margin-top:var(--s6)}
+.groei{flex:1 1 10rem;min-width:0}
+.stip-top{margin-top:.45em}
+.paar{display:flex;flex-wrap:wrap;gap:var(--s2) var(--s4);align-items:baseline}
+</style>
+</head>
+<body>
+
+<div class="demo-balk">
+  <a href="../index.html">← Start</a>
+  <span>Statuslegende · bureaumodus</span>
+  <span class="rechts">
+    <span>Demo-chroom — deze balk hoort niet bij het product.</span>
+    <button type="button" data-thema-knop onclick="wisselThema()" aria-label="Wissel tussen licht en donker thema">Donker</button>
+  </span>
+</div>
+
+<div class="bureau">
+
+<nav class="nav" aria-label="Hoofdnavigatie">
+  <span class="merk">PowerLedger</span>
+  <a href="overzicht.html" class="aan" aria-current="page">Overzicht</a>
+  <a href="overzicht.html#stelplaatsen">Stelplaatsen</a>
+  <a href="todos.html">Todo's</a>
+  <a href="documenten.html">Documenten</a>
+  <a href="toegang.html">Toegang</a>
+</nav>
+
+<main>
+  <div class="kop">
+    <h1 class="schermtitel">Wat de vijf statuskleuren betekenen</h1>
+    <p class="toelichting">Dezelfde vijf kleuren op elk oppervlak: overzicht, sitedossier, borddossier. Kleur staat er nooit alleen — er staat altijd een woord naast.</p>
+  </div>
+
+  <div class="kaart">
+
+    <div class="rij">
+      <span class="stip s-groen stip-top" aria-hidden="true"></span>
+      <span class="groei">
+        <span class="paar"><b>Niets open</b></span>
+        <small>Attest geldig, geen document ontbrekend of vervallen, geen open todo of vaststelling, en het bord is minstens één keer bevestigd.</small>
+        <small>Voorbeeld: Wilrijk — bevestigd <span class="mono">04-08</span>.</small>
+      </span>
+    </div>
+
+    <div class="rij">
+      <span class="stip s-geel stip-top" aria-hidden="true"></span>
+      <span class="groei">
+        <span class="paar"><b>Gevolgen open</b></span>
+        <small>Attest is nog geldig, maar het dossier loopt achter op een wijziging: er staan todo's of een vaststelling open die eerst gesloten moeten worden.</small>
+        <small>Voorbeeld: Berchem — 2 todo&rsquo;s open.</small>
+      </span>
+    </div>
+
+    <div class="rij">
+      <span class="stip s-oranje stip-top" aria-hidden="true"></span>
+      <span class="groei">
+        <span class="paar"><b>Loopt af</b></span>
+        <small>Een vaststelling staat open, of een verplicht document ontbreekt of vervalt binnen zes weken zonder dat er al iets is aangevraagd.</small>
+        <small>Voorbeeld: Antwerpen-Noord — keuring vervalt over <span class="mono">6 wk</span>, nog niets aangevraagd.</small>
+      </span>
+    </div>
+
+    <div class="rij">
+      <span class="stip s-rood stip-top" aria-hidden="true"></span>
+      <span class="groei">
+        <span class="paar"><b>Vervallen</b></span>
+        <small>Een attest of document is vervallen of afgekeurd, of een toestand staat &ldquo;uit&rdquo; zonder eigenaar.</small>
+        <small>Voorbeeld: Mechelen &middot; SVB-B — 2 kringen staan uit, <em>Uitwendige invloeden</em> vervallen sinds <span class="mono">01-06-2026</span>.</small>
+      </span>
+    </div>
+
+    <div class="rij">
+      <span class="stip s-grijs stip-top" aria-hidden="true"></span>
+      <span class="groei">
+        <span class="paar"><b>Nog niet bevestigd</b></span>
+        <small>Er is nog nooit een bevestiging gelogd voor dit bord — ongeacht hoeveel er verder al in orde is. Geen leeg vakje, maar een uitspraak.</small>
+        <small>Voorbeeld: Deurne — opgenomen <span class="mono">21-08</span>, nog niet bevestigd.</small>
+      </span>
+    </div>
+
+  </div>
+
+  <h2 class="kap">hoe de status berekend wordt</h2>
+  <p class="toelichting">De statuskleur is een rekensom over feiten — attest, documenten, open todo&rsquo;s, open vaststellingen en de laatste bevestiging — nooit een beoordeling. Bevestiging is <em>noodzakelijk</em> voor <b>Niets open</b>, maar nooit <em>voldoende</em>: ze heft openstaande todo&rsquo;s of vaststellingen niet op. Een bord dat lang niet bevestigd is, verliest daarom nooit stilzwijgend zijn andere problemen — de kleuren stapelen niet op, maar de ernstigste wint: rood voor vervallen wint van geel voor gevolgen open.</p>
+</main>
+
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  var d = document.documentElement.dataset.thema ||
+    (matchMedia('(prefers-color-scheme: dark)').matches ? 'donker' : 'licht');
+  document.querySelectorAll('[data-thema-knop]').forEach(function (b) {
+    b.textContent = d === 'donker' ? 'Licht' : 'Donker';
+  });
+});
+</script>
+</body>
+</html>

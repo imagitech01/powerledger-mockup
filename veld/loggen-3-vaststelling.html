@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vaststelling gemeld — PowerLedger</title>
+<link rel="stylesheet" href="../styles.css">
+<script src="../thema.js" defer></script>
+<style>
+  [hidden]{display:none !important}
+  .demo-balk{flex-wrap:wrap;row-gap:var(--s2)}
+  .telefoon{padding-bottom:170px}
+  .kop{margin:0 0 var(--s4)}
+  .sectie{margin-top:var(--s6)}
+  .bewijs{border-left:3px solid var(--accent);padding:var(--s3) var(--s4);margin:0 0 var(--s5);
+    background:color-mix(in srgb, var(--accent) 8%, var(--grond))}
+  .quote{color:var(--inkt-2)}
+  .statusregel{margin-top:var(--s2)}
+  .onderbalk{padding-bottom:var(--s5)}
+</style>
+</head>
+<body>
+
+<div class="demo-balk">
+  <a href="../index.html">&larr; Start</a>
+  <span>Loggen &mdash; vaststelling gemeld</span>
+  <span class="rechts">
+    <span>demo-chroom, geen productonderdeel</span>
+    <button type="button" data-thema-knop onclick="wisselThema()" aria-label="Wissel tussen licht en donker thema">Donker</button>
+  </span>
+</div>
+
+<main class="telefoon">
+
+  <div class="kop">
+    <h1 class="schermtitel">Gemeld</h1>
+  </div>
+
+  <div class="bewijs" role="status">
+    <p class="body-tekst">Vaststelling gemeld, gaat naar triage bij Geert Vermeulen.</p>
+    <p class="toelichting" style="margin-top:var(--s2)">Je hoeft dit niet zelf op te lossen; je blijft het volgen in <span class="mono">Mijn todo&rsquo;s</span>.</p>
+  </div>
+
+  <section class="sectie">
+    <h2 class="kap">wat je meldde</h2>
+    <div class="rij">
+      <span class="tekst">
+        <b>SVB-B<span id="kring-suffix"></span></b>
+        <small>Gemeld <span class="mono">21-08 16:21</span> door Jan Verhoeven &mdash; <span class="quote" id="omschrijving">&ldquo;&rdquo;</span></small>
+        <small id="urgentie-tekst"></small>
+      </span>
+    </div>
+  </section>
+
+  <section class="sectie">
+    <h2 class="kap">status SVB-B nu</h2>
+    <span class="statusregel"><span class="stip s-oranje" aria-hidden="true"></span><span>Vaststelling open</span></span>
+    <p class="toelichting" style="margin-top:var(--s3)">Een openstaande vaststelling zet het bord op oranje tot Geert ze triageert en toewijst.</p>
+  </section>
+
+</main>
+
+<div class="onderbalk">
+  <a class="knop" href="bord-svb-b.html" style="display:block;text-align:center">Naar borddossier SVB-B</a>
+  <a class="knop-2" href="loggen-1.html" style="display:block;text-align:center">Nog iets loggen</a>
+</div>
+
+<script>
+(function(){
+  function param(n){ var m = location.search.match(new RegExp('[?&]' + n + '=([^&]*)')); return m ? decodeURIComponent(m[1]) : ''; }
+  var o = param('o') || 'stopcontacten bijgeplaatst zonder aarding';
+  var k = param('k');
+  var u = param('u') || 'wachten';
+
+  document.getElementById('omschrijving').textContent = '“' + o + '”';
+  if(k) document.getElementById('kring-suffix').textContent = ' · kring ' + k;
+  document.getElementById('urgentie-tekst').textContent =
+    u === 'gevaarlijk' ? 'Gemeld als gevaarlijk, nu.' : 'Gemeld als: kan wachten.';
+})();
+</script>
+
+</body>
+</html>

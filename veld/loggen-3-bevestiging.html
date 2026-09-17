@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bevestigd — PowerLedger</title>
+<link rel="stylesheet" href="../styles.css">
+<script src="../thema.js" defer></script>
+<style>
+  [hidden]{display:none !important}
+  .demo-balk{flex-wrap:wrap;row-gap:var(--s2)}
+  .telefoon{padding-bottom:170px}
+  .kop{margin:0 0 var(--s4)}
+  .sectie{margin-top:var(--s6)}
+  .bewijs{border-left:3px solid var(--accent);padding:var(--s3) var(--s4);margin:0 0 var(--s5);
+    background:color-mix(in srgb, var(--accent) 8%, var(--grond))}
+  .statusregel{margin-top:var(--s2)}
+  .onderbalk{padding-bottom:var(--s5)}
+</style>
+</head>
+<body>
+
+<div class="demo-balk">
+  <a href="../index.html">&larr; Start</a>
+  <span>Loggen &mdash; bevestigd</span>
+  <span class="rechts">
+    <span>demo-chroom, geen productonderdeel</span>
+    <button type="button" data-thema-knop onclick="wisselThema()" aria-label="Wissel tussen licht en donker thema">Donker</button>
+  </span>
+</div>
+
+<main class="telefoon">
+
+  <div class="kop">
+    <h1 class="schermtitel">Bevestigd</h1>
+  </div>
+
+  <div class="bewijs" role="status">
+    <p class="body-tekst">Laatst bevestigd: 21-08 16:22 door Jan Verhoeven.</p>
+  </div>
+
+  <section class="sectie">
+    <h2 class="kap">status SVB-B nu</h2>
+    <span class="statusregel"><span class="stip s-rood" aria-hidden="true"></span><span>SVB-B blijft Vervallen</span></span>
+    <p class="toelichting" style="margin-top:var(--s3)">2 staan uit, 6 todo&rsquo;s. Bevestiging is nodig voor <b>Niets open</b>, maar nooit voldoende &mdash; ze heft de openstaande kringen en todo&rsquo;s niet op. Was er verder niets open geweest, dan zou het bord nu groen staan.</p>
+  </section>
+
+</main>
+
+<div class="onderbalk">
+  <a class="knop" href="bord-svb-b.html" style="display:block;text-align:center">Naar borddossier SVB-B</a>
+  <a class="knop-2" href="loggen-1.html" style="display:block;text-align:center">Nog iets loggen</a>
+</div>
+
+</body>
+</html>

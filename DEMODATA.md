@@ -109,7 +109,59 @@ De gaten in de nummering zijn echt en moeten zichtbaar blijven.
 ## Personen
 
 Jan Verhoeven (elektricien, uitvoerder) · Geert Vermeulen (beheerder) · Peeters (elektricien De Lijn) ·
-De Wilde Elektro (externe aannemer, eenmalig uitgenodigd) · Vinçotte (keurder).
+De Wilde Elektro (externe aannemer, eenmalig uitgenodigd) · Vinçotte (keurder) ·
+Bert Van Asch (technisch tekenaar) · Tommy Willems (studiebureau) · een preventieadviseur (geen naam
+in de demodata — rol volstaat op de todo-rij).
+
+### Contactgegevens (demo)
+
+Voor aanmeld- en uitnodigingsschermen: Jan Verhoeven — `jan.verhoeven@delijn.be`.
+Geert Vermeulen nodigt uit vanuit De Lijn, Antwerpen.
+
+## Wijzigingstypes en gevolgen
+
+Dropdown voor het werkwoord **wijziging** (`veld/loggen-2-wijziging.html`). Elk type maakt een vaste
+set documenttypes potentieel verouderd; elk geraakt document krijgt daardoor een todo met een vaste
+standaardeigenaar. De beheerder kan elke toewijzing overschrijven (zie EXPERIENCE.md § Wie de gevolgen
+krijgt).
+
+| # | Wijzigingstype | Raakt documenten |
+|---|---|---|
+| 1 | Automaat bijgeplaatst | schema, kabelberekening, keuringsverslag, uitwendige invloeden, risicoanalyse |
+| 2 | Automaat vervangen (andere curve of ampèrage) | schema, kabelberekening |
+| 3 | Kring toegevoegd | schema, kabelberekening, keuringsverslag, uitwendige invloeden, risicoanalyse |
+| 4 | Kring verwijderd of buiten dienst | schema |
+| 5 | Verdeelbord uitgebreid | schema, kabelberekening, keuringsverslag, uitwendige invloeden, risicoanalyse, aardingsplan |
+| 6 | Voeding gewijzigd | schema, kabelberekening, keuringsverslag, aardingsplan |
+| 7 | Lokaal herbestemd | uitwendige invloeden, risicoanalyse, keuringsverslag |
+| 8 | Andere wijziging | schema |
+
+Standaardeigenaar per documenttype (todo die ontstaat als het document geraakt wordt):
+
+| Document | Standaardeigenaar |
+|---|---|
+| Eendraadschema (schema) | Bert Van Asch — technisch tekenaar |
+| Aardingsplan | Bert Van Asch — technisch tekenaar |
+| Kabelberekening | Tommy Willems — studiebureau |
+| Keuringsverslag | Geert Vermeulen — technisch verantwoordelijke |
+| Uitwendige invloeden | preventieadviseur |
+| Risicoanalyse | preventieadviseur |
+
+### Demo-voorbeeld: automaat vervangen op kring 26
+
+`veld/loggen-2-wijziging.html` en `veld/loggen-3-wijziging.html` gebruiken standaard type 2
+(**Automaat vervangen**) op **Kring 26 · k26**, vastgelegd 21-08 16:21 door Jan Verhoeven. Gevolgen:
+`Eendraadschema bijwerken → Bert Van Asch` en `Kabelberekening nakijken → Tommy Willems`, beide `open`.
+Dit is een nieuwe, aparte registratie boven op de bestaande kring-26-geschiedenis van 18-02 (zie
+Tijdlijn en Todo's hierboven) — kring 26 staat dus na dit voorbeeld voor twee afzonderlijke wijzigingen
+met gevolgen open.
+
+## Overige borden stelplaats Mechelen (voor de QR-stickervel-demo)
+
+Naast SVB-B, SVB-A en HS-cabine Noord (zie Site Mechelen) staan er op het stickervel van Werkplaats
+en Bussenhal ook: **SVB-C** (LS, kantoorgebouw), **HS-cabine Zuid** (HS, bussenhal) en
+**Noodstroomkast WKP** (LS, werkplaats, aggregaat). Deze drie zijn verzonnen om het stickervel te
+vullen; er bestaat verder geen dossier voor ze in dit prototype.
 
 ## Foto's
 

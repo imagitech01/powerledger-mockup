@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PowerLedger — QR-stickers Mechelen</title>
+<link rel="stylesheet" href="../styles.css">
+<script src="../thema.js" defer></script>
+<script src="../qr.js"></script>
+<style>
+/* Bureaumodus. Uitsluitend tokens uit styles.css, nooit een letterlijke kleurwaarde.
+   Schaalfactor 0,875 (DESIGN.md § Layout & Spacing) op dichtheid en raakvlak.
+   De typografische ladder blijft ongeschaald: de ondergrens van 13 px
+   uit DESIGN.md § Typography gaat voor op de schaalfactor. */
+.bureau{--schaal:.875;--raakvlak:calc(48px * var(--schaal))}
+.bureau .knop{display:inline-flex;align-items:center;justify-content:center;
+  width:auto;padding:var(--s3) var(--s5);min-height:var(--raakvlak);margin-top:0}
+main{padding-bottom:var(--s7)}
+.kop{margin:0 0 var(--s5);display:flex;justify-content:space-between;align-items:flex-start;gap:var(--s5);flex-wrap:wrap}
+.kop p{margin:var(--s2) 0 0}
+.stickervel{display:grid;grid-template-columns:1fr 1fr;gap:var(--s5);max-width:760px}
+.sticker{border:1px dashed var(--lijn-hard);border-radius:var(--r-md);padding:var(--s5);
+  text-align:center;background:var(--paneel);display:flex;flex-direction:column;align-items:center;gap:var(--s2)}
+.sticker svg{width:150px;height:150px;color:var(--inkt)}
+.sticker b{font-size:1.0625rem;font-weight:650;letter-spacing:-.01em}
+.sticker .locatie{color:var(--inkt-2);font-size:.875rem}
+.sticker .uitleg{color:var(--inkt-3);font-size:.75rem;line-height:1.4;margin-top:var(--s2)}
+@media print{
+  .demo-balk,.nav,.geen-print{display:none !important}
+  body{background:#fff}
+  main{padding:0}
+  .stickervel{grid-template-columns:1fr 1fr;gap:12mm;max-width:none}
+  .sticker{border:1px solid #999;break-inside:avoid;page-break-inside:avoid}
+  @page{size:A4;margin:12mm}
+}
+</style>
+</head>
+<body>
+
+<div class="demo-balk">
+  <a href="../index.html">← Start</a>
+  <span>QR-stickers · bureaumodus</span>
+  <span class="rechts">
+    <span>Demo-chroom — deze balk hoort niet bij het product.</span>
+    <button type="button" data-thema-knop onclick="wisselThema()" aria-label="Wissel tussen licht en donker thema">Donker</button>
+  </span>
+</div>
+
+<div class="bureau">
+
+<nav class="nav" aria-label="Hoofdnavigatie">
+  <span class="merk">PowerLedger</span>
+  <a href="overzicht.html">Overzicht</a>
+  <a href="overzicht.html#stelplaatsen" class="aan" aria-current="page">Stelplaatsen</a>
+  <a href="todos.html">Todo's</a>
+  <a href="documenten.html">Documenten</a>
+  <a href="toegang.html">Toegang</a>
+</nav>
+
+<main>
+  <div class="kop">
+    <div>
+      <h1 class="schermtitel">QR-stickers</h1>
+      <p class="toelichting">Stelplaats Mechelen — één sticker per bord, te plakken aan de binnenkant van de kastdeur.</p>
+    </div>
+    <button type="button" class="knop geen-print" id="afdrukken">Afdrukken</button>
+  </div>
+
+  <div class="stickervel" id="vel"></div>
+
+  <p class="toelichting geen-print" style="margin-top:var(--s5);max-width:760px">Lezen via de QR vereist geen account; loggen wel. In dit prototype wijzen alle zes stickers naar hetzelfde borddossier (SVB-B) — in het product krijgt elk bord zijn eigen dossier.</p>
+</main>
+
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  var d = document.documentElement.dataset.thema ||
+    (matchMedia('(prefers-color-scheme: dark)').matches ? 'donker' : 'licht');
+  document.querySelectorAll('[data-thema-knop]').forEach(function (b) {
+    b.textContent = d === 'donker' ? 'Licht' : 'Donker';
+  });
+
+  var URL_SVB_B = 'https://imagitech01.github.io/powerledger-mockup/veld/bord-svb-b.html';
+  var BORDEN = [
+    ['SVB-B', 'Werkplaats · laagspanning'],
+    ['SVB-A', 'Bussenhal · laagspanning'],
+    ['HS-cabine Noord', 'Hoogspanning'],
+    ['SVB-C', 'Kantoorgebouw · laagspanning'],
+    ['HS-cabine Zuid', 'Bussenhal · hoogspanning'],
+    ['Noodstroomkast WKP', 'Werkplaats · aggregaat']
+  ];
+
+  var vel = document.getElementById('vel');
+  BORDEN.forEach(function (b) {
+    var svg = window.PLQR.toSVG(URL_SVB_B, { moduleSize: 4 });
+    var div = document.createElement('div');
+    div.className = 'sticker';
+    div.innerHTML = svg +
+      '<b>' + b[0] + '</b>' +
+      '<span class="locatie">Stelplaats Mechelen · ' + b[1] + '</span>' +
+      '<span class="uitleg">Scan om het dossier te lezen. Loggen vraagt een account.</span>';
+    vel.appendChild(div);
+  });
+
+  document.getElementById('afdrukken').addEventListener('click', function () { window.print(); });
+});
+</script>
+</body>
+</html>
